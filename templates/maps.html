@@ -97,8 +97,8 @@
 
                 // Мы создаем цикл. Потом он проверяет, активные ли метки. 
                 {% for i in markers %}
-                var activeIconUrl = 'https://cdn-icons-png.flaticon.com/128/6490/6490420.png';
-                var inactiveIconUrl = 'https://cdn-icons-png.flaticon.com/128/7153/7153133.png';
+                var activeIconUrl = 'https://cdn-icons-png.flaticon.com/128/3059/3059964.png';
+                var inactiveIconUrl = 'https://cdn-icons-png.flaticon.com/128/4737/4737461.png'; 
                 var iconUrl = '{{ i.is_active }}' === 'True' ? activeIconUrl : inactiveIconUrl;
                 var circleLayout{{i.id}} = ymaps.templateLayoutFactory.createClass(`<div class="placemark_layout_container"><div class="circle_layout"><img src="${iconUrl}" alt="Метка"></div></div>`);
                 var circlePlacemark{{i.id}} = new ymaps.Placemark(
