@@ -1,4 +1,8 @@
 from django.contrib import admin
-from .models import Marker
 
+# Register your models here.
+from maps.models import Maps, Marker
+
+
+admin.site.register(Maps)
 admin.site.register(Marker)

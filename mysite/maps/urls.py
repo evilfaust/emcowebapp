@@ -1,7 +1,14 @@
 from django.urls import path
-from .views import map_view, add_marker
+
+from . import views
+
+
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
-    path('', map_view, name='map'),
-    path('add_marker/', add_marker, name='add_marker'),
-]
+    path("", views.index_maps, name="maps"),
+    path('add_marker/', views.add_marker, name='add_marker'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
