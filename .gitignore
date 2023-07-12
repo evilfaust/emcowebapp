@@ -1,5 +1,5 @@
 # custom git ignore
-.mysite/myvenv
+mysite/myvenv/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
