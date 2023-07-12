@@ -23,6 +23,7 @@
             myMap.events.add('click', function (e) {
                 if (!myMap.balloon.isOpen()) {
                     var coords = e.get('coords');
+                    
                     myMap.balloon.open(coords, {
                         contentHeader: 'Координаты добавлены',
                         contentBody: '',
@@ -31,6 +32,7 @@
                 } else {
                     myMap.balloon.close();
                 }
+                window.scrollBy(0,400);
             });
 
 
