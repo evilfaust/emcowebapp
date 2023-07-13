@@ -11,43 +11,77 @@
 <body>
     {% load static %}
     {% include 'index_head.html' %}
+    <div class="container position-relative">
+        <img src="../media/logo/pic.jpg" class="card-img-top" alt="...">
+        <div class="btn-overlay d-flex flex-column-reverse">
+            <button type="button" class="btn btn-primary " onclick="goToMaps()">Посмотреть отмеченные точки</button>
+            <button type="button" class="btn btn-danger " onclick="goToAddMarker()">Отметить точку</button>
+        </div>
+    </div>
     <div class="container">
         <div class="row">
             <div class="card w-100 border-light">
-        <!-- <div class="card-header">
-            #EMCO_району
-        </div> -->
-            <img src="../media/logo/pic.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-            <!-- <h2 class="card-title text-center">Свалкам бой!</h2> -->
-            <p class="card-text">
-                Свалкам бой! - это интерактивное приложение, 
-                разработанное специально для борьбы с несанкционированными свалками. 
-                При помощи этого приложения пользователи смогут эффективно маркировать
-                 и сообщать о местонахождении несанкционированных свалок, 
-                 что поможет местным властям, волонтерам и экологическим 
-                 организациям в ликвидации и предотвращении таких проблем.
-                </p>
-            <div class="d-grid gap-2 ">
-
-            <button type="button" class="btn btn-primary" onclick="goToMaps()">Посмотреть отмеченные точки</button>
-            <button type="button" class="btn btn-danger" onclick="goToAddMarker()">Отметить точку</button>
+                <div class="card-body">
+                    <p class="card-text">
+                        Свалкам бой! - это интерактивное приложение, 
+                        разработанное специально для борьбы с несанкционированными свалками. 
+                        При помощи этого приложения пользователи смогут эффективно маркировать
+                        и сообщать о местонахождении несанкционированных свалок, 
+                        что поможет местным властям, волонтерам и экологическим 
+                        организациям в ликвидации и предотвращении таких проблем.
+                    </p>
+                    <br>
+                    <p class="card-text">
+                        Свалкам бой! - ваш надежный партнер в борьбе за чистоту и экологическую ответственность. Совместными усилиями мы можем сохранить нашу планету для будущих поколений!
+                    </p>
+                </div>
             </div>
-            <br>
-            <p class="card-text">
-                Свалкам бой! - ваш надежный партнер в борьбе за чистоту и экологическую ответственность. Совместными усилиями мы можем сохранить нашу планету для будущих поколений!
-            </p>
         </div>
-      </div>
-</div>
-</div>
-<script>
-    function goToMaps() {
-        window.location.href = "/maps/";
-    }
-    function goToAddMarker() {
-        window.location.href = "/maps/add_marker/";
-    }
-</script>
+    </div>
+    <script>
+        function goToMaps() {
+            window.location.href = "/maps/";
+        }
+        function goToAddMarker() {
+            window.location.href = "/maps/add_marker/";
+        }
+    </script>
 </body>
+<style>
+    .position-relative {
+        position: relative;
+    }
+
+    .btn-overlay {
+        position: relative;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -30PX);
+    }
+
+    .text-overlay {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        color: #fff;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .btn-overlay .btn:first-child {
+        margin-right: 0px;
+    }
+
+    @media (max-width: 767px) {
+        .btn-overlay {
+            position: absolute;
+            top: 95%;
+            left: 30%;
+            right: 2px;
+            bottom: 0;
+            transform: none;
+            padding: 10px;
+        }
+    }
+</style>
 </html>
