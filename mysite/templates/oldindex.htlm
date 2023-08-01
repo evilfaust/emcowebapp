@@ -1,0 +1,25 @@
+old
+<style>
+    .navcustom {
+        padding-top: 8px;
+    }
+</style>
+<div class="container text-center  rounded navcustom" >
+    <div class="row ">
+      <div class="col">
+          <img src="../media/logo/new-logo-2.png" alt="EMCO.TECH" width="100px" height="">
+      </div>
+      <div class="col">
+          <img src="../media/logo/logo-10.svg" alt="EMCO" width="92px" height="">
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col text-danger">
+        <h5>Отметь на карте свалку,
+            <br>
+            сделай район чище!</h5>
+    </div>
+    </div>
+  </div>
+  <br>

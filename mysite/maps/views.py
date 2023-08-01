@@ -13,12 +13,10 @@ def index_maps(request):
 
     all_metki = list(Maps.objects.values())
     markers = Marker.objects.all()
+
+
     return render(request, 'maps.html', {'data' : all_metki, 'markers': markers })
 
-
-
-def index_home(request):
-    return render(request, 'index.html')
 
 # from django.http import HttpResponse
 
@@ -43,3 +41,7 @@ def add_marker(request):
 def map_view(request):
     markers = Marker.objects.all()
     return render(request, 'maps.html', {'markers': markers})
+
+
+def index_home(request):
+    return render(request, 'index.html')
