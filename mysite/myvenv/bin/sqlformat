@@ -1,4 +1,4 @@
-#!/home/dev_app/emcowebapp/mysite/myvenv/bin/python3
+#!/Users/evilfaust/Documents/testprogram/emcoapp/emcowebapp/mysite/myvenv/bin/python3.11
 # -*- coding: utf-8 -*-
 import re
 import sys

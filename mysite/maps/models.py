@@ -18,6 +18,8 @@ class Marker(models.Model):
     longitude = models.FloatField()
     is_active = models.BooleanField(default=True)
     photo = models.ImageField(upload_to='marker_photos/', blank=True, null=True)
+    aftephoto = models.ImageField(upload_to='marker_photos/', blank=True, null=True)
+    discription = models.CharField(max_length=140, blank=True, null=True)
 
     def __str__(self):
         return self.name

@@ -140,6 +140,12 @@
                                     {% else %}
                                     '<p></p>'
                                     {% endif %}
+                        +
+                                    {% if i.aftephoto %}
+                                    '<p>Фото после: <br><img src="{{ i.aftephoto.url }}" class="w-100"></p><p>{{i.discription }}</p>'
+                                   {% else %}
+                                    '<p></p>'
+                                    {% endif %}
                     });
                 });
                 
