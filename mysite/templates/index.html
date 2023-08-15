@@ -1,6 +1,25 @@
 <!DOCTYPE html>
 <html lang="ru">
   <head>
+
+
+    {% if user.is_authenticated %}
+    <p>Привет, {{ user.username }}! <a href="{% url 'logout' %}">Выйти</a>
+    {% endif %}
+
+    {% if current_user.is_authenticated %}
+      <p>Добро пожаловать, {{ current_user.username }}!</p>
+    {% else %}
+    {% endif %}
+
+    {% if not user.is_authenticated %}
+      <p>Добро пожаловать на наш сайт! <a href="{% url 'login' %}">Войдите</a>, чтобы начать.</p>
+    {% endif %}
+
+    {% if not user.is_authenticated %}
+    <p>Нет аккаунта? ну тыкни емае <a href="{% url 'signup' %}">Регистрация</a></p>
+    {% endif %}
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
