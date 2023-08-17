@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from maps.models import Maps, Marker
 from django.contrib.auth import login
-from .forms import SignUpForm
+from .forms import RegistrationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 
 
 from .forms import MarkerForm
@@ -54,13 +56,13 @@ def index_home(request):
 
 def signup(request):
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
+        form = RegistrationForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            user = User.objects.create_user(username=form.cleaned_data['username'], email=form.cleaned_data['email'], password=form.cleaned_data['password'])
             login(request, user)
             return redirect('index_home')  # Замените 'home' на имя вашей главной страницы
     else:
-        form = SignUpForm()
+        form = RegistrationForm()
     return render(request, 'signup.html', {'form': form})
 
 def user_login(request):
