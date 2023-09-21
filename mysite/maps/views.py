@@ -9,8 +9,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 
 
-from .forms import MarkerForm
 
+from .forms import MarkerForm
+from news.models import News
 # from django.http import JsonResponse
 import json
 from json import dumps
@@ -83,3 +84,10 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('index_home')
+
+def news_list(request):
+    news_list = News.objects.all()
+    context = {
+        'news_list': news_list,
+    }
+    return render(request, 'inweb_news.html', context)
