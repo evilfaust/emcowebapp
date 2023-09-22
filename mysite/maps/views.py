@@ -51,9 +51,18 @@ def map_view(request):
 
 
 def index_home(request):
+    news_list = News.objects.all()
+    # Переворачиваем список, чтобы новые новости были сверху
+    news_list = reversed(news_list)
+    context = {
+        'news_list': news_list,
+    }
+    return render(request, 'index.html',  context)
     return render(request, 'index.html')
     current_user = request.user
     return render(request, 'index_home.html', {'current_user': current_user})
+    
+    
 
 def signup(request):
     if request.method == 'POST':
@@ -87,7 +96,15 @@ def user_logout(request):
 
 def news_list(request):
     news_list = News.objects.all()
+    # Переворачиваем список, чтобы новые новости были сверху
+    news_list = reversed(news_list)
     context = {
         'news_list': news_list,
     }
-    return render(request, 'inweb_news.html', context)
+    return render(request, 'inweb_news.html',  context)
+    
+
+
+
+
+

@@ -57,6 +57,21 @@
                 Свалкам бой! - ваш надежный партнер в борьбе за чистоту и экологическую ответственность. Совместными усилиями мы можем сохранить нашу планету для будущих поколений!
             </p>
         </div>
+        {% for news in news_list %}
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ news.images.url }}" class="img-fluid rounded-start" alt="">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ news.name }}</h5>
+                        <p class="card-text">{{ news.discription }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
       </div>
 </div>
 <script>
