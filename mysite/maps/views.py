@@ -62,37 +62,7 @@ def index_home(request):
     current_user = request.user
     return render(request, 'index_home.html', {'current_user': current_user})
     
-    
 
-def signup(request):
-    if request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-            user = User.objects.create_user(username=form.cleaned_data['username'], email=form.cleaned_data['email'], password=form.cleaned_data['password'])
-            login(request, user)
-            return redirect('index_home')  # Замените 'home' на имя вашей главной страницы
-    else:
-        form = RegistrationForm()
-    return render(request, 'signup.html', {'form': form})
-
-def user_login(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('index_home')  # Редирект на главную страницу после успешного входа
-        else:
-            error_message = "Неправильное имя пользователя или пароль"
-    else:
-        error_message = ""
-    
-    return render(request, 'login.html', {'error_message': error_message})
-
-def user_logout(request):
-    logout(request)
-    return redirect('index_home')
 
 def news_list(request):
     news_list = News.objects.all()

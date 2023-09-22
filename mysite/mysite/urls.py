@@ -27,9 +27,6 @@ urlpatterns = (
         path("admin/", admin.site.urls),
         path("maps/", include("maps.urls")),
         path("", views.index_home, name="index_home"),
-        path('login/', auth_views.LoginView.as_view(), name='login'),
-        path('logout/', views.user_logout, name='logout'),
-        path('signup/', views.signup, name='signup'),
         path('news/', views.news_list, name='news_list'),
     ]
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
