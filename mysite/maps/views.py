@@ -1,9 +1,17 @@
 from django.shortcuts import render, redirect
 from maps.models import Maps, Marker
+from django.contrib.auth import login
+from .forms import RegistrationForm
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+
 
 
 from .forms import MarkerForm
-
+from news.models import News
 # from django.http import JsonResponse
 import json
 from json import dumps
@@ -37,11 +45,36 @@ def add_marker(request):
     return render(request, 'add_marker.html', {'form': form})
 
 
-
 def map_view(request):
     markers = Marker.objects.all()
     return render(request, 'maps.html', {'markers': markers})
 
 
 def index_home(request):
+    news_list = News.objects.all()
+    # Переворачиваем список, чтобы новые новости были сверху
+    news_list = reversed(news_list)
+    context = {
+        'news_list': news_list,
+    }
+    return render(request, 'index.html',  context)
     return render(request, 'index.html')
+    current_user = request.user
+    return render(request, 'index_home.html', {'current_user': current_user})
+    
+
+
+def news_list(request):
+    news_list = News.objects.all()
+    # Переворачиваем список, чтобы новые новости были сверху
+    news_list = reversed(news_list)
+    context = {
+        'news_list': news_list,
+    }
+    return render(request, 'inweb_news.html',  context)
+    
+
+
+
+
+
