@@ -39,6 +39,9 @@
             <p class="card-text">
                 Свалкам бой! - ваш надежный партнер в борьбе за чистоту и экологическую ответственность. Совместными усилиями мы можем сохранить нашу планету для будущих поколений!
             </p>
+            <div class="position-relative d-grid gap-2">
+              <a href="/news" class="btn btn-primary">Перейти к новостям</a>
+          </div>
         </div>
         {% for news in news_list %}
         <div class="card mb-3" style="max-width: 540px;">
@@ -48,13 +51,13 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title">{{ news.name }}</h5>
-                        <p class="card-text">{{ news.discription }}</p>
+                        <h5 class="card-title"><a href="{% url 'news_detail' news.id %}">{{ news.name }}</a></h5>
+                        <p class="card-text">{{ news.description }}</p>
                     </div>
                 </div>
             </div>
         </div>
-        {% endfor %}
+    {% endfor %}    
       </div>
 </div>
 <script>

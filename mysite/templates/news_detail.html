@@ -10,10 +10,6 @@
       integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
       crossorigin="anonymous"
     />
-    <link
-      rel="stylesheet"
-      href="C:\Users\xtela\Documents\GitHub\emcowebapp\mysite\static\admin\css\inweb_exmpl.css"
-    />
   </head>
   <header>
     <div class="upline">
@@ -29,14 +25,11 @@
         <path d="M101.48 23L112.755 11.5L101.48 0L90.2043 11.5L101.48 23Z" fill="#E4E4E4"/>
         <ellipse cx="182.664" cy="11.5" rx="11.5" ry="11.2755" transform="rotate(90 182.664 11.5)" fill="#E4E4E4"/>
         </svg>
-    <div class="emco_tech_logo">
-        <img class="logo_emco_tech" src="../media/logo/new-logo-2.png" alt="EMCO.TECH" width="40%" >
-        <img class="logo_emco" src="../media/logo/logo-10.svg" alt="EMCO" width="40%">
     </div>
-  </div>
-  <div class="container mt-5 d-flex justify-content-end">
+      <div class="mt-0 d-flex justify-content-end">
   <a href="javascript:history.back()" class="btn btn-outline-primary">Назад</a>
-</div>
+</div>   
+    </div>
   </header>
   <body>
     <script
@@ -44,21 +37,25 @@
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
       crossorigin="anonymous"
     ></script>
-    {% for news in news_list %}
-    <div class="card mb-3" style="max-width: 540px;">
-        <div class="row g-0">
-            <div class="col-md-4">
-                <img src="{{ news.images.url }}" class="img-fluid rounded-start" alt="">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title"><a href="{% url 'news_detail' news.id %}">{{ news.name }}</a></h5>
-                    <p class="card-text">{{ news.description }}</p>
+    <html>
+        <head>
+            <title>{{ news.name }}</title>
+        </head>
+        <body>
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{ news.images.url }}" class="img-fluid rounded-start" alt="{{ news.name }}">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ news.name }}</h5>
+                            <p class="card-text">{{ news.discription }}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-{% endfor %}
+        </body>
   </body>
   <style>.upline {
     width: auto;
