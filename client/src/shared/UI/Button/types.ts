@@ -1,5 +1,5 @@
-export interface InputProps{
-    button:string;
-    input:string;
-
-} 
+export type ButtonProps = {
+  children: React.ReactNode;
+  className?: string;
+  variant?: "primary" | "second" | "outlined";
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;

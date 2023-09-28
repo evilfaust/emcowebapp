@@ -1,0 +1,21 @@
+$primary: #e31c34;
+$outlined: transperent;
+
+//
+.button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  &_primary {
+    background-color: $primary;
+  }
+
+  &_second {
+    background-color: $primary;
+  }
+
+  &_outlined {
+    background-color: $outlined;
+  }
+}
