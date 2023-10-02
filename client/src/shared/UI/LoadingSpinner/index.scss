@@ -3,7 +3,7 @@
   width: 80px;
   height: 80px;
 
-  &:after {
+  ::after {
     content: " ";
     display: block;
     width: 64px;

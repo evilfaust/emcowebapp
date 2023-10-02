@@ -1,14 +1,14 @@
-import { InputProps } from "./types"
+import { IInputProps } from "./types";
 
+import styles from './index.module.scss'
 
-export const Input: React.FC<InputProps> = ({ label, input }) => {
-
-    return (
-        <div>
-            <label>
-                {label}
-                <input type={input} /> 
-            </label>
-        </div>
-    )
-}
+export const Input: React.FC<IInputProps> = ({ label, id, }) => {
+  return (
+    <div className={styles.container}>
+      <label>
+        {label}
+        <input id={id} type="text" />
+      </label>
+    </div>
+  );
+};
