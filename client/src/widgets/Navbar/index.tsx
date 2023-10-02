@@ -1,17 +1,13 @@
 import { pages } from "./pages";
 
+import logo from "./img/logo.png";
+import "./index.scss";
+
 export const Navbar: React.FC = () => {
   return (
     <header>
-      <nav>
-        <h1>Свалкам бой!</h1>
-        <ul>
-          {pages.map((page) => (
-            <NavLink>
-              <li key={page.id}>{page.label}</li>
-            </NavLink>
-          ))}
-        </ul>
+      <nav className="navbar">
+        <img src={logo} />
       </nav>
     </header>
   );
