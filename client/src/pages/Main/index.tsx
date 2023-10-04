@@ -1,10 +1,10 @@
-import { Input } from "shared/UI";
-import { GrassField } from "./components/grassfield";
+import { GrassField, Component2 } from "./components";
 
 function Main() {
   return (
     <>
-     <GrassField />
+      <GrassField />
+      <Component2 />
     </>
   );
 }
