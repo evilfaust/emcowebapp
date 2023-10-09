@@ -1,5 +1,11 @@
+import { MapSection } from "./components";
+
 function Map() {
-  return <></>;
+  return (
+    <>
+      <MapSection />s
+    </>
+  );
 }
 
 export default Map;

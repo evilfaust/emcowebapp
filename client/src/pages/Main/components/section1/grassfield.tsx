@@ -7,7 +7,6 @@ export const GrassField: React.FC = () => {
     <section>
       <div className="grass">
         <img src={grass} alt="Свалкам бой" />
-        
       </div>
     </section>
   );
