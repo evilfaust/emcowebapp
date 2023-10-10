@@ -1,0 +1,41 @@
+@use "../../../../shared/styles/index.scss";
+
+.layout {
+  display: flex;
+
+  .wrapper {
+    display: block;
+    max-width: 100%;
+    width: 49%;
+
+    .wrapper-txt {
+      text-align: center;
+      color: white;
+      background-color: black;
+      border-radius: 3.125rem;
+      width: 45%;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 2rem;
+      line-height: 1.25rem;
+      text-transform: uppercase;
+      font-family: "Neue Machina";
+      font-size: 1.25rem;
+    }
+
+    button {
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: -1.875rem;
+      padding-bottom: 1rem;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .layout {
+    .wrapper {
+      display: none;
+    }
+  }
+}

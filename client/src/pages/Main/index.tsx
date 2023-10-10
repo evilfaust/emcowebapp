@@ -1,10 +1,10 @@
-import { GrassField, Component2 } from "./components";
+import { Banner, ToMapButton,  } from "./components";
 
 function Main() {
   return (
     <>
-      <GrassField />
-      <Component2 />
+      <Banner />
+      <ToMapButton />
     </>
   );
 }
