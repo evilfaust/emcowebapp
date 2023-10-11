@@ -1,9 +1,10 @@
-import { MapSection } from "./components";
+import { JunkInfo, MapSection } from "./components";
 
 function Map() {
   return (
     <>
       <MapSection />
+      <JunkInfo />
     </>
   );
 }

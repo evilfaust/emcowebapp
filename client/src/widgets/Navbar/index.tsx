@@ -1,4 +1,4 @@
-import logo from "shared/images/logo.png";
+import logo from "shared/images/header-logo.png";
 import "./index.scss";
 
 export const Navbar: React.FC = () => {
