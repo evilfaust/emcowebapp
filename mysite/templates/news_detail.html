@@ -41,25 +41,51 @@
       crossorigin="anonymous"
     ></script>
     <html>
-        <head>
-            <title>{{ news.name }}</title>
-        </head>
-        <body>
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
+    <head>
+        <title>{{ news.name }}</title>
+    </head>
+    <body>
+        <div class="container mt-5">
+            <div class="row">
+                {% if news.images %}
                     <div class="col-md-4">
-                        <img src="{{ news.images.url }}" class="img-fluid rounded-start" alt="{{ news.name }}">
+                        <img src="{{ news.images.url }}" class="img-fluid rounded" alt="{{ news.name }}">
                     </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ news.name }}</h5>
-                            <p class="card-text">{{ news.discription }}</p>
-                        </div>
+                {% endif %}
+                {% if news.images2 %}
+                    <div class="col-md-4">
+                        <img src="{{ news.images2.url }}" class="img-fluid rounded" alt="{{ news.name }}">
+                    </div>
+                {% endif %}
+                {% if news.images3 %}
+                    <div class="col-md-4">
+                        <img src="{{ news.images3.url }}" class="img-fluid rounded" alt="{{ news.name }}">
+                    </div>
+                {% endif %}
+                {% if news.images4 %}
+                    <div class="col-md-4">
+                        <img src="{{ news.images4.url }}" class="img-fluid rounded" alt="{{ news.name }}">
+                    </div>
+                {% endif %}
+                {% if news.images5 %}
+                    <div class="col-md-4">
+                        <img src="{{ news.images5.url }}" class="img-fluid rounded" alt="{{ news.name }}">
+                    </div>
+                {% endif %}
+                {% if news.images6 %}
+                    <div class="col-md-4">
+                        <img src="{{ news.images6.url }}" class="img-fluid rounded" alt="{{ news.name }}">
+                    </div>
+                {% endif %}
+                <div class="empty-block"></div> 
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>{{ news.name }}</h3>
+                        <p class="description">{{ news.discription }}</p>
                     </div>
                 </div>
-            </div>
-        </body>
-  </body>
+           </div>
+       </body>
   <nav class="navbar fixed-bottom bg-white border-bottom border-body" data-bs-theme="dark navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       
@@ -88,13 +114,17 @@
       
     </div>
   </nav>
+  <div class="empty-block"></div>  
+  <div class="empty-block"></div>  
+  <div class="empty-block"></div>  
+  <div class="empty-block"></div>  
   <style>.upline {
     width: auto;
     height: 26px;
     background-color: black;
     
   }
-  
+
   
   .round_button {
     width: 38px;
@@ -139,6 +169,17 @@
   .logo_emco_tech,.logo_emco {
     margin-left:15px ;
     margin-right: 15px;
+  }
+  @media (max-width: 767px) {
+    .btn-overlay {
+      position: absolute;
+      top: 95%;
+      left: 30%;
+      right: -15px;
+      bottom: 0;
+      transform: translate(-40%, 0px);
+      padding: 10px;
+    }
   }
   </style>
   <script>
