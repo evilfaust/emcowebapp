@@ -124,6 +124,40 @@
       position: relative;
     }
 
+
+
+    .carousel-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      max-width: 600px;
+    }
+
+    .carousel-item img {
+      max-width: 900px;
+      max-height: 9000px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      filter: invert(100%);
+    }
+
+
+        @media (min-width: 992px) {
+        .navbar .btn {
+            width: 150px; /* Измените этот размер на свое усмотрение */
+        }
+        .container-fluid {
+          max-width: 50%; /* Установите требуемую максимальную ширину */
+      }
+    }
+
+
     .btn-overlay {
       position: absolute;
       top: 70%;
@@ -157,6 +191,12 @@
         bottom: 0;
         transform: translate(-40%, 0px);
         padding: 10px;
+      }
+
+      .carousel-item img {
+        max-width: 1000px; /* Установите нужную максимальную ширину */
+        max-height: 1000px; /* Установите нужную максимальную высоту */
+        object-fit: cover; /* Чтобы изображение не деформировалось */
       }
     }
   </style>

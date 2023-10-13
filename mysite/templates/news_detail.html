@@ -12,26 +12,14 @@
     />
   </head>
   <header>
-    <div class="upline">
-      <svg xmlns="http://www.w3.org/2000/svg" width="194" height="23" viewBox="0 0 194 23" fill="none">
-        <path d="M45.1021 0C42.1406 0 39.2081 0.594912 36.4721 1.75077C33.7361 2.90663 31.2501 4.6008 29.156 6.73654C27.0619 8.87229 25.4008 11.4078 24.2675 14.1983C23.1342 16.9888 22.5509 19.9796 22.5509 23L45.1021 23V0Z" fill="#E31C34"/>
-        <rect x="181.912" width="23" height="46.6056" transform="rotate(90 181.912 0)" fill="#E4E4E4"/>
-        <path d="M135.307 0C132.345 0 129.413 0.594912 126.677 1.75077C123.941 2.90663 121.455 4.6008 119.361 6.73654C117.267 8.87229 115.605 11.4078 114.472 14.1983C113.339 16.9888 112.756 19.9796 112.756 23L135.307 23V0Z" fill="#E31C34"/>
-        <path d="M135.307 0C138.268 0 141.201 0.594912 143.937 1.75077C146.673 2.90663 149.159 4.6008 151.253 6.73654C153.347 8.87229 155.008 11.4078 156.141 14.1983C157.274 16.9888 157.858 19.9796 157.858 23H135.307V0Z" fill="black"/>
-        <path d="M22.551 0L22.551 23L-0.00012207 23L22.551 0Z" fill="#E31C34"/>
-        <rect x="67.6531" y="23" width="22.5511" height="23" transform="rotate(180 67.6531 23)" fill="#E4E4E4"/>
-        <rect x="90.2043" y="23" width="22.5511" height="23" transform="rotate(180 90.2043 23)" fill="black"/>
-        <path d="M78.9288 23L90.2043 11.5L78.9288 0L67.6532 11.5L78.9288 23Z" fill="#E4E4E4"/>
-        <path d="M101.48 23L112.755 11.5L101.48 0L90.2043 11.5L101.48 23Z" fill="#E4E4E4"/>
-        <ellipse cx="182.664" cy="11.5" rx="11.5" ry="11.2755" transform="rotate(90 182.664 11.5)" fill="#E4E4E4"/>
-        </svg>
-    <div class="emco_tech_logo">
-        <img class="logo_emco_tech" src="../media/logo/new-logo-2.png" alt="EMCO.TECH" width="40%" >
-        <img class="logo_emco" src="../media/logo/logo-10.svg" alt="EMCO" width="40%">
-    </div>
-  </div>
-  <div class="container mt-5 d-flex justify-content-end">
-    <div class="empty-block"></div>    
+    <nav class="navbar bg-body-tertiary shadow p-3 mb-2">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img class="logo_emco_tech" src="/media/logo/new-logo-2.png" alt="EMCO.TECH" width="150px" >
+          <img class="logo_emco" src="/media/logo/logo-10.svg" alt="EMCO" width="150px">
+        </a>
+      </div>
+    </nav>
 </div>
   </header>
   <body>
@@ -40,52 +28,80 @@
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
       crossorigin="anonymous"
     ></script>
-    <html>
-    <head>
-        <title>{{ news.name }}</title>
-    </head>
     <body>
         <div class="container mt-5">
-            <div class="row">
+          <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                {% for i in "123456" %}
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
+                {% endfor %}
+            </div>
+            <div class="carousel-inner">
                 {% if news.images %}
-                    <div class="col-md-4">
-                        <img src="{{ news.images.url }}" class="img-fluid rounded" alt="{{ news.name }}">
+                    <div class="carousel-item active">
+                        <img src="{{ news.images.url }}" class="d-block w-100" alt="{{ news.name }}">
                     </div>
                 {% endif %}
                 {% if news.images2 %}
-                    <div class="col-md-4">
-                        <img src="{{ news.images2.url }}" class="img-fluid rounded" alt="{{ news.name }}">
+                    <div class="carousel-item">
+                        <img src="{{ news.images2.url }}" class="d-block w-100" alt="{{ news.name }}">
                     </div>
                 {% endif %}
                 {% if news.images3 %}
-                    <div class="col-md-4">
-                        <img src="{{ news.images3.url }}" class="img-fluid rounded" alt="{{ news.name }}">
+                    <div class="carousel-item">
+                        <img src="{{ news.images3.url }}" class="d-block w-100" alt="{{ news.name }}">
                     </div>
                 {% endif %}
                 {% if news.images4 %}
-                    <div class="col-md-4">
-                        <img src="{{ news.images4.url }}" class="img-fluid rounded" alt="{{ news.name }}">
+                    <div class="carousel-item">
+                        <img src="{{ news.images4.url }}" class="d-block w-100" alt="{{ news.name }}">
                     </div>
                 {% endif %}
                 {% if news.images5 %}
-                    <div class="col-md-4">
-                        <img src="{{ news.images5.url }}" class="img-fluid rounded" alt="{{ news.name }}">
+                    <div class="carousel-item">
+                        <img src="{{ news.images5.url }}" class="d-block w-100" alt="{{ news.name }}">
                     </div>
                 {% endif %}
                 {% if news.images6 %}
-                    <div class="col-md-4">
-                        <img src="{{ news.images6.url }}" class="img-fluid rounded" alt="{{ news.name }}">
+                    <div class="carousel-item">
+                        <img src="{{ news.images6.url }}" class="d-block w-100" alt="{{ news.name }}">
                     </div>
                 {% endif %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
                 <div class="empty-block"></div> 
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12 mb-4">
                         <h3>{{ news.name }}</h3>
                         <p class="description">{{ news.discription }}</p>
                     </div>
                 </div>
+                <div class="upline">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="194" height="23" viewBox="0 0 194 23" fill="none">
+                    <path d="M45.1021 0C42.1406 0 39.2081 0.594912 36.4721 1.75077C33.7361 2.90663 31.2501 4.6008 29.156 6.73654C27.0619 8.87229 25.4008 11.4078 24.2675 14.1983C23.1342 16.9888 22.5509 19.9796 22.5509 23L45.1021 23V0Z" fill="#E31C34"/>
+                    <rect x="181.912" width="23" height="46.6056" transform="rotate(90 181.912 0)" fill="#E4E4E4"/>
+                    <path d="M135.307 0C132.345 0 129.413 0.594912 126.677 1.75077C123.941 2.90663 121.455 4.6008 119.361 6.73654C117.267 8.87229 115.605 11.4078 114.472 14.1983C113.339 16.9888 112.756 19.9796 112.756 23L135.307 23V0Z" fill="#E31C34"/>
+                    <path d="M135.307 0C138.268 0 141.201 0.594912 143.937 1.75077C146.673 2.90663 149.159 4.6008 151.253 6.73654C153.347 8.87229 155.008 11.4078 156.141 14.1983C157.274 16.9888 157.858 19.9796 157.858 23H135.307V0Z" fill="black"/>
+                    <path d="M22.551 0L22.551 23L-0.00012207 23L22.551 0Z" fill="#E31C34"/>
+                    <rect x="67.6531" y="23" width="22.5511" height="23" transform="rotate(180 67.6531 23)" fill="#E4E4E4"/>
+                    <rect x="90.2043" y="23" width="22.5511" height="23" transform="rotate(180 90.2043 23)" fill="black"/>
+                    <path d="M78.9288 23L90.2043 11.5L78.9288 0L67.6532 11.5L78.9288 23Z" fill="#E4E4E4"/>
+                    <path d="M101.48 23L112.755 11.5L101.48 0L90.2043 11.5L101.48 23Z" fill="#E4E4E4"/>
+                    <ellipse cx="182.664" cy="11.5" rx="11.5" ry="11.2755" transform="rotate(90 182.664 11.5)" fill="#E4E4E4"/>
+                    </svg>
+              </div>
            </div>
        </body>
+       
+
   <nav class="navbar fixed-bottom bg-white border-bottom border-body" data-bs-theme="dark navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       
@@ -110,14 +126,13 @@
           <path d="M13.683 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-7.08a2 2 0 0 1-1.519-.698L.241 8.65a1 1 0 0 1 0-1.302L5.084 1.7A2 2 0 0 1 6.603 1h7.08zm-7.08 1a1 1 0 0 0-.76.35L1 8l4.844 5.65a1 1 0 0 0 .759.35h7.08a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1h-7.08z"/>
         </svg>
       </a>
-      
-      
     </div>
   </nav>
+  
   <div class="empty-block"></div>  
   <div class="empty-block"></div>  
-  <div class="empty-block"></div>  
-  <div class="empty-block"></div>  
+  <div class="empty-block"></div> 
+
   <style>.upline {
     width: auto;
     height: 26px;
@@ -145,15 +160,23 @@
     z-index: 1;
   }
 
+  .emco_tech_logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; 
+}
+.logo_emco_tech, .logo_emco {
+    width: 150px;
+    height: auto;
+}
+.logo_emco_tech {
+    margin-right: 20px; 
+}
+
   .empty-block {
     height: 20px; /* Высота блока, которую вы можете настроить по своему усмотрению */
     /* Другие стили, если необходимо */
-  }
-  
-  .emco_tech_logo{
-      margin:  10px 22px 25px 25px;
-      display: inline-block;
-      
   }
   
   .exmpl_container{
@@ -181,6 +204,20 @@
       padding: 10px;
     }
   }
+
+
+
+  @media (min-width: 992px) {
+    .navbar .btn {
+        width: 150px; /* Измените этот размер на свое усмотрение */
+    }
+    .container-fluid {
+      max-width: 50%; /* Установите требуемую максимальную ширину */
+  }
+}
+
+
+
   </style>
   <script>
     function goToMaps() {
