@@ -1,2 +1,2 @@
-export * from "./section1/ui";
-export * from "./section2/ui";
+export * from "./map/ui";
+export * from "./info/ui";
