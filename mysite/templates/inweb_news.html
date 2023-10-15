@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Новости</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -12,15 +12,8 @@
     />
   </head>
   <header>
-    <nav class="navbar bg-body-tertiary shadow p-3 mb-2">
-      <div class="container">
-        <a class="navbar-brand" href="#">
-          <img class="logo_emco_tech" src="../media/logo/new-logo-2.png" alt="EMCO.TECH" width="150px" >
-          <img class="logo_emco" src="../media/logo/logo-10.svg" alt="EMCO" width="150px">
-        </a>
-      </div>
-    </nav>
-  <div class="container mt-5 d-flex justify-content-end">   
+    {% load static %}
+    {% include 'index_head.html' %}
 </div>
   </header>
   <body>
@@ -39,64 +32,32 @@
           <div class="col-md-8">
             <div class="card-body">
               <h5 class="card-title"><a href="{% url 'news_detail' news.id %}">{{ news.name }}</a></h5>
-              <p class="card-text">{{ news.description }}</p>
+              <p class="description">{{ news.discription }}</p>
             </div>
           </div>
         </div>
       </div>
-    <nav class="navbar fixed-bottom bg-white border-bottom border-body" data-bs-theme="dark navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        
-        <a class="btn btn-outline-primary" onclick="goToNews()" >
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-newspaper" viewBox="0 0 16 16">
-            <path d="M0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v10.528c0 .3-.05.654-.238.972h.738a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 1 1 0v9a1.5 1.5 0 0 1-1.5 1.5H1.497A1.497 1.497 0 0 1 0 13.5v-11zM12 14c.37 0 .654-.211.853-.441.092-.106.147-.279.147-.531V2.5a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5v11c0 .278.223.5.497.5H12z"/>
-            <path d="M2 3h10v2H2V3zm0 3h4v3H2V6zm0 4h4v1H2v-1zm0 2h4v1H2v-1zm5-6h2v1H7V6zm3 0h2v1h-2V6zM7 8h2v1H7V8zm3 0h2v1h-2V8zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1z"/>
-          </svg>
-        </a>
+      {% endfor %}
+    </div>
 
-        <a class="btn btn-outline-primary" onclick="goToHome()" >
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
-            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
-            <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
-          </svg>
-        </a>
-
-        </a>
-        <a href="javascript:history.back()" class="btn btn-outline-primary">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-backspace" viewBox="0 0 16 16">
-            <path d="M5.83 5.146a.5.5 0 0 0 0 .708L7.975 8l-2.147 2.146a.5.5 0 0 0 .707.708l2.147-2.147 2.146 2.147a.5.5 0 0 0 .707-.708L9.39 8l2.146-2.146a.5.5 0 0 0-.707-.708L8.683 7.293 6.536 5.146a.5.5 0 0 0-.707 0z"/>
-            <path d="M13.683 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-7.08a2 2 0 0 1-1.519-.698L.241 8.65a1 1 0 0 1 0-1.302L5.084 1.7A2 2 0 0 1 6.603 1h7.08zm-7.08 1a1 1 0 0 0-.76.35L1 8l4.844 5.65a1 1 0 0 0 .759.35h7.08a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1h-7.08z"/>
-          </svg>
-        </a>
-        
-        
-      </div>
-    </nav>
-{% endfor %}
-  </body>
-  <div class="upline">
-    <svg xmlns="http://www.w3.org/2000/svg" width="194" height="23" viewBox="0 0 194 23" fill="none">
-      <path d="M45.1021 0C42.1406 0 39.2081 0.594912 36.4721 1.75077C33.7361 2.90663 31.2501 4.6008 29.156 6.73654C27.0619 8.87229 25.4008 11.4078 24.2675 14.1983C23.1342 16.9888 22.5509 19.9796 22.5509 23L45.1021 23V0Z" fill="#E31C34"/>
-      <rect x="181.912" width="23" height="46.6056" transform="rotate(90 181.912 0)" fill="#E4E4E4"/>
-      <path d="M135.307 0C132.345 0 129.413 0.594912 126.677 1.75077C123.941 2.90663 121.455 4.6008 119.361 6.73654C117.267 8.87229 115.605 11.4078 114.472 14.1983C113.339 16.9888 112.756 19.9796 112.756 23L135.307 23V0Z" fill="#E31C34"/>
-      <path d="M135.307 0C138.268 0 141.201 0.594912 143.937 1.75077C146.673 2.90663 149.159 4.6008 151.253 6.73654C153.347 8.87229 155.008 11.4078 156.141 14.1983C157.274 16.9888 157.858 19.9796 157.858 23H135.307V0Z" fill="black"/>
-      <path d="M22.551 0L22.551 23L-0.00012207 23L22.551 0Z" fill="#E31C34"/>
-      <rect x="67.6531" y="23" width="22.5511" height="23" transform="rotate(180 67.6531 23)" fill="#E4E4E4"/>
-      <rect x="90.2043" y="23" width="22.5511" height="23" transform="rotate(180 90.2043 23)" fill="black"/>
-      <path d="M78.9288 23L90.2043 11.5L78.9288 0L67.6532 11.5L78.9288 23Z" fill="#E4E4E4"/>
-      <path d="M101.48 23L112.755 11.5L101.48 0L90.2043 11.5L101.48 23Z" fill="#E4E4E4"/>
-      <ellipse cx="182.664" cy="11.5" rx="11.5" ry="11.2755" transform="rotate(90 182.664 11.5)" fill="#E4E4E4"/>
-      </svg>
-</div>
   <div class="empty-block"></div>  
   <div class="empty-block"></div>  
-  <style>.upline {
+  <style>
+    .upline {
     width: auto;
     height: 26px;
     background-color: black;
     
   }
-  
+
+  .description {
+    max-height: 200px; /* Установите желаемую максимальную высоту */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* количество строк */
+    -webkit-box-orient: vertical;
+  }
   
   .round_button {
     width: 38px;
@@ -116,12 +77,6 @@
     border-radius: 60px;
     position: absolute ;
     z-index: 1;
-  }
-  
-  .emco_tech_logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
   
   .exmpl_container{
@@ -146,25 +101,26 @@
       transform: translate(-40%, 0px);
       padding: 10px;
     }
+
+    .carousel-item img {
+      max-width: 1000px; /* Установите нужную максимальную ширину */
+      max-height: 1000px; /* Установите нужную максимальную высоту */
+      object-fit: cover; /* Чтобы изображение не деформировалось */
+    }
   }
 
 
   @media (min-width: 992px) {
     .navbar .btn {
-        width: 150px; /* Измените этот размер на свое усмотрение */
+        width: 170px; /* Измените этот размер на свое усмотрение */
     }
     .container-fluid {
-      max-width: 50%; /* Установите требуемую максимальную ширину */
+      max-width: 60%; /* Установите требуемую максимальную ширину */
   }
 }
-
   .empty-block {
     height: 20px; /* Высота блока, которую вы можете настроить по своему усмотрению */
     /* Другие стили, если необходимо */
-  }
-  .logo_emco_tech,.logo_emco {
-    margin-left:15px ;
-    margin-right: 15px;
   }
   </style>
   <script>

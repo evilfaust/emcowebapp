@@ -80,11 +80,34 @@
         -webkit-transition: all 0.5s ease-in-out;
         transition: all 0.5s ease-in-out;
       }
+
+      @media (min-width: 992px) {
+      .navbar .btn {
+          width: 170px; /* Измените этот размер на свое усмотрение */
+      }
+      .container-fluid {
+        max-width: 60%; /* Установите требуемую максимальную ширину */
+    }
+  }
+
+    @media (max-width: 767px) {
+      .btn-overlay {
+        position: absolute;
+        top: 95%;
+        left: 30%;
+        right: -15px;
+        bottom: 0;
+        transform: translate(-40%, 0px);
+        padding: 10px;
+      }
     </style>
   </head>
   <body>
-    <div class="container">
-      {% include "navbar.html" %} {% include "add_marker_info.html"%} 
+          {% load static %}
+      {% include 'index_head.html' %}
+      {% include "add_marker_info.html"%} 
+      <div class="container">
+
       <div class="row">
         <script>
           function goToHome() {
