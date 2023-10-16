@@ -1,11 +1,10 @@
-import { PiMapPinBold } from "react-icons/pi";
-
+import { YandexMap } from "./features/ui";
 import "./ui.scss";
 
 export const MapSection: React.FC = () => {
   return (
     <section>
-      <PiMapPinBold />
+      <YandexMap />
     </section>
   );
 };
