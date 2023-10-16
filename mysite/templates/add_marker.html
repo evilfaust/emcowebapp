@@ -52,62 +52,60 @@
       }
     </script>
     <style>
-      #map {
-        width: 100%;
-        height: 500px;
-      }
-      .btn-pozition {
-        position: absolute;
-        z-index: 1000;
-        margin-top: 50px;
-        margin-left: 20px;
-        width: 40px;
-      }
-      .fixed-top {
-        position: fixed;
-        top: 0;
-        right: 0;
-        left: 0;
-        z-index: 1030;
-      }
-      .navbar-custom {
-        padding: 20px 0px;
-        padding-right: 0 !important;
-        width: 100%;
-        border-radius: 0px;
-        z-index: 9999;
-        margin-bottom: 0px;
-        -webkit-transition: all 0.5s ease-in-out;
-        transition: all 0.5s ease-in-out;
+          #map {
+            width: 100%;
+            height: 500px;
+          }
+          .btn-pozition {
+            position: absolute;
+            z-index: 1000;
+            margin-top: 50px;
+            margin-left: 20px;
+            width: 40px;
+          }
+          .fixed-top {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1030;
+          }
+          .navbar-custom {
+            padding: 20px 0px;
+            padding-right: 0 !important;
+            width: 100%;
+            border-radius: 0px;
+            z-index: 9999;
+            margin-bottom: 0px;
+            -webkit-transition: all 0.5s ease-in-out;
+            transition: all 0.5s ease-in-out;
+          }
+
+          @media (min-width: 992px) {
+          .navbar .btn {
+              width: 170px; /* Измените этот размер на свое усмотрение */
+          }
+          .container-fluid {
+            max-width: 60%; /* Установите требуемую максимальную ширину */
+        }
       }
 
-      @media (min-width: 992px) {
-      .navbar .btn {
-          width: 170px; /* Измените этот размер на свое усмотрение */
-      }
-      .container-fluid {
-        max-width: 60%; /* Установите требуемую максимальную ширину */
-    }
-  }
-
-    @media (max-width: 767px) {
-      .btn-overlay {
-        position: absolute;
-        top: 95%;
-        left: 30%;
-        right: -15px;
-        bottom: 0;
-        transform: translate(-40%, 0px);
-        padding: 10px;
-      }
+        @media (max-width: 767px) {
+          .btn-overlay {
+            position: absolute;
+            top: 95%;
+            left: 30%;
+            right: -15px;
+            bottom: 0;
+            transform: translate(-40%, 0px);
+            padding: 10px;
+          }
     </style>
   </head>
   <body>
-          {% load static %}
-      {% include 'index_head.html' %}
-      {% include "add_marker_info.html"%} 
-      <div class="container">
-
+    {% load static %} {% include 'index_head.html' %} {% include
+    "add_marker_info.html"%}
+    <div class="container">
       <div class="row">
         <script>
           function goToHome() {
