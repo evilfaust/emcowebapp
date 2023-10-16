@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from django.shortcuts import render, get_object_or_404
 
 
 
@@ -72,6 +73,11 @@ def news_list(request):
         'news_list': news_list,
     }
     return render(request, 'inweb_news.html',  context)
+
+
+def news_detail(request, news_id):
+    news = get_object_or_404(News, pk=news_id)
+    return render(request, 'news_detail.html', {'news': news})
     
 
 

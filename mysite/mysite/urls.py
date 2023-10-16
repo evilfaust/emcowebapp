@@ -22,12 +22,14 @@ from django.conf.urls.static import static
 from maps import views
 from django.contrib.auth import views as auth_views
 
+
 urlpatterns = (
     [
         path("admin/", admin.site.urls),
         path("maps/", include("maps.urls")),
         path("", views.index_home, name="index_home"),
         path('news/', views.news_list, name='news_list'),
+        path('news/<int:news_id>/', views.news_detail, name='news_detail'),
     ]
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

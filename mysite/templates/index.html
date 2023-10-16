@@ -13,6 +13,7 @@
     ></script>
 
     <title>Свалкам бой!</title>
+    
   </head>
   <body>
     {% load static %}
@@ -39,22 +40,40 @@
             <p class="card-text">
                 Свалкам бой! - ваш надежный партнер в борьбе за чистоту и экологическую ответственность. Совместными усилиями мы можем сохранить нашу планету для будущих поколений!
             </p>
+            <div class="position-relative d-grid gap-2">
+              <a href="/news" class="btn btn-primary">Перейти к новостям</a>
+          </div>
         </div>
-        {% for news in news_list %}
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="{{ news.images.url }}" class="img-fluid rounded-start" alt="">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ news.name }}</h5>
-                        <p class="card-text">{{ news.discription }}</p>
+        <div id="carouselExample" class="carousel slide">
+          <div class="carousel-inner">
+            {% for news in news_list %}
+              <div class="carousel-item{% if forloop.first %} active{% endif %}">
+                <a href="{% url 'news_detail' news.id %}">
+                  <img src="{{ news.images.url }}" class="d-block w-100" alt="{{ news.title }}">
+
+                  <div class="text-center"> <!-- Выравнивание текста по центру -->
+                    <h1 class="card-title" style="font-size: 24px;"> <!-- Установка размера шрифта -->
+                      <a href="{% url 'news_detail' news.id %}">{{ news.name }}</a>
+                    </h1>
+                    <p class="card-text" style="font-size: 18px;"> <!-- Установка размера шрифта -->
+                      {{ news.description }}
+                    </p>
+                  </div>                    
+
+                    </a>
                     </div>
-                </div>
-            </div>
+            {% endfor %}
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
         </div>
-        {% endfor %}
+        <div class="empty-block"></div>         
       </div>
 </div>
 <script>
@@ -64,11 +83,70 @@
   function goToAddMarker() {
       window.location.href = "/maps/add_marker/";
   }
+  function goToHome() {
+    window.location.href = "/";
+  }
+  function goToNews() {
+    window.location.href = "/news/";
+  }
 </script>
   <style>
     .position-relative {
       position: relative;
     }
+
+
+
+    .carousel-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      max-width: 600px;
+    }
+
+    .carousel-item img {
+      max-width: 800px;
+      max-height: 500px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: 30%; /* Установите желаемую ширину */
+      filter: invert(100%);
+
+    }
+
+    @media (min-width: 992px) {
+      .navbar .btn {
+          width: 170px; /* Измените этот размер на свое усмотрение */
+      }
+      .container-fluid {
+        max-width: 60%; /* Установите требуемую максимальную ширину */
+    }
+  }
+
+    @media (max-width: 767px) {
+      .btn-overlay {
+        position: absolute;
+        top: 95%;
+        left: 30%;
+        right: -15px;
+        bottom: 0;
+        transform: translate(-40%, 0px);
+        padding: 10px;
+      }
+
+      .carousel-item img {
+        max-width: 1000px; /* Установите нужную максимальную ширину */
+        max-height: 1000px; /* Установите нужную максимальную высоту */
+        object-fit: cover; /* Чтобы изображение не деформировалось */
+      }
+    }
+
 
     .btn-overlay {
       position: absolute;
@@ -89,17 +167,9 @@
     .btn-overlay .btn:first-child {
       margin-right: 0px;
     }
-
-    @media (max-width: 767px) {
-      .btn-overlay {
-        position: absolute;
-        top: 95%;
-        left: 30%;
-        right: -15px;
-        bottom: 0;
-        transform: translate(-40%, 0px);
-        padding: 10px;
-      }
+    .empty-block {
+      height: 100px; /* Высота блока, которую вы можете настроить по своему усмотрению */
+      /* Другие стили, если необходимо */
     }
   </style>
 </html>
