@@ -22,17 +22,17 @@
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
       crossorigin="anonymous"
     ></script>
-    <div class="container text-center">
+    <div class="container text-center" >
       {% for news in news_list %}
-      <div class="card mb-3" style="max-width: 800px; display: inline-block;">
+      <div class="card mb-3" display: inline-block;">
         <div class="row g-0">
           <div class="col-md-4">
-            <img src="{{ news.images.url }}" class="img-fluid rounded-start" alt="">
+            <img src="{{ news.images.url }}" class="img-fluid rounded-start" style="max-width: 100%;" alt="">
           </div>
           <div class="col-md-8">
-            <div class="card-body">
+            <div class="card-body" style="word-wrap: break-word;">
               <h5 class="card-title"><a href="{% url 'news_detail' news.id %}">{{ news.name }}</a></h5>
-              <p class="description">{{ news.discription }}</p>
+              <p class="description" style="white-space: normal;">{{ news.discription }}</p>
             </div>
           </div>
         </div>
@@ -48,6 +48,10 @@
     height: 26px;
     background-color: black;
     
+  }
+
+  .{
+    max-width: 200px; /* Здесь вы можете установить нужное вам значение ширины */
   }
 
   .description {
