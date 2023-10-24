@@ -1,0 +1,21 @@
+.navigation {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .navigation {
+    display: block;
+
+    .navlink {
+      display: flex;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .navigation {
+    display: none;
+  }
+}
