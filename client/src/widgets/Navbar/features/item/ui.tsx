@@ -6,7 +6,8 @@ import { ItemProps } from "./types";
 
 const StyledNavLink = styled(NavLink)`
   &.active {
-    color: red;
+    color: #e31c34;
+    text-decoration: underline;
   }
 `;
 
