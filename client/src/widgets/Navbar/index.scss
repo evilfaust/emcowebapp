@@ -13,6 +13,24 @@
     max-width: 20em;
     max-height: 3em;
   }
+
+  ul {
+    display: flex;
+    margin: 0;
+
+    list-style-type: none;
+
+    li {
+      padding: 0.75rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
 }
 
 @media screen and (max-width: 768px) {

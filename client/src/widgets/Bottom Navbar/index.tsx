@@ -1,6 +1,6 @@
 import React from "react";
 import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { pages } from "widgets";
 
 import "./index.scss";
