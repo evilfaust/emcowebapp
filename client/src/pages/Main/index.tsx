@@ -1,3 +1,4 @@
+import { Footer } from "widgets";
 import { Banner, ToMapButton,  } from "./components";
 
 function Main() {
@@ -5,6 +6,7 @@ function Main() {
     <>
       <Banner />
       <ToMapButton />
+      <Footer/>
     </>
   );
 }
