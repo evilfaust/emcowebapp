@@ -1,16 +1,17 @@
 import React from "react";
+import footer_logo from "shared/images/footer-logo.png";
+
 import "./index.scss";
-import emco from "./img/emco.png"
 
 export const Footer: React.FC = () => {
   return (
-    <div className="footer-bottom">
+    <div className="footer">
       <div className="container">
-        <div className="text">
+        <div className="footer__text">
           Этот проект разработан при поддержке сотрудников
           <div>и учеников детского технопарка EMCO TECH</div>
-          <div className="emco">
-          <img src={emco} alt="EMCO TECH"/>
+          <div className="footer__image">
+            <img src={footer_logo} alt="EMCO TECH" />
           </div>
         </div>
       </div>

@@ -1,12 +1,10 @@
-import { Footer } from "widgets";
-import { Banner, ToMapButton,  } from "./components";
+import { Banner, ToMapButton } from "./components";
 
 function Main() {
   return (
     <>
       <Banner />
       <ToMapButton />
-      <Footer/>
     </>
   );
 }
