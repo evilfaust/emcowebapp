@@ -5,6 +5,7 @@ import { LoadingSpinner } from "shared/UI";
 import { Footer, MobileNavigation, Navbar } from "widgets";
 import { Counter } from "pages/Main/components/counter/ui";
 import axios from 'axios';
+import useDjangoData from '../useDjangoData'; // Подстройте количество `../` в зависимости от расположения файла
 
 const Main = React.lazy(() => import("pages/Main/index"));
 const Map = React.lazy(() => import("pages/Map/index"));
@@ -17,21 +18,7 @@ interface YouTubeVideo {
   channel: string;
 }
 function App() {
-  const [details, setDetails] = useState<YouTubeVideo[]>([]);
-
-  //тут мы тоже показываем, что надо брать данные с джанго сервака
-  useEffect(() => {
-    let data;
-    axios.get('http://localhost:8000')
-      .then(res => {
-        data = res.data;
-        setDetails(data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, []);
-
+  const { data: details, loading } = useDjangoData('http://localhost:8000');
   return (
 
 
