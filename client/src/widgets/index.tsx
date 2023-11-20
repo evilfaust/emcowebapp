@@ -1,6 +1,5 @@
 import { TbNews } from "react-icons/tb";
 import { AiOutlineHome } from "react-icons/ai";
-import { Footer } from "./Footer/index";
 
 export * from "./Bottom Navbar/index";
 export * from "./Footer/index";

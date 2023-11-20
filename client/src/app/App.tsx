@@ -21,8 +21,6 @@ function App() {
       <Navbar />
       <MobileNavigation />
       <CssBaseline />
-
-      <Footer />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/news" element={<News />}>
@@ -31,6 +29,7 @@ function App() {
         <Route path="/map" element={<Map />} />
         <Route path="*" element={<Main />} />
       </Routes>
+      <Footer />
     </Suspense>
   );
 }
