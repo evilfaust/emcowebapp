@@ -1,0 +1,26 @@
+.body {
+  display: block;
+  margin-top: 30em;
+
+  .counter_head {
+    position: absolute;
+    margin-top: -4.2em;
+    margin-left: 9em;
+    z-index: 1;
+  }
+  .counter_base {
+    margin-left: 8.2em;
+    margin-top: -2em;
+    z-index: 0;
+  }
+  .text_counter {
+    font-family: "Neue Machina";
+    font-size: 3em;
+    font-weight: bold;
+  }
+}
+.info {
+  position: relative;
+  margin-left: 75em;
+
+}
