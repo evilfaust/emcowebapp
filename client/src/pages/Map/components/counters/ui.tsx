@@ -3,22 +3,28 @@ import { info } from "console";
 import React from "react";
 import dump from "shared/images/counter base.png";
 import head_dump from "shared/images/counter head.png";
-import indo from "shared/images/info-map.png";
+import wrapper_text from "shared/images/info-map.png";
+import wrapper from "shared/images/img_svalok.png";
 import "./ui.scss";
 
 export const CounterNumber: React.FC = () => {
   return (
-    <section className="body">
-      <img className="info" src={indo} />
-      <div className="counter_head">
-        <img
-          className="counter_head"
-          src={head_dump}
-          alt="Счетчик убранных свалок"
-        />
-      </div>
-      <div className="counter_base">
-        <img className="counter_base" src={dump} alt="Подставка" />
+    <section>
+      <div className="layout">
+        <div className="wrapper">
+          <img src={wrapper} />
+          <div className="wrapper_counter">
+            <img
+              className="counter_head"
+              src={head_dump}
+              alt="Счетчик убранных свалок"
+            />
+            <img className="counter_base" src={dump} alt="Подставка" />
+          </div>
+        </div>
+        <div className="wrapper">
+          <img className="info" src={wrapper_text} />
+        </div>
       </div>
     </section>
   );

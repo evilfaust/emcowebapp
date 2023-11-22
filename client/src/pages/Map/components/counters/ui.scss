@@ -1,26 +1,37 @@
-.body {
-  display: block;
-  margin-top: 30em;
-
-  .counter_head {
-    position: absolute;
-    margin-top: -4.2em;
-    margin-left: 9em;
-    z-index: 1;
+.layout {
+  display: flex;
+  .wrapper {
+    display: block;
+    max-width: 100%;
+    width: 50%;
+    .wrapper_text {
+      font-family: "Neue Machina";
+      font-size: 2em;
+      font-weight: bold;
+    }
+    .info {
+      max-width: 100%;
+      width: auto;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
-  .counter_base {
-    margin-left: 8.2em;
-    margin-top: -2em;
-    z-index: 0;
+  .wrapper_counter {
+    display: block;
+    margin-top: -5em;
+    padding-left: 25em;
+    
+    
+    .counter_head {
+      display: block;
+      position: relative;
+      padding-top: 18em;
+      padding-left: 1.5em;
+      width: 42%;
+    }
+    .counter_base {
+      margin-top: -1.9em;
+      width: 47%;
+    }
   }
-  .text_counter {
-    font-family: "Neue Machina";
-    font-size: 3em;
-    font-weight: bold;
-  }
-}
-.info {
-  position: relative;
-  margin-left: 75em;
-
 }
