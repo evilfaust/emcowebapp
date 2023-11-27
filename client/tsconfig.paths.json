@@ -4,7 +4,8 @@
     "paths": {
       "@app/*": ["src/app/*"],
       "@pages/*": ["src/pages/*"],
-      "@shared/*": ["src/shared/*"]
+      "@shared/*": ["src/shared/*"],
+      "@widgets/*": ["src/widgets/*"]
     }
   }
 }
