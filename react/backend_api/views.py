@@ -17,9 +17,9 @@ class YouTubeVideoView(APIView):
     def get(self, request):
         output = [
             {
-                'title': output['title'],
-                'channel': output['channel']
-            } for output in YouTubeVideo.objects.all().values()
+                'title': video['title'],
+                'channel': video['channel']
+            } for video in YouTubeVideo.objects.all().values()
         ]
         return Response(output)
     
@@ -30,16 +30,18 @@ class YouTubeVideoView(APIView):
             return Response(serializer.data)
 
 
-
-
-        
 class MarkerView(APIView):
     def get(self, request):
         output = [
             {
-                'title': output['title'],
-                'channel': output['channel']
-            } for output in Marker.objects.all().values()
+                'name': marker['name'],
+                'latitude': marker['latitude'],
+                'longitude': marker['longitude'],
+                'is_active': marker['is_active'],
+                'photo': marker['photo'],
+                'aftephoto': marker['aftephoto'],
+                'discription': marker['discription'],
+            } for marker in Marker.objects.all().values()
         ]
         return Response(output)
     
@@ -50,15 +52,18 @@ class MarkerView(APIView):
             return Response(serializer.data)
 
 
-
-        
 class MapsView(APIView):
     def get(self, request):
         output = [
             {
-                'title': output['title'],
-                'channel': output['channel']
-            } for output in Maps.objects.all().values()
+                'title': maps['title'],
+                'cord_x': maps['cord_x'],
+                'cord_y': maps['cord_y'],
+                'img_url': maps['img_url'],
+                'description': maps['description'],
+                'aftephoto': maps['aftephoto'],
+                'discription': maps['discription'],
+            } for maps in Maps.objects.all().values()
         ]
         return Response(output)
     
