@@ -9,9 +9,11 @@ import "./ui.scss";
 
 interface Marker {
   id: number;
-  coordinates: [number, number];
   title: string;
-  description: string;
+  discription: string;
+  latitude: number;
+  longitude: number;
+  photo: string;
 }
 
 const YandexMap: React.FC = () => {
@@ -43,14 +45,17 @@ const YandexMap: React.FC = () => {
           {markers.map((marker) => (
             <Placemark
               key={marker.id}
-              geometry={marker.coordinates}
-              options={{
-                iconLayout: 'default#image',
-                iconImageHref: 'islands#circleIcon',
-              }}
+              geometry={[marker.latitude, marker.longitude]}
               properties={{
-                balloonContentBody: marker.description,
-              }}
+                balloonContentHeader: `Координаты: ${marker.latitude}, ${marker.longitude}`,
+                balloonContentBody: `
+                  Описание: ${marker.discription}
+                  Фото: <img src="${marker.photo}" alt="Фото" style="max-width: 100%;" />`,
+                }}
+                options={{
+                    preset: 'islands#greenDotIconWithCaption',
+                    iconColor: '#aeca3b',
+                }}
             />
           ))}
         </Map>

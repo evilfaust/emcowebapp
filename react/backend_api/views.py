@@ -7,8 +7,8 @@ from .serializer import YouTubeVideoSerializer
 from .models import Marker
 from .serializer import MarkerSerializer
 
-from .models import Maps
-from .serializer import MapsSerializer
+from .models import News
+from .serializer import NewsSerializer
 
 from rest_framework.response import Response
 
@@ -52,23 +52,46 @@ class MarkerView(APIView):
             return Response(serializer.data)
 
 
-class MapsView(APIView):
+class MarkerView(APIView):
     def get(self, request):
         output = [
             {
-                'title': maps['title'],
-                'cord_x': maps['cord_x'],
-                'cord_y': maps['cord_y'],
-                'img_url': maps['img_url'],
-                'description': maps['description'],
-                'aftephoto': maps['aftephoto'],
-                'discription': maps['discription'],
-            } for maps in Maps.objects.all().values()
+                'name': marker['name'],
+                'latitude': marker['latitude'],
+                'longitude': marker['longitude'],
+                'is_active': marker['is_active'],
+                'photo': marker['photo'],
+                'aftephoto': marker['aftephoto'],
+                'discription': marker['discription'],
+            } for marker in Marker.objects.all().values()
         ]
         return Response(output)
     
     def post(self, request):
-        serializer = MapsSerializer(data=request.data)
+        serializer = MarkerSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
+        
+        
+class NewsView(APIView):
+    def get(self, request):
+        output = [
+            {
+                'name': news['name'],
+                'images': news['images'],
+                'images2': news['images2'],
+                'images3': news['images3'],
+                'images4': news['images4'],
+                'images5': news['images5'],
+                'images6': news['images6'],
+                'description': news['description'],
+            } for news in News.objects.all().values()
+        ]
+        return Response(output)
+
+    def post(self, request):
+        serializer = NewsSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
