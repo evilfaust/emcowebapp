@@ -11,31 +11,38 @@
     }
     .info {
       max-width: 100%;
-      width: auto;
-      margin-left: auto;
+      width: 350px;
+      margin-left: 15em;
       margin-right: auto;
+   
+    }
+    .wrappersamsa{
+      margin-left: 10em;
     }
   }
   .wrapper_counter {
-    display: flex;
-    font-family: "Neue Machina";
+    
+    display: block;
+    // margin-left: 27em;
     color: white;
-    background-color: white;
+    border-style: solid;
     border-radius: 3.125em;
-    width: 80%;
+    width: 550px;
+    height: 425px;
     justify-content: center;
     text-align: center;
+    align-items: center;
 
-    h1{
-      font-size: 3.9em;
+    h1 {
+      margin-bottom: -0.25em;
+      font-size: 4em;
       font-weight: bolde;
-      color: #e31c34;
-      span{
-        color: green;
-        
-
-      }
+      -webkit-text-stroke: 1px #e31c34;
+      line-height: 104px;
     }
-  
+    span {
+      font-size: 4.4em;
+      -webkit-text-stroke: 1px green;
+    }
   }
 }

@@ -10,14 +10,16 @@ export const CounterNumber: React.FC = () => {
     <section>
       <div className="layout">
         <div className="wrapper">
-          <img src={wrapper} />
-          <div className="wrapper_counter">
-            <h1>СВАЛОК УБРАЛИ:<span><strong>40</strong></span></h1>
-            
+          <img src={wrapper} className="centered" style={{ marginLeft: 'auto' }}/>
+          <div className="wrapper_counter centered" style={{ marginBottom: "auto" }}>
+            <h1>СВАЛОК УБРАЛИ:</h1>
+            <span>
+              <strong>40</strong>
+            </span>
           </div>
         </div>
         <div className="wrapper">
-          <img className="info" src={wrapper_text} />
+          <img className="centered" src={wrapper_text} />
         </div>
       </div>
     </section>
