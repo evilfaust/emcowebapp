@@ -25,3 +25,10 @@ code {
   justify-content: center;
   align-items: center;
 }
+
+.flex {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
