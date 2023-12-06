@@ -21,7 +21,7 @@
     <div class="container">
         <div class="row">
             <div class="card w-100 border-light">
-            <img src="../media/logo/pic.jpg" class="card-img-top" alt="...">
+            <img src="../media/logo/newpic.jpg" class="card-img-top" alt="...">
             <div class="card-body">
             <p class="card-text">
                 Свалкам бой! - это интерактивное приложение, 
@@ -29,7 +29,7 @@
                 При помощи этого приложения пользователи смогут эффективно маркировать
                  и сообщать о местонахождении несанкционированных свалок, 
                  что поможет местным властям, волонтерам и экологическим 
-                 организациям в ликвидации и предотвращении таких проблем.
+                 организациям в ликвидации и предотвращении таких проблем. Совместными усилиями мы можем сохранить нашу планету для будущих поколений!
                 </p>
             <div class="d-grid gap-2 ">
 
@@ -37,38 +37,27 @@
             <button type="button" class="btn btn-danger" onclick="goToAddMarker()">Отметить точку</button>
             </div>
             <br>
-            <p class="card-text">
-                Свалкам бой! - ваш надежный партнер в борьбе за чистоту и экологическую ответственность. Совместными усилиями мы можем сохранить нашу планету для будущих поколений!
-            </p>
-            <div class="position-relative d-grid gap-2">
-              <a href="/news" class="btn btn-primary">Перейти к новостям</a>
-          </div>
         </div>
-        <div id="carouselExample" class="carousel slide">
+        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
           <div class="carousel-inner">
             {% for news in news_list %}
               <div class="carousel-item{% if forloop.first %} active{% endif %}">
                 <a href="{% url 'news_detail' news.id %}">
-                  <img src="{{ news.images.url }}" class="d-block w-100" alt="{{ news.title }}">
-
+                  <img src="{{ news.images.url }}" class="d-block w-100" style="object-fit: cover; height: 300px;" alt="{{ news.title }}">
+                  <div class="empty-block-mini"></div>
                   <div class="text-center"> <!-- Выравнивание текста по центру -->
-                    <h1 class="card-title" style="font-size: 24px;"> <!-- Установка размера шрифта -->
-                      <a href="{% url 'news_detail' news.id %}">{{ news.name }}</a>
-                    </h1>
-                    <p class="card-text" style="font-size: 18px;"> <!-- Установка размера шрифта -->
-                      {{ news.description }}
-                    </p>
+                    <div class="d-grid gap-2 d-md-block">
+                      <button class="btn btn-primary" type="button">{{ news.name }}</button>
+                    </div>
                   </div>                    
-
-                    </a>
                     </div>
             {% endfor %}
           </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
           </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>
@@ -111,14 +100,16 @@
       display: block;
       margin-left: auto;
       margin-right: auto;
+      border-radius: 10px; /* Здесь вы можете настроить желаемое значение радиуса */
     }
 
     .carousel-control-prev,
     .carousel-control-next {
       width: 30%; /* Установите желаемую ширину */
-      filter: invert(100%);
-
     }
+
+
+
 
     @media (min-width: 992px) {
       .navbar .btn {
@@ -126,6 +117,11 @@
       }
       .container-fluid {
         max-width: 60%; /* Установите требуемую максимальную ширину */
+    }
+    
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: 50%; /* Установите желаемую ширину */
     }
   }
 
@@ -146,6 +142,9 @@
         object-fit: cover; /* Чтобы изображение не деформировалось */
       }
     }
+
+
+
 
 
     .btn-overlay {
@@ -169,6 +168,10 @@
     }
     .empty-block {
       height: 100px; /* Высота блока, которую вы можете настроить по своему усмотрению */
+      /* Другие стили, если необходимо */
+    }
+    .empty-block-mini {
+      height: 10px; /* Высота блока, которую вы можете настроить по своему усмотрению */
       /* Другие стили, если необходимо */
     }
   </style>

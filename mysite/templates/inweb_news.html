@@ -23,22 +23,28 @@
       crossorigin="anonymous"
     ></script>
     <div class="container text-center">
-      {% for news in news_list %}
-      <div class="card mb-3" style="max-width: 800px; display: inline-block;">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="{{ news.images.url }}" class="img-fluid rounded-start" alt="">
-          </div>
-          <div class="col-md-8">
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for news in news_list %}
+        <div class="col">
+          <div class="card">
+            <img src="{{ news.images.url }}" class="img-fluid rounded-start" style="max-width: 100%;" alt="">
             <div class="card-body">
               <h5 class="card-title"><a href="{% url 'news_detail' news.id %}">{{ news.name }}</a></h5>
-              <p class="description">{{ news.discription }}</p>
+              <p class="description" style="white-space: normal;">{{ news.small_discription }}</p>
             </div>
           </div>
         </div>
+        {% endfor %}
       </div>
-      {% endfor %}
     </div>
+
+
+
+
+
+
+
+
 
   <div class="empty-block"></div>  
   <div class="empty-block"></div>  
@@ -48,6 +54,10 @@
     height: 26px;
     background-color: black;
     
+  }
+
+  .{
+    max-width: 200px; /* Здесь вы можете установить нужное вам значение ширины */
   }
 
   .description {
