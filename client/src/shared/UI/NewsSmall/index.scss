@@ -7,35 +7,30 @@
   max-height: 25rem;
   margin-left: 3.5rem;
   margin-right: 3.5rem;
-  margin-top: 1.5rem;
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
   p {
-    word-wrap: break-word;
-    margin-top: 0.5rem;
     margin-bottom: 0.5rem;
-    width: 95%;
-    max-width: 95%;
     text-align: left;
     margin-left: auto;
     margin-right: auto;
-    height: 40%;
-    max-height: 40%;
-    height: 4.5em; /* Высота для отображения только трех строк текста */
+    height: 4.5em;
     display: -webkit-box;
-    -webkit-line-clamp: 3; /* Ограничение по числу строк */
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    font-size: 1.5em;
+    font-size: 1.0em;
     font-family: 'Roboto', sans-serif;
     border-top: 1px solid grey;
-
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 
   .card-title{
+    margin-bottom: 0;
     height: 10%;
     font-size: 2rem;
     font-family: 'Roboto', sans-serif;
-    margin-top: 0.5rem;
-    margin-bottom:0.5rem;
     border-top: 1px solid grey;
     text-align: center;
   }
