@@ -2,7 +2,7 @@ import { CssBaseline } from "@mui/material";
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { LoadingSpinner } from "shared/UI";
-import { Footer, MobileNavigation, Navbar } from "widgets";
+import { Footer, MobileNavigation, Navigation } from "widgets";
 
 const Main = React.lazy(() => import("pages/Main/index"));
 const Map = React.lazy(() => import("pages/Map/index"));
@@ -18,7 +18,7 @@ function App() {
         </div>
       }
     >
-      <Navbar />
+      <Navigation />
       <MobileNavigation />
       <CssBaseline />
       <Routes>
