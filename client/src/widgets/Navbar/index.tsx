@@ -1,14 +1,15 @@
 import { pages } from "widgets";
 import { Item } from "./features/item/ui";
+import { NavLink } from "react-router-dom";
+import { Navbar } from "react-bootstrap";
 
 import logo from "shared/images/header-logo.png";
 import "./index.scss";
-import { NavLink } from "react-router-dom";
 
-export const Navbar: React.FC = () => {
+export const Navigation: React.FC = () => {
   return (
     <header>
-      <nav className="navbar">
+      <Navbar expand="lg">
         <NavLink to={"/"}>
           <img src={logo} alt="logo" />
         </NavLink>
@@ -17,7 +18,7 @@ export const Navbar: React.FC = () => {
             <Item label={page.label} link={page.to} value={page.value} />
           ))}
         </ul>
-      </nav>
+      </Navbar>
     </header>
   );
 };
