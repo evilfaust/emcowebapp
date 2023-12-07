@@ -4,3 +4,8 @@ export * from "./Img/index";
 export * from "./Input/index";
 export * from "./LoadingSpinner/index";
 export * from "./Marker/index";
+export * from "./NewsIMG/index";
+export * from "./NewsText/index";
+export * from "./NewsTitle/index";
+export * from "./NewsBig/index";
+export * from "./NewsSmall/index";

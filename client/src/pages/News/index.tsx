@@ -1,9 +1,9 @@
 import { NewsSmall } from "shared/UI/NewsSmall";
 import "./index.scss";
-
 function News() {
   return (
     <div className="NewsLine flex">
+      
       <ul>
         <li>
           <NewsSmall />

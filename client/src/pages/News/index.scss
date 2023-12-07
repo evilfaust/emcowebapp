@@ -1,5 +1,5 @@
 .NewsLine {
-
+display: flex;
     ul{
         width: 100%;
         height: 100%;
@@ -12,9 +12,8 @@
     margin-top: 0.5rem;
     margin-bottom: 1.5rem;
     display: flex;
-    max-height: 15%;
-    max-width: 95%;
-
-
+    max-height: 600px;
+    max-width: 1800px;
+    
   }
 }
