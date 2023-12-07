@@ -1,18 +1,19 @@
 import "./index.scss";
 import NewsImage from "shared/images/main-mobile.png";
 import { Card } from "react-bootstrap";
-
-export const NewsSmall = () => {
+import { INewsProps } from "./types";
+export const NewsSmall: React.FC<INewsProps> = ({
+  id,
+  title,
+  description,
+  image,
+}) => {
   return (
-    <Card>
-      <Card.Img variant="top" src={NewsImage} />
+    <Card key={id}>
+      <Card.Img variant="top" src={image} />
 
-      <Card.Title>Card Title</Card.Title>
-      <Card.Text>
-        {
-          "аввввввввввввввввввввавввввввввввввввввввваввввввввввввввввввввавввввввввввввввввввв"
-        }
-      </Card.Text>
+      <Card.Title>{title}</Card.Title>
+      <Card.Text>{description}</Card.Text>
     </Card>
   );
 };
