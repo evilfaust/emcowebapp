@@ -3,13 +3,11 @@
 .card {
   border: 1px solid grey;
   border-radius: 1rem;
-  max-width: 600px;
-  max-height: 600px;
+  max-width: 22.5rem;
+  max-height: 25rem;
   margin-left: 3.5rem;
   margin-right: 3.5rem;
-  width: 360px;
-  height: 400px;
-
+  margin-top: 1.5rem;
   p {
     word-wrap: break-word;
     margin-top: 0.5rem;
@@ -31,13 +29,7 @@
     border-top: 1px solid grey;
 
   }
-  img {
-    max-height: 50%;
-    padding-bottom: 0.5rem;
-    padding-top: 0.5rem;
-    height: 50%;
-    width: 50%;
-  }
+
   .card-title{
     height: 10%;
     font-size: 2rem;
@@ -45,5 +37,6 @@
     margin-top: 0.5rem;
     margin-bottom:0.5rem;
     border-top: 1px solid grey;
+    text-align: center;
   }
 }

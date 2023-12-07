@@ -8,7 +8,7 @@ function News() {
     <Container>
       <Row>
         {news.map((news) => (
-          <Col xs={6} md={4}>
+          <Col xs={12} md={6} lg={4} xl={4} xxl={4}>
             <NewsSmall
               id={news.id}
               title={news.title}
