@@ -23,10 +23,9 @@ function App() {
       <CssBaseline />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/news" element={<News />}>
-          <Route path=":newsId" element={<Newsletter />} />
-        </Route>
-        <Route path="/map" element={<Map />} />
+        <Route path="news" element={<News />} />
+        <Route path="news/1" element={<Newsletter />} />
+        <Route path="map" element={<Map />} />
         <Route path="*" element={<Main />} />
       </Routes>
       <Footer />
