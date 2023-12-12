@@ -1,16 +1,7 @@
-import "./index.scss"
-import { NewsImg } from "shared/UI/NewsIMG";
-import { NewsText } from "shared/UI/NewsText";
-import { NewsTitle } from "shared/UI/NewsTitle";
+import "./index.scss";
 
 function NewsLetter() {
-    return (
-        <div>
-            <NewsTitle/>
-            <NewsImg/>
-            <NewsText/>
-        </div>
-    )
+  return <div></div>;
 }
 
-export default NewsLetter
+export default NewsLetter;

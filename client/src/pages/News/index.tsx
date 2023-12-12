@@ -1,23 +1,28 @@
-import { NewsSmall } from "shared/UI/NewsSmall";
-import "./index.scss";
+import { NewsSmall } from "shared/UI/NewsComponent";
 import { news } from "./delete_after_connect_to_db";
-import { Row, Col, Container } from "react-bootstrap";
+import { Container, Grid } from "@mui/material";
+
+import "./index.scss";
 
 function News() {
   return (
-    <Container>
-      <Row>
-        {news.map((news) => (
-          <Col xs={12} md={6} lg={4} xl={4} xxl={4}>
-            <NewsSmall
-              id={news.id}
-              title={news.title}
-              description={news.description}
-              image={news.image}
-            />
-          </Col>
-        ))}
-      </Row>
+    <Container maxWidth={"lg"}>
+      <Grid sx={{ flexGrow: 1 }} container spacing={2}>
+        <Grid item xs={12}>
+          <Grid container justifyContent="center" spacing={2}>
+            {news.map((news) => (
+              <Grid key={news.id} item>
+                <NewsSmall
+                  id={news.id}
+                  title={news.title}
+                  description={news.description}
+                  image={news.image}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </Grid>
+      </Grid>
     </Container>
   );
 }

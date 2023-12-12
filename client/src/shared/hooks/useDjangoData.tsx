@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 interface DjangoData {
   title: string;
@@ -13,14 +13,15 @@ const useDjangoData = (url: string) => {
   useEffect(() => {
     let mounted = true;
 
-    axios.get(url)
-      .then(res => {
+    axios
+      .get(url)
+      .then((res) => {
         if (mounted) {
           setData(res.data);
           setLoading(false);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         if (mounted) {
           console.log(err);
           setLoading(false);
