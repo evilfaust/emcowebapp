@@ -18,6 +18,12 @@
         padding: 0.5rem;
         background-color: black;
       }
+      /* Ограничение ширины балуна */
+      .balloon-content {
+        max-width: 300px !important;
+        white-space: normal; /* Позволяет тексту переноситься на новую строку */
+        overflow: hidden; /* Скрытие текста, выходящего за пределы балуна */
+      }
     }
   }
 }

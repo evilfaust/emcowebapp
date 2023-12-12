@@ -1,4 +1,5 @@
-import { YandexMap } from "./features/ui";
+import YandexMap from "./features/ui";
+
 import "./ui.scss";
 
 export const MapSection: React.FC = () => {
