@@ -12,6 +12,37 @@ from .serializer import NewsSerializer
 
 from rest_framework.response import Response
 
+from rest_framework import generics
+from rest_framework.response import Response
+from .serializer import UserSerializer, RegisterSerializer, LoginSerializer
+from django.contrib.auth.models import User
+from rest_framework import status
+from rest_framework.permissions import AllowAny
+from django.contrib.auth import authenticate
+from django.contrib.auth import login
+
+
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    permission_classes = (AllowAny,)
+    serializer_class = RegisterSerializer
+
+class LoginView(APIView):
+    def post(self, request, *args, **kwargs):
+        serializer = LoginSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.validated_data['user']
+            return Response({
+                'user': {
+                    'username': user.username,
+                    'email': user.email,
+                },
+                'access': serializer.validated_data['access'],
+                'refresh': serializer.validated_data['refresh']
+            })
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class YouTubeVideoView(APIView):
     def get(self, request):

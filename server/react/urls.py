@@ -18,6 +18,12 @@ from django.contrib import admin
 from django.urls import path,include
 from django.urls import re_path as url
 from backend_api.views import*
+from django.conf import settings
+from django.conf.urls.static import static
+from django.views.static import serve
+
+from backend_api.views import RegisterView, LoginView
+
 
 
 urlpatterns = [
@@ -26,5 +32,11 @@ urlpatterns = [
     path('youtube/', YouTubeVideoView.as_view(), name='youtube-view'),
     path('marker/', MarkerView.as_view(), name='marker-view'),
     path('news/', NewsView.as_view(), name='news-view'),
-]
+    
+    path('register/', RegisterView.as_view(), name='register'),
+    path('login/', LoginView.as_view(), name='login'),
+    
+    path('api/register/', RegisterView.as_view(), name='register'),
+    path('api/login/', LoginView.as_view(), name='login'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

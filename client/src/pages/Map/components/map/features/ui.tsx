@@ -5,7 +5,7 @@ import { FiMapPin } from "react-icons/fi";
 import { Button, MarkerBar } from "shared/UI";
 import "./ui.scss";
 
-
+import customMarkerIcon from "../../../../../shared/icon/pin1.png"; // Путь к вашей иконке
 
 interface Marker {
   id: number;
@@ -14,6 +14,7 @@ interface Marker {
   latitude: number;
   longitude: number;
   photo: string;
+  aftephoto: string;
 }
 
 const YandexMap: React.FC = () => {
@@ -49,13 +50,17 @@ const YandexMap: React.FC = () => {
               properties={{
                 balloonContentHeader: `Координаты: ${marker.latitude}, ${marker.longitude}`,
                 balloonContentBody: `
-                  Описание: ${marker.discription}
-                  Фото: <img src="${marker.photo}" alt="Фото" style="max-width: 100%;" />`,
-                }}
-                options={{
-                    preset: 'islands#greenDotIconWithCaption',
-                    iconColor: '#aeca3b',
-                }}
+                <p>Описание: ${marker.discription}</p>
+                  Фото:${marker.photo && `<img src="${marker.photo}" alt="Фото" style="max-width: 100%;" />`}
+                  После:${marker.aftephoto && `<img src="${marker.aftephoto}" alt="Фото" style="max-width: 100%;" />`}
+                `
+              }}
+              options={{
+                iconLayout: 'default#image',
+                iconImageHref: customMarkerIcon,
+                iconImageSize: [40, 40], // Размеры вашей иконки
+                iconImageOffset: [-20, -40] // Смещение иконки (если необходимо)
+              }}
             />
           ))}
         </Map>

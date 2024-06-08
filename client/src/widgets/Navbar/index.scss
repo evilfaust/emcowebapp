@@ -1,11 +1,9 @@
 .navbar {
   display: flex;
-  position: relative;
-  max-width: 100%;
-  min-width: 100%;
+  align-items: center;
+  justify-content: space-between;
   background-color: white;
-  padding: 0.5rem;
-  padding-left: 2rem;
+  padding: 0.5rem 2rem;
   box-shadow: 0px 5px 5px rgb(172, 172, 172);
   margin-bottom: 1em;
 
@@ -16,19 +14,57 @@
 
   ul {
     display: flex;
+    align-items: center;
     margin: 0;
-
+    padding: 0;
     list-style-type: none;
 
     li {
       padding: 0.875rem;
-      margin-left: auto;
-      margin-right: auto;
+    }
+
+    &:first-child {
+      margin-right: auto; /* Логотип будет слева */
+    }
+
+    &:last-child {
+      margin-left: auto; /* Пользовательское имя будет справа */
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      color: #333;
+
+      span {
+        margin-left: 0.5rem; /* Добавим отступ между именем и иконкой пользователя */
+      }
     }
 
     a {
       text-decoration: none;
       color: inherit;
+    }
+
+    .logout-button {
+      padding: 0.5rem 1rem;
+      background-color: #f44336;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    
+      &:hover {
+        background-color: #d32f2f;
+      }
+    
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(244, 67, 54, 0.5);
+      }
+    
+      &:active {
+        transform: translateY(1px);
+      }
     }
   }
 }

@@ -4,6 +4,7 @@ import { AiOutlineHome } from "react-icons/ai";
 export * from "./Bottom Navbar/index";
 export * from "./Footer/index";
 export * from "./Navbar/index";
+export { default as Navigation } from './Navbar/index';
 
 export const pages = [
   {
@@ -18,4 +19,5 @@ export const pages = [
     icon: <TbNews />,
     to: "/news",
   },
+  
 ];

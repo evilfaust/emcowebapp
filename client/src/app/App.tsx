@@ -8,6 +8,9 @@ const Main = React.lazy(() => import("pages/Main/index"));
 const Map = React.lazy(() => import("pages/Map/index"));
 const News = React.lazy(() => import("pages/News/index"));
 const Newsletter = React.lazy(() => import("pages/Newsletter/index"));
+const Register = React.lazy(() => import("pages/Register/index"));
+const Login = React.lazy(() => import("pages/Login/index"));
+const Profile = React.lazy(() => import("pages/Profile/index"));
 
 function App() {
   return (
@@ -26,6 +29,9 @@ function App() {
         <Route path="news" element={<News />} />
         <Route path="news/1" element={<Newsletter />} />
         <Route path="map" element={<Map />} />
+        <Route path="register" element={<Register />} />
+        <Route path="login" element={<Login />} />
+        <Route path="profile" element={<Profile />} />
         <Route path="*" element={<Main />} />
       </Routes>
       <Footer />
