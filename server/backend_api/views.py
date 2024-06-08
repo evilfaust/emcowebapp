@@ -61,32 +61,12 @@ class YouTubeVideoView(APIView):
             return Response(serializer.data)
 
 
-class MarkerView(APIView):
-    def get(self, request):
-        output = [
-            {
-                'name': marker['name'],
-                'latitude': marker['latitude'],
-                'longitude': marker['longitude'],
-                'is_active': marker['is_active'],
-                'photo': marker['photo'],
-                'aftephoto': marker['aftephoto'],
-                'discription': marker['discription'],
-            } for marker in Marker.objects.all().values()
-        ]
-        return Response(output)
-    
-    def post(self, request):
-        serializer = MarkerSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response(serializer.data)
-
 
 class MarkerView(APIView):
     def get(self, request):
         output = [
             {
+                'id': marker['id'],
                 'name': marker['name'],
                 'latitude': marker['latitude'],
                 'longitude': marker['longitude'],

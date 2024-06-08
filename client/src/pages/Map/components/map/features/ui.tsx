@@ -9,7 +9,7 @@ import customMarkerIcon from "../../../../../shared/icon/pin1.png"; // Путь 
 
 interface Marker {
   id: number;
-  title: string;
+  name: string;
   discription: string;
   latitude: number;
   longitude: number;
@@ -50,9 +50,11 @@ const YandexMap: React.FC = () => {
               properties={{
                 balloonContentHeader: `Координаты: ${marker.latitude}, ${marker.longitude}`,
                 balloonContentBody: `
+                <p>Название: ${marker.name}</p>
                 <p>Описание: ${marker.discription}</p>
                   Фото:${marker.photo && `<img src="${marker.photo}" alt="Фото" style="max-width: 100%;" />`}
                   После:${marker.aftephoto && `<img src="${marker.aftephoto}" alt="Фото" style="max-width: 100%;" />`}
+                  <p>Номер: ${marker.id}</p>
                 `
               }}
               options={{

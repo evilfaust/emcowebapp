@@ -6,6 +6,7 @@ class YouTubeVideo(models.Model):
     
 
 class Marker(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     latitude = models.FloatField()
     longitude = models.FloatField()
