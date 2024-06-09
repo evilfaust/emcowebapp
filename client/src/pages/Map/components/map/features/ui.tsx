@@ -5,7 +5,8 @@ import { FiMapPin } from "react-icons/fi";
 import { Button, MarkerBar } from "shared/UI";
 import "./ui.scss";
 
-import customMarkerIcon from "../../../../../shared/icon/pin1.png"; // Путь к вашей иконке
+import customMarkerIcon from "../../../../../shared/icon/Vector red.png"; // Путь к вашей иконке
+import customMarkerIcon2 from "../../../../../shared/icon/Vector green.png"; // Путь к вашей иконке
 
 interface Marker {
   id: number;
@@ -15,6 +16,7 @@ interface Marker {
   longitude: number;
   photo: string;
   aftephoto: string;
+  is_active: boolean;
 }
 
 const YandexMap: React.FC = () => {
@@ -50,6 +52,7 @@ const YandexMap: React.FC = () => {
               properties={{
                 balloonContentHeader: `Координаты: ${marker.latitude}, ${marker.longitude}`,
                 balloonContentBody: `
+                ${marker.is_active ? `<p style="color: green;"><strong>Убрана</strong></p>` : ""}
                 <p>Название: ${marker.name}</p>
                 <p>Описание: ${marker.discription}</p>
                   Фото:${marker.photo && `<img src="${marker.photo}" alt="Фото" style="max-width: 100%;" />`}
@@ -59,8 +62,8 @@ const YandexMap: React.FC = () => {
               }}
               options={{
                 iconLayout: 'default#image',
-                iconImageHref: customMarkerIcon,
-                iconImageSize: [40, 40], // Размеры вашей иконки
+                iconImageHref: marker.is_active ? customMarkerIcon2 : customMarkerIcon,
+                iconImageSize: [40, 47], // Размеры вашей иконки
                 iconImageOffset: [-20, -40] // Смещение иконки (если необходимо)
               }}
             />
