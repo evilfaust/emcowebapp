@@ -24,6 +24,7 @@ python manage.py makemigrations Миграция базы данных
 python manage.py migrate        Миграция базы данных
 python manage.py runserver      запускает джанго
 
+
 env\Scripts\activate            
 cd server
 python manage.py makemigrations 
