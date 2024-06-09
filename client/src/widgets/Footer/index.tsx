@@ -5,10 +5,13 @@ import "./index.scss";
 
 export const Footer: React.FC = () => {
   return (
-    <footer>
-      <div className="footer__text">
-        Этот проект разработан при поддержке сотрудников
-        <div>и учеников детского технопарка EMCO TECH</div>
+    <footer className="footer">
+      <div className="footer__content">
+        <div className="footer__text">
+          Этот проект разработан при поддержке сотрудников и учеников
+          <br />
+          детского технопарка EMCO TECH
+        </div>
         <div className="footer__image">
           <img src={footer_logo} alt="EMCO TECH" />
         </div>

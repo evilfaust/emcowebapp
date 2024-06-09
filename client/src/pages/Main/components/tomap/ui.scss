@@ -1,6 +1,20 @@
 .layout {
   display: flex;
 
+
+
+.text-block2 {
+    max-width: 50%;;
+  }
+  
+.text-block1 {
+    max-width: 10%;
+  }
+
+
+
+
+
   .wrapper {
     display: block;
     max-width: 100%;
@@ -11,7 +25,7 @@
       color: white;
       background-color: black;
       border-radius: 3.125rem;
-      width: 45%;
+      max-width: 50%;
       margin-left: auto;
       margin-right: auto;
       padding: 2rem;
@@ -19,21 +33,59 @@
       text-transform: uppercase;
       font-family: "Neue Machina";
       font-size: 1.25rem;
+      position: relative; /* Добавлено положение относительно для .wrapper-txt */
+      z-index: 1;
+
     }
 
     button {
       margin-left: auto;
       margin-right: auto;
-      margin-top: -1.875rem;
-      padding-bottom: 1rem;
+      margin-top: -3rem;
+      padding-bottom: 1.4rem;
+
     }
   }
 }
 
 @media screen and (max-width: 768px) {
   .layout {
-    .wrapper {
-      display: none;
-    }
+    display: none;
   }
+  .wrapper {
+    display: none;
+  }
+  .text-block2 {
+    display: none;
+  }
+
+  .wrapper2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0; /* Убираем внутренние отступы */
+  }
+  
+  .wrapper2 img {
+    max-width: 90%; /* Максимальная ширина изображения равна ширине родительского контейнера */
+    max-height: 90%; /* Максимальная высота изображения равна высоте родительского контейнера */
+    height: auto; /* Автоматический расчет высоты, сохраняя пропорции */
+  }
+
+
+  
+}
+
+@media screen and (min-width: 769px) {
+  .text-block1 {
+        display: none; // Показать на мобильных устройствах
+      }
+  .app {
+    display: none; // Показать на мобильных устройствах
+  }
+
+  .wrapper2 {
+        display: none;
+    
+    }
 }

@@ -5,3 +5,4 @@ export * from "./Input/index";
 export * from "./LoadingSpinner/index";
 export * from "./Marker/index";
 export * from "./NewsComponent/index";
+export * from './InteractiveMapButton';
