@@ -14,6 +14,7 @@ class Marker(models.Model):
     photo = models.ImageField(upload_to='marker_photos/', blank=True, null=True)
     aftephoto = models.ImageField(upload_to='marker_photos/', blank=True, null=True)
     discription = models.CharField(max_length=140, blank=True, null=True)
+    is_admin = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name

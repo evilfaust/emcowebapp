@@ -55,7 +55,7 @@ class YouTubeVideoSerializer(serializers.ModelSerializer):
 class MarkerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Marker
-        fields = ['name', 'latitude', 'longitude', 'is_active', 'photo', 'aftephoto', 'description']
+        fields = ['name', 'latitude', 'longitude', 'is_active', 'photo', 'aftephoto', 'discription']
         
 class NewsSerializer(serializers.ModelSerializer):
     class Meta:
