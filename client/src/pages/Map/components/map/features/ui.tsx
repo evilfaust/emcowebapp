@@ -171,8 +171,10 @@ const YandexMap: React.FC = () => {
               name="discription"
               value={newMarker.discription || ""}
               onChange={handleInputChange}
+              maxLength={300}
               required
-            ></textarea>
+              style={{ height: "100px", resize: "none" }} // Fixed height and disable resize
+            />
             <input
               type="file"
               name="photo"
