@@ -47,9 +47,30 @@ const getCurrentUser = () => {
   return null;
 };
 
+const getTrashCount = async (username: string): Promise<number> => {
+  try {
+    const response = await axios.get(API_URL + `users/${username}/trash-count/`);
+    return response.data.count;
+  } catch (error) {
+    console.error('Error fetching trash count:', error);
+    return 0; // Или обработать ошибку другим способом
+  }
+};
+
+const resetPassword = async (email: string): Promise<void> => {
+  try {
+    await axios.post(API_URL + 'reset-password/', { email });
+  } catch (error) {
+    console.error('Error resetting password:', error);
+    throw new Error('Error resetting password');
+  }
+};
+
 export default {
   register,
   login,
   logout,
   getCurrentUser,
+  getTrashCount,
+  resetPassword,
 };

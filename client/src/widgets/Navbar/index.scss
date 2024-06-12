@@ -1,76 +1,170 @@
+/* index.scss */
+
 .navbar {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  background-color: white;
-  padding: 0.5rem 2rem;
-  box-shadow: 0px 5px 5px rgb(172, 172, 172);
-  margin-bottom: 1em;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+  position: relative;
 
-  img {
-    max-width: 20em;
-    max-height: 3em;
+  a {
+    text-decoration: none;
+    color: #000;
   }
 
-  ul {
+  img {
+    max-height: 50px; /* Adjust the logo size if needed */
+  }
+
+  .navbar-left,
+  .navbar-right {
     display: flex;
     align-items: center;
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
 
     li {
-      padding: 0.875rem;
-    }
+      list-style: none;
+      margin-right: 20px;
 
-    &:first-child {
-      margin-right: auto; /* Логотип будет слева */
-    }
+      &:last-child {
+        margin-right: 0;
+      }
 
-    &:last-child {
-      margin-left: auto; /* Пользовательское имя будет справа */
+      a {
+        color: #000;
+        font-weight: bold;
+        padding: 10px;
+        transition: color 0.3s;
+
+        &:hover {
+          color: #007bff;
+        }
+      }
+    }
+  }
+
+  .navbar-right {
+    .user-profile {
       display: flex;
       align-items: center;
-      font-weight: bold;
-      color: #333;
+
+      .profile-icon {
+        width: 30px; /* Adjust the profile icon size */
+        height: 30px; /* Adjust the profile icon size */
+        border-radius: 50%;
+        margin-right: 10px;
+        cursor: pointer;
+        transition: transform 0.3s;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
 
       span {
-        margin-left: 0.5rem; /* Добавим отступ между именем и иконкой пользователя */
+        margin-right: 10px;
+        font-weight: bold;
+      }
+
+      .logout-button {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: #c82333;
+        }
       }
     }
+  }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    position: absolute;
+    right: 20px; /* Adjusted position to right */
+    top: 15px;
 
-    .logout-button {
-      padding: 0.5rem 1rem;
-      background-color: #f44336;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    
-      &:hover {
-        background-color: #d32f2f;
-      }
-    
-      &:focus {
-        outline: none;
-        box-shadow: 0 0 0 2px rgba(244, 67, 54, 0.5);
-      }
-    
-      &:active {
-        transform: translateY(1px);
-      }
+    .bar {
+      width: 25px;
+      height: 3px;
+      background-color: #000;
+      margin: 4px 0;
+      transition: 0.4s;
     }
   }
 }
 
-@media screen and (max-width: 768px) {
-  .navbar > ul {
-    display: none;
+/* Media queries for mobile devices */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: row; /* Ensure navbar items are aligned horizontally */
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+
+    img {
+      max-height: 40px; /* Adjust the logo size for mobile */
+    }
+
+    .navbar-left,
+    .navbar-right {
+      display: none; /* Hide default menu items */
+    }
+
+    .hamburger {
+      display: flex; /* Show hamburger icon */
+    }
+  }
+
+  .mobile-menu {
+    display: block;
+    width: 100%;
+    background-color: #f8f9fa;
+    position: absolute;
+    top: 60px; /* Adjust based on navbar height */
+    left: 0;
+    border-top: 1px solid #dee2e6;
+    padding: 10px 20px;
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        margin: 10px 0;
+
+        a {
+          color: #000;
+          font-weight: bold;
+          padding: 10px;
+          transition: color 0.3s;
+
+          &:hover {
+            color: #007bff;
+          }
+        }
+
+        button {
+          background-color: #dc3545;
+          color: white;
+          border: none;
+          padding: 5px 10px;
+          cursor: pointer;
+          border-radius: 4px;
+          transition: background-color 0.3s;
+
+          &:hover {
+            background-color: #c82333;
+          }
+        }
+      }
+    }
   }
 }
