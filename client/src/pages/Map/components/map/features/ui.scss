@@ -30,6 +30,7 @@
   font-size: 1rem;
   border: 1px solid #ccc; /* Рамка для полей */
   border-radius: 5px; /* Закругляем края полей */
+  width: 300px;
 }
 
 
@@ -48,7 +49,7 @@
   font-size: 1.1rem;
   z-index: 2;
   bottom: 5px;
-  z-index: 1
+  z-index: 1;
 }
 
 .form-container form button::before {
