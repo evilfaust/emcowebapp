@@ -46,17 +46,25 @@
             background-color: #ddd;
         }
 
-        button {
-            padding: 8px 12px;
+        .delete-button, .go-to-button {
+            padding: 12px 24px; /* Увеличиваем отступы для увеличения ширины кнопок */
             background-color: #f44336;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 20px; /* Максимально закругленные края */
             cursor: pointer;
             transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto; /* Центрируем кнопки */
         }
 
-        button:hover {
+        .go-to-button {
+            background-color: #4caf50;
+        }
+
+        .delete-button:hover, .go-to-button:hover {
             background-color: #cc0000;
         }
     }

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Map, YMaps, Placemark } from "@pbe/react-yandex-maps";
+import { useSearchParams } from "react-router-dom";
 import { FiMapPin } from "react-icons/fi";
-import { Button, MarkerBar } from "shared/UI";
+import { Button } from "shared/UI";
 import "./ui.scss";
 
 import customMarkerIcon from "../../../../../shared/icon/Vector red.png";
@@ -11,11 +12,11 @@ import customMarkerIcon2 from "../../../../../shared/icon/Vector green.png";
 interface Marker {
   id: number;
   name: string;
-  discription: string;
+  description: string; // Corrected typo in the interface
   latitude: number;
   longitude: number;
   photo: string | File | null;
-  afterphoto: string;
+  aftephoto: string;
   is_active: boolean;
 }
 
@@ -25,6 +26,7 @@ const YandexMap: React.FC = () => {
   const [tempCoordinates, setTempCoordinates] = useState<[number, number] | null>(null);
   const [addingMarker, setAddingMarker] = useState(false);
   const [buttonText, setButtonText] = useState("ДОБАВИТЬ ТОЧКУ НА КАРТУ");
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     fetchMarkers();
@@ -75,7 +77,7 @@ const YandexMap: React.FC = () => {
       formData.append("photo", newMarker.photo);
     }
     formData.append("name", newMarker.name || "");
-    formData.append("discription", newMarker.discription || "");
+    formData.append("description", newMarker.description || ""); // Corrected field name
     formData.append("latitude", newMarker.latitude?.toString() || "");
     formData.append("longitude", newMarker.longitude?.toString() || "");
     try {
@@ -104,11 +106,17 @@ const YandexMap: React.FC = () => {
     }
   };
 
+  const mapCenter = [
+    parseFloat(searchParams.get('latitude') || '49.15794957'),
+    parseFloat(searchParams.get('longitude') || '142.1032654')
+  ];
+  const mapZoom = searchParams.get('latitude') && searchParams.get('longitude') ? 18 : 15;
+
   return (
     <div className="map_body">
       <YMaps query={{ apikey: "1a587e3a-630a-4425-bcb2-a7a0dde7b588" }}>
         <Map
-          defaultState={{ center: [49.15794957, 142.1032654], zoom: 15 }}
+          defaultState={{ center: mapCenter, zoom: mapZoom }}
           width="100%"
           height="31.25em"
           onClick={handleMapClick}
@@ -123,9 +131,9 @@ const YandexMap: React.FC = () => {
                 balloonContentBody: `
                   ${marker.is_active ? `<p style="color: green;"><strong>Убрана</strong></p>` : ""}
                   <p>Название: ${marker.name}</p>
-                  <p>Описание: ${marker.discription}</p>
-                  Фото:${marker.photo && `<img src="${marker.photo}" alt="Фото" style="max-width: 100%;" />`}
-                  После:${marker.afterphoto && `<img src="${marker.afterphoto}" alt="Фото" style="max-width: 100%;" />`}
+                  <p>Описание: ${marker.description}</p>
+                  Фото:${marker.photo ? `<img src="${marker.photo}" alt="Фото" style="max-width: 100%;" />` : "Нет фото"}
+                  После:${marker.aftephoto ? `<img src="${marker.aftephoto}" alt="Фото" style="max-width: 100%;" />` : "Нет фото после"}
                   <p>Номер: ${marker.id}</p>
                 `,
               }}
@@ -135,6 +143,7 @@ const YandexMap: React.FC = () => {
                 iconImageSize: [40, 47],
                 iconImageOffset: [-20, -40],
               }}
+              balloonOpen={searchParams.get('latitude') === marker.latitude.toString() && searchParams.get('longitude') === marker.longitude.toString()}
             />
           ))}
           {tempCoordinates && addingMarker && (
@@ -166,10 +175,10 @@ const YandexMap: React.FC = () => {
               onChange={handleInputChange}
               required
             />
-            <label htmlFor="discription">Описание</label>
+            <label htmlFor="description">Описание</label> {/* Corrected field name */}
             <textarea
-              name="discription"
-              value={newMarker.discription || ""}
+              name="description"
+              value={newMarker.description || ""}
               onChange={handleInputChange}
               maxLength={300}
               required

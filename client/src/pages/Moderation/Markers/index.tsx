@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios, { AxiosError } from 'axios';
 import './markers.scss';
+import { FiTrash2, FiArrowUpCircle } from 'react-icons/fi'; // Импортируем иконки из react-icons
 
 interface Marker {
     id: number;
@@ -9,7 +10,7 @@ interface Marker {
     latitude: number;
     longitude: number;
     photo: string;
-    afterphoto: string;
+    aftephoto: string; // ИМЕННО AFTEPHOTO, НЕ ИСПРАВЛЯТЬ
     is_active: boolean;
 }
 
@@ -98,6 +99,11 @@ const MarkersModeration: React.FC = () => {
         marker.id.toString().includes(searchQuery)
     );
 
+    const handleGoToMarker = (latitude: number, longitude: number) => {
+        const mapUrl = `/map?latitude=${latitude}&longitude=${longitude}`;
+        window.location.href = mapUrl;
+    };
+
     return (
         <div className="markers-container">
             <h1>Метки на карте</h1>
@@ -116,12 +122,14 @@ const MarkersModeration: React.FC = () => {
                         <thead>
                             <tr>
                                 <th onClick={toggleSortDirection}>ID {sortDirection === 'asc' ? '▲' : '▼'}</th>
-                                <th>Название</th>
+                                <th style={{ width: '120px' }}>Название</th> {/* Уменьшили ширину столбца "Название" */}
                                 <th>Описание</th>
                                 <th>Координаты</th>
                                 <th>Фото</th>
+                                <th>Фото после</th> {/* Добавили столбец "Фото после" */}
                                 <th>Убрана</th>
-                                <th>Действия</th>
+                                <th>Удалить</th>
+                                <th>Перейти к метке</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -132,7 +140,18 @@ const MarkersModeration: React.FC = () => {
                                     <td>{marker.description}</td>
                                     <td>{marker.latitude}, {marker.longitude}</td>
                                     <td>
-                                        <a href={`http://localhost:8000/${marker.photo}`} target="_blank" rel="noopener noreferrer">Ссылка на фото</a>
+                                        {marker.photo ? (
+                                            <a href={`http://localhost:8000/${marker.photo}`} target="_blank" rel="noopener noreferrer">Ссылка на фото</a>
+                                        ) : (
+                                            <span style={{ color: '#ccc' }}>Нет фото</span>
+                                        )}
+                                    </td>
+                                    <td>
+                                        {marker.aftephoto ? (
+                                            <a href={`http://localhost:8000/${marker.aftephoto}`} target="_blank" rel="noopener noreferrer">Ссылка на фото</a>
+                                        ) : (
+                                            <span style={{ color: '#ccc' }}>Нет фото</span>
+                                        )}
                                     </td>
                                     <td>
                                         <label className="switch">
@@ -145,7 +164,14 @@ const MarkersModeration: React.FC = () => {
                                         </label>
                                     </td>
                                     <td>
-                                        <button onClick={() => confirmDeleteMarker(marker.id)}>Удалить</button>
+                                        <button className="delete-button" onClick={() => confirmDeleteMarker(marker.id)}>
+                                            <FiTrash2 />
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button className="go-to-button" onClick={() => handleGoToMarker(marker.latitude, marker.longitude)}>
+                                            <FiArrowUpCircle />
+                                        </button>
                                     </td>
                                 </tr>
                             ))}
