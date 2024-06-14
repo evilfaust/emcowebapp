@@ -21,6 +21,7 @@ from backend_api.views import*
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
+from backend_api.views import MarkerDetailView
 
 from backend_api.views import RegisterView, LoginView
 
@@ -35,6 +36,8 @@ urlpatterns = [
     
     path('register/', RegisterView.as_view(), name='register'),
     path('login/', LoginView.as_view(), name='login'),
+
+    path('api/markers/<int:pk>/', MarkerDetailView.as_view(), name='marker-detail'),
     
     path('api/register/', RegisterView.as_view(), name='register'),
     path('api/login/', LoginView.as_view(), name='login'),

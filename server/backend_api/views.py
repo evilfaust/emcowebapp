@@ -23,6 +23,14 @@ from django.contrib.auth import login
 
 
 
+
+
+
+from .serializer import MarkerSerializer
+from django.shortcuts import get_object_or_404
+
+
+
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
@@ -106,3 +114,29 @@ class NewsView(APIView):
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
+
+
+class MarkerDetailView(APIView):
+    def get_object(self, pk):
+        try:
+            return Marker.objects.get(pk=pk)
+        except Marker.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk):
+        marker = self.get_object(pk)
+        serializer = MarkerSerializer(marker)
+        return Response(serializer.data)
+
+    def patch(self, request, pk):
+        marker = self.get_object(pk)
+        serializer = MarkerSerializer(marker, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        marker = self.get_object(pk)
+        marker.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

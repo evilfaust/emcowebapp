@@ -3,6 +3,7 @@ import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { LoadingSpinner } from "shared/UI";
 import { Footer, MobileNavigation, Navigation } from "widgets";
+import Moderation from "pages/Moderation/index"; // Импортируем компонент для модерации
 
 const Main = React.lazy(() => import("pages/Main/index"));
 const Map = React.lazy(() => import("pages/Map/index"));
@@ -32,6 +33,7 @@ function App() {
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
         <Route path="profile" element={<Profile />} />
+        <Route path="moderation/*" element={<Moderation />} /> {/* Добавлен маршрут для модерации */}
         <Route path="*" element={<Main />} />
       </Routes>
       <Footer />

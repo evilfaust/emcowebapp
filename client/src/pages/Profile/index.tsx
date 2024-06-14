@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AuthService from '../../services/authService';
 import '../Auth.css';
+import { Link } from 'react-router-dom';
 
 const Profile: React.FC = () => {
   const currentUser = AuthService.getCurrentUser();
@@ -42,6 +43,9 @@ const Profile: React.FC = () => {
           <p><strong>Количество убранных свалок:</strong> {trashCount}</p>
           <button onClick={handleResetPassword} className="reset-password-button">Сбросить пароль</button>
           <button onClick={handleLogout} className="logout-button">Выйти</button>
+          <Link to="/moderation">
+            <button className="moderation-button">Модерация</button>
+          </Link>
         </div>
       ) : (
         <p>Сначала логин, потом аккаунт</p>
