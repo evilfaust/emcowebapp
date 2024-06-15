@@ -21,6 +21,8 @@ from rest_framework.permissions import AllowAny
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
 
+from rest_framework.permissions import IsAuthenticated
+from .serializer import UserSerializer
 
 
 
@@ -140,3 +142,14 @@ class MarkerDetailView(APIView):
         marker = self.get_object(pk)
         marker.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+
+
+class CurrentUserView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        serializer = UserSerializer(user)
+        return Response(serializer.data)

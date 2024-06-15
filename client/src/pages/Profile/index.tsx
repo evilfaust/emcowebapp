@@ -3,17 +3,32 @@ import AuthService from '../../services/authService';
 import '../Auth.css';
 import { Link } from 'react-router-dom';
 
+interface User {
+  username: string;
+  email: string;
+  is_staff: boolean;
+}
+
 const Profile: React.FC = () => {
-  const currentUser = AuthService.getCurrentUser();
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [trashCount, setTrashCount] = useState<number>(0);
 
   useEffect(() => {
-    if (currentUser) {
-      AuthService.getTrashCount(currentUser.username)
-        .then(count => setTrashCount(count))
-        .catch(error => console.error('Error fetching trash count:', error));
-    }
-  }, [currentUser]);
+    const fetchUserData = async () => {
+      const userInfo = await AuthService.getUserInfo();
+      if (userInfo) {
+        setCurrentUser(userInfo);
+        try {
+          const count = await AuthService.getTrashCount(userInfo.username);
+          setTrashCount(count);
+        } catch (error) {
+          console.error('Error fetching trash count:', error);
+        }
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const handleResetPassword = () => {
     if (currentUser && currentUser.email) {
@@ -41,14 +56,17 @@ const Profile: React.FC = () => {
           <p><strong>Username:</strong> {currentUser.username}</p>
           <p><strong>Email:</strong> {currentUser.email}</p>
           <p><strong>Количество убранных свалок:</strong> {trashCount}</p>
+          {currentUser.is_staff && (<p><strong>Статус администратора:</strong> {currentUser.is_staff ? 'Да' : 'Нет'}</p>)}
           <button onClick={handleResetPassword} className="reset-password-button">Сбросить пароль</button>
           <button onClick={handleLogout} className="logout-button">Выйти</button>
-          <Link to="/moderation">
-            <button className="moderation-button">Модерация</button>
-          </Link>
+          {currentUser.is_staff && (
+            <Link to="/moderation">
+              <button className="moderation-button">Модерация</button>
+            </Link>
+          )}
         </div>
       ) : (
-        <p>Сначала логин, потом аккаунт</p>
+        <p>Сначала войдите в аккаунт</p>
       )}
     </div>
   );

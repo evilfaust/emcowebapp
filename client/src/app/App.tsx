@@ -1,8 +1,11 @@
+// C:\Users\Dmitrii\Documents\GitHub\emcowebapp\client\src\App.tsx
+
 import { CssBaseline } from "@mui/material";
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { LoadingSpinner } from "shared/UI";
 import { Footer, MobileNavigation, Navigation } from "widgets";
+import AdminRoute from "shared/hooks/AdminRoute"; // Импортируем AdminRoute
 import Moderation from "pages/Moderation/index"; // Импортируем компонент для модерации
 
 const Main = React.lazy(() => import("pages/Main/index"));
@@ -22,9 +25,9 @@ function App() {
         </div>
       }
     >
+      <CssBaseline />
       <Navigation />
       <MobileNavigation />
-      <CssBaseline />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="news" element={<News />} />
@@ -33,7 +36,9 @@ function App() {
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
         <Route path="profile" element={<Profile />} />
-        <Route path="moderation/*" element={<Moderation />} /> {/* Добавлен маршрут для модерации */}
+        <Route path="moderation/*" element={<AdminRoute />}>
+          <Route path="*" element={<Moderation />} />
+        </Route>
         <Route path="*" element={<Main />} />
       </Routes>
       <Footer />

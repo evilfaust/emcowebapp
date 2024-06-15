@@ -38,6 +38,7 @@ urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
 
     path('api/markers/<int:pk>/', MarkerDetailView.as_view(), name='marker-detail'),
+    path('api/current_user/', CurrentUserView.as_view(), name='current_user'),
     
     path('api/register/', RegisterView.as_view(), name='register'),
     path('api/login/', LoginView.as_view(), name='login'),

@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'email']
+        fields = ['username', 'email','is_staff']
 
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
@@ -61,3 +61,5 @@ class NewsSerializer(serializers.ModelSerializer):
     class Meta:
         model = News
         fields = ['name', 'images', 'images2', 'images3', 'images4', 'images5', 'images6', 'discription']
+        
+        
