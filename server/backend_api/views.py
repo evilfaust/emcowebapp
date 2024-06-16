@@ -99,6 +99,7 @@ class NewsView(APIView):
     def get(self, request):
         output = [
             {
+                'id': news['id'],
                 'name': news['name'],
                 'images': news['images'],
                 'images2': news['images2'],
@@ -106,7 +107,9 @@ class NewsView(APIView):
                 'images4': news['images4'],
                 'images5': news['images5'],
                 'images6': news['images6'],
-                'description': news['description'],
+                'discription': news['discription'],
+                'small_discription': news['small_discription'],
+                
             } for news in News.objects.all().values()
         ]
         return Response(output)
@@ -153,3 +156,10 @@ class CurrentUserView(APIView):
         user = request.user
         serializer = UserSerializer(user)
         return Response(serializer.data)
+    
+    
+
+
+class NewsDetailView(generics.RetrieveAPIView):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer

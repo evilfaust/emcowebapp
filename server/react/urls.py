@@ -40,6 +40,9 @@ urlpatterns = [
     path('api/markers/<int:pk>/', MarkerDetailView.as_view(), name='marker-detail'),
     path('api/current_user/', CurrentUserView.as_view(), name='current_user'),
     
+    path('api/news/', NewsView.as_view(), name='news-view'),
+    path('api/news/<int:pk>/', NewsDetailView.as_view(), name='news-detail'),
+    
     path('api/register/', RegisterView.as_view(), name='register'),
     path('api/login/', LoginView.as_view(), name='login'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

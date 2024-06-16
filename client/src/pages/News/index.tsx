@@ -1,27 +1,68 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { NewsSmall } from "shared/UI/NewsComponent";
-import { news } from "./delete_after_connect_to_db";
 import { Container, Grid } from "@mui/material";
-
+import { Link } from 'react-router-dom';
 import "./index.scss";
 
+interface News {
+  id: number;
+  name: string;
+  discription: string;
+  images: string[];
+  small_discription: string;
+}
+
 function News() {
+  const [news, setNews] = useState<News[]>([]);
+
+  useEffect(() => {
+    axios.get('http://192.168.0.12:8000/api/news/')
+      .then(response => {
+        console.log('Ответ от API:', response.data);
+        const formattedNews = response.data.map((item: any) => ({
+          id: item.id,
+          name: item.name,
+          small_discription: item.small_discription,
+          images: [
+            item.images,
+            item.images2,
+            item.images3,
+            item.images4,
+            item.images5,
+            item.images6,
+          ].reduce((acc: string[], val: string | undefined) => {
+            if (val) {
+              acc.push(val);
+            }
+            return acc;
+          }, []),
+        }));
+        formattedNews.sort((a: News, b: News) => b.id - a.id);
+        setNews(formattedNews);
+      })
+      .catch(error => {
+        console.error('Ошибка при получении новостей:', error);
+      });
+  }, []);
+
+  console.log('Список новостей:', news);
+
   return (
-    <Container maxWidth={"lg"}>
-      <Grid sx={{ flexGrow: 1 }} container spacing={2}>
-        <Grid item xs={12}>
-          <Grid container justifyContent="center" spacing={2}>
-            {news.map((news) => (
-              <Grid key={news.id} item>
-                <NewsSmall
-                  id={news.id}
-                  title={news.title}
-                  description={news.description}
-                  image={news.image}
-                />
-              </Grid>
-            ))}
+    <Container maxWidth="lg" className="news-container">
+      <Grid container spacing={3} justifyContent="center">
+        {news.map((newsItem) => (
+          <Grid key={newsItem.id} item xs={12} className="news-item">
+            <Link to={`/news/${newsItem.id}`} style={{ textDecoration: 'none' }}>
+              <NewsSmall
+                id={newsItem.id}
+                title={newsItem.name}
+                description={newsItem.small_discription}
+                image={newsItem.images.length > 0 ? newsItem.images[0] : ''}
+              />
+            </Link>
           </Grid>
-        </Grid>
+        ))}
       </Grid>
     </Container>
   );

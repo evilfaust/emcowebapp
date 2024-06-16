@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-+a7r*7-gm6-h0jq*js=7d2iwjo^%jbl8w6_gah*^s@zg9ajghf
 DEBUG = True
 
 # ALLOWED_HOSTS = ['localhost']
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', '192.168.0.12']
 
 
 # Application definition
@@ -61,7 +61,7 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
-    'http://192.168.0.10:3000',
+    'http://192.168.0.12:3000',
     'http://192.168.0.175:3000'
 ]
 
@@ -160,7 +160,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

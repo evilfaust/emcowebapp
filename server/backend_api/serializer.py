@@ -60,6 +60,6 @@ class MarkerSerializer(serializers.ModelSerializer):
 class NewsSerializer(serializers.ModelSerializer):
     class Meta:
         model = News
-        fields = ['name', 'images', 'images2', 'images3', 'images4', 'images5', 'images6', 'discription']
+        fields = ['id','name', 'images', 'images2', 'images3', 'images4', 'images5', 'images6', 'discription', 'small_discription']
         
         

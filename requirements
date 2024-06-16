@@ -20,8 +20,8 @@ yarn start
 Терминал 2(server)
 env\Scripts\activate            запускает виртуальное окружение
 cd server
-python manage.py makemigrations Миграция базы данных
-python manage.py migrate        Миграция базы данных
+python manage.py makemigrations Миграция базы данных альтернатива python manage.py makemigrations backend_api
+python manage.py migrate        Миграция базы данных альтернатива python manage.py migrate backend_api
 python manage.py runserver      запускает джанго
 
 
@@ -29,7 +29,9 @@ env\Scripts\activate
 cd server
 python manage.py makemigrations 
 python manage.py migrate       
-python manage.py runserver    
+python manage.py runserver 0.0.0.0:8000  
+
+tree /A /F > project_structure.txt
 
 
 
