@@ -31,9 +31,6 @@ python manage.py makemigrations
 python manage.py migrate       
 python manage.py runserver 0.0.0.0:8000  
 
-tree /A /F > project_structure.txt
-
-
 
 
 Если вдруг чета не запустилось:
@@ -56,6 +53,8 @@ python -m pip install Pillow
 pip install django-cors-headers
 pip install djangorestframework
 pip install djangorestframework-simplejwt
+yarn add @mui/icons-material
+yarn add react-responsive-carousel
 
 
 Миграция базы данных
@@ -63,3 +62,7 @@ python manage.py makemigrations
 python manage.py migrate
 
 Если вдруг не хватает библиотек - обращаемся к бэк разработчику
+
+Создание структуры проекта(желательно находится в папке без node_modules)
+tree /A /F > project_structure.txt
+

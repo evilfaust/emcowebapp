@@ -17,7 +17,7 @@ function News() {
   const [news, setNews] = useState<News[]>([]);
 
   useEffect(() => {
-    axios.get('http://192.168.0.12:8000/api/news/')
+    axios.get('http://localhost:8000/api/news/')
       .then(response => {
         console.log('Ответ от API:', response.data);
         const formattedNews = response.data.map((item: any) => ({
