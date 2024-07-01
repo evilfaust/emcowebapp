@@ -1,45 +1,47 @@
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
-interface Notification {
-  id: string;
+export interface Notification {
+  id: number;
   message: string;
   read: boolean;
+  created_at: string;
+  user: number;
 }
 
-interface NotificationContextProps {
+export interface NotificationContextProps {
   notifications: Notification[];
-  markAsRead: (id: string) => void;
   addNotification: (notification: Notification) => void;
+  markAsRead: (id: string) => void;
 }
 
-const NotificationContext = createContext<NotificationContextProps | undefined>(undefined);
+const NotificationContext = createContext<NotificationContextProps>({
+  notifications: [],
+  addNotification: () => {},
+  markAsRead: () => {},
+});
 
-export const NotificationProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const useNotification = () => useContext(NotificationContext);
+
+export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
-
-  const markAsRead = (id: string) => {
-    setNotifications(prevNotifications =>
-      prevNotifications.map(notification =>
-        notification.id === id ? { ...notification, read: true } : notification
-      )
-    );
-  };
 
   const addNotification = (notification: Notification) => {
     setNotifications(prevNotifications => [...prevNotifications, notification]);
   };
 
+  const markAsRead = (id: string) => {
+    setNotifications(prevNotifications =>
+      prevNotifications.map(notification =>
+        notification.id === parseInt(id) ? { ...notification, read: true } : notification
+      )
+    );
+  };
+
   return (
-    <NotificationContext.Provider value={{ notifications, markAsRead, addNotification }}>
+    <NotificationContext.Provider value={{ notifications, addNotification, markAsRead }}>
       {children}
     </NotificationContext.Provider>
   );
 };
 
-export const useNotification = (): NotificationContextProps => {
-  const context = useContext(NotificationContext);
-  if (context === undefined) {
-    throw new Error('useNotification must be used within a NotificationProvider');
-  }
-  return context;
-};
+export default NotificationContext;

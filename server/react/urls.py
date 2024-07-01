@@ -23,12 +23,20 @@ from django.conf.urls.static import static
 from django.views.static import serve
 from backend_api.views import MarkerDetailView
 
-from backend_api.views import RegisterView, LoginView
+from backend_api.views import RegisterView, LoginView, NotificationView
 
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    
     path('', YouTubeVideoView.as_view(), name='home'),  # Путь для корневого URL
     path('youtube/', YouTubeVideoView.as_view(), name='youtube-view'),
     path('marker/', MarkerView.as_view(), name='marker-view'),
@@ -45,5 +53,7 @@ urlpatterns = [
     
     path('api/register/', RegisterView.as_view(), name='register'),
     path('api/login/', LoginView.as_view(), name='login'),
+    
+    path('api/notification/', NotificationView.as_view(), name='notification'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

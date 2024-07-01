@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import YouTubeVideo
 from .models import Marker
 from .models import News
+from .models import Notification
 
 # Регистрируем модель Marker в админке
 @admin.register(Marker)
@@ -13,3 +14,4 @@ class MarkerAdmin(admin.ModelAdmin):
 
 admin.site.register(YouTubeVideo)
 admin.site.register(News)
+admin.site.register(Notification)

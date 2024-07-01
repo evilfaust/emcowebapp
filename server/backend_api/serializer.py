@@ -3,6 +3,7 @@ from rest_framework import serializers
 from .models import YouTubeVideo
 from .models import Marker
 from .models import News
+from .models import Notification
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
@@ -61,5 +62,12 @@ class NewsSerializer(serializers.ModelSerializer):
     class Meta:
         model = News
         fields = ['id','name', 'images', 'images2', 'images3', 'images4', 'images5', 'images6', 'discription', 'small_discription']
+        
+        
+        
+class NotificationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Notification
+        fields = '__all__'
         
         

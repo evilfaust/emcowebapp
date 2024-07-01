@@ -1,36 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AppBar, Toolbar, IconButton, Badge, Menu, MenuItem, ListItemText, ListItemIcon } from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MarkEmailUnreadIcon from '@mui/icons-material/MarkEmailUnread';
-import { useNotification } from 'shared/notifications/NotificationContext';
-import { pages } from 'widgets';
+import { useNotification, Notification } from '../../shared/notifications/NotificationContext';
+import { pages } from '../../widgets';
 import { Item } from './features/item/ui';
-import AuthService from 'services/authService';
-import logo from 'shared/images/header-logo.png';
-import profileIcon from 'shared/images/profile-icon.png';
+import AuthService from '../../services/authService';
+import logo from '../../shared/images/header-logo.png';
+import profileIcon from '../../shared/images/profile-icon.png';
 import './index.scss';
 
 const handleLogout = () => {
   AuthService.logout();
-  window.location.href = '/login'; // Перенаправление после выхода
+  window.location.href = '/login';
 };
 
 const Navigation: React.FC = () => {
   const currentUser = AuthService.getCurrentUser();
-  const [menuOpen, setMenuOpen] = useState(false);
   const { notifications, markAsRead, addNotification } = useNotification();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [mobileAnchorEl, setMobileAnchorEl] = useState<null | HTMLElement>(null);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    loadNotifications();
+  }, []);
+
+  const loadNotifications = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/api/notification/', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access')}`,
+        },
+      });
+      if (response.ok) {
+        const data: Notification[] = await response.json();
+        data.forEach(notification => addNotification(notification));
+      } else {
+        console.error('Error loading notifications:', response.statusText);
+      }
+    } catch (error: any) {
+      console.error('Error loading notifications:', error.message);
+    }
+  };
+
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
+    setAnchorEl(null);
+    setMobileAnchorEl(null);
   };
 
   const handleNotificationClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
-    addNotification({ id: String(Date.now()), message: 'Уведомления работают', read: false });
   };
 
   const handleNotificationClose = () => {
@@ -38,10 +59,20 @@ const Navigation: React.FC = () => {
     setMobileAnchorEl(null);
   };
 
-  const handleNotificationItemClick = (id: string) => {
-    markAsRead(id);
-    handleNotificationClose();
-    // Add additional action on notification click if needed
+  const handleNotificationItemClick = async (id: string) => {
+    try {
+      await fetch(`http://localhost:8000/api/notification/${id}/`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('access')}`, // Передаем токен авторизации
+        },
+      });
+      markAsRead(id);
+      handleNotificationClose();
+    } catch (error: any) {
+      console.error('Error marking notification as read:', error.message);
+    }
   };
 
   const unreadCount = notifications.filter(notification => !notification.read).length;
@@ -52,7 +83,6 @@ const Navigation: React.FC = () => {
 
   const handleMobileNotificationClick = (event: React.MouseEvent<HTMLElement>) => {
     setMobileAnchorEl(event.currentTarget);
-    addNotification({ id: String(Date.now()), message: 'Уведомления работают', read: false });
   };
 
   return (
@@ -82,20 +112,26 @@ const Navigation: React.FC = () => {
                   open={Boolean(anchorEl)}
                   onClose={handleNotificationClose}
                 >
-                  {notifications.map((notification) => (
-                    <MenuItem key={notification.id} onClick={() => handleNotificationItemClick(notification.id)}>
-                      <ListItemIcon>
-                        <MarkEmailUnreadIcon fontSize="small" />
-                      </ListItemIcon>
-                      <ListItemText primary={notification.message} />
+                  {notifications.length === 0 ? (
+                    <MenuItem>
+                      <ListItemText primary="Empty" />
                     </MenuItem>
-                  ))}
+                  ) : (
+                    notifications.map((notification) => (
+                      <MenuItem key={notification.id} onClick={() => handleNotificationItemClick(notification.id.toString())}>
+                        <ListItemIcon>
+                          <MarkEmailUnreadIcon fontSize="small" />
+                        </ListItemIcon>
+                        <ListItemText primary={notification.message} />
+                      </MenuItem>
+                    ))
+                  )}
                 </Menu>
                 <button className="logout-button" onClick={handleLogout}>Выйти</button>
               </li>
             ) : (
               <li>
-                <NavLink to={'/login'}>Войти</NavLink>
+                <NavLink to={'/login'}>Login</NavLink>
               </li>
             )}
           </ul>
@@ -111,42 +147,6 @@ const Navigation: React.FC = () => {
           </div>
         </Toolbar>
       </AppBar>
-      {menuOpen && (
-        <div className="mobile-menu">
-          <ul>
-            {pages.map((page) => (
-              <li key={page.value}>
-                <NavLink to={page.to} onClick={toggleMenu}>{page.label}</NavLink>
-              </li>
-            ))}
-            {currentUser ? (
-              <li>
-                <NavLink to="/profile" onClick={toggleMenu}>Профиль</NavLink>
-                <button onClick={handleLogout}>Выйти</button>
-              </li>
-            ) : (
-              <li>
-                <NavLink to="/login" onClick={toggleMenu}>Войти</NavLink>
-              </li>
-            )}
-          </ul>
-        </div>
-      )}
-      <Menu
-        anchorEl={mobileAnchorEl}
-        open={Boolean(mobileAnchorEl)}
-        onClose={handleNotificationClose}
-        className="notification-menu-mobile"
-      >
-        {notifications.map((notification) => (
-          <MenuItem key={notification.id} onClick={() => handleNotificationItemClick(notification.id)}>
-            <ListItemIcon>
-              <MarkEmailUnreadIcon fontSize="small" />
-            </ListItemIcon>
-            <ListItemText primary={notification.message} />
-          </MenuItem>
-        ))}
-      </Menu>
     </header>
   );
 };

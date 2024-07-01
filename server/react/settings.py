@@ -59,11 +59,12 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',  
 ]
 
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
-    'http://192.168.0.12:3000',
-    'http://192.168.0.175:3000'
-]
+
+
+CORS_ORIGIN_WHITELIST_ALL = True
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_ALL = True
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -78,14 +79,14 @@ REST_FRAMEWORK = {
 from datetime import timedelta
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=120),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': True,
 }
 
 
-CORS_ORIGIN_ALLOW_ALL = True
+
 
 
 ROOT_URLCONF = 'react.urls'

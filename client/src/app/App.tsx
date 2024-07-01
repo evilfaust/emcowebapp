@@ -1,4 +1,5 @@
-// app/App.tsx
+// src/app/App.tsx
+
 import { CssBaseline } from "@mui/material";
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";

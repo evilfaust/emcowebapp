@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User  # Импортируем модель User
 
 class YouTubeVideo(models.Model):
     title = models.CharField(max_length=100)
@@ -30,5 +31,16 @@ class News(models.Model):
     images4 = models.ImageField(upload_to='images/', blank=True)
     images5 = models.ImageField(upload_to='images/', blank=True)
     images6 = models.ImageField(upload_to='images/', blank=True)
+    
     def __str__(self):
         return f'{self.name} {self.discription}'
+    
+    
+class Notification(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Используем модель User здесь
+    message = models.CharField(max_length=255)
+    read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.message
