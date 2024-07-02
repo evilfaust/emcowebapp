@@ -58,7 +58,7 @@ const Profile: React.FC = () => {
           <p><strong>Количество убранных свалок:</strong> {trashCount}</p>
           {currentUser.is_staff && (<p><strong>Статус администратора:</strong> {currentUser.is_staff ? 'Да' : 'Нет'}</p>)}
           <button onClick={handleResetPassword} className="reset-password-button">Сбросить пароль</button>
-          <button onClick={handleLogout} className="logout-button">Выйти</button>
+          <button onClick={handleLogout} className="logout-button2">Выйти</button>
           {currentUser.is_staff && (
             <Link to="/moderation">
               <button className="moderation-button">Модерация</button>
