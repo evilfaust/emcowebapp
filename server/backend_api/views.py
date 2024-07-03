@@ -1,5 +1,23 @@
-# views.py
+from django.shortcuts import render
+from rest_framework.views import APIView
 
+from .models import YouTubeVideo
+from .serializer import YouTubeVideoSerializer
+
+from .models import Marker
+from .serializer import MarkerSerializer
+
+from .models import News
+from .serializer import NewsSerializer
+
+from rest_framework.response import Response
+
+from rest_framework import generics
+from rest_framework.response import Response
+from .serializer import UserSerializer, RegisterSerializer, LoginSerializer
+from django.contrib.auth.models import User
+from rest_framework import status
+from rest_framework.permissions import AllowAny
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -20,12 +38,10 @@ from .serializer import (
     NotificationSerializer,
 )
 
-
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
-
 
 class LoginView(APIView):
     def post(self, request, *args, **kwargs):
@@ -45,32 +61,45 @@ class LoginView(APIView):
 
 class YouTubeVideoView(APIView):
     def get(self, request):
-        videos = YouTubeVideo.objects.all()
-        serializer = YouTubeVideoSerializer(videos, many=True)
-        return Response(serializer.data)
+        output = [
+            {
+                'title': video['title'],
+                'channel': video['channel']
+            } for video in YouTubeVideo.objects.all().values()
+        ]
+        return Response(output)
     
     def post(self, request):
         serializer = YouTubeVideoSerializer(data=request.data)
-        if serializer.is_valid():
+        if serializer.is_valid(raise_exception=True):
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.data)
+
 
 
 class MarkerView(APIView):
     def get(self, request):
-        markers = Marker.objects.all()
-        serializer = MarkerSerializer(markers, many=True)
-        return Response(serializer.data)
+        output = [
+            {
+                'id': marker['id'],
+                'name': marker['name'],
+                'latitude': marker['latitude'],
+                'longitude': marker['longitude'],
+                'is_active': marker['is_active'],
+                'photo': marker['photo'],
+                'aftephoto': marker['aftephoto'],
+                'discription': marker['discription'],
+            } for marker in Marker.objects.all().values()
+        ]
+        return Response(output)
     
     def post(self, request):
         serializer = MarkerSerializer(data=request.data)
-        if serializer.is_valid():
+        if serializer.is_valid(raise_exception=True):
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
+            return Response(serializer.data)
+        
+        
 class NewsView(APIView):
     def get(self, request):
         news = News.objects.all()
@@ -87,7 +116,10 @@ class NewsView(APIView):
 
 class MarkerDetailView(APIView):
     def get_object(self, pk):
-        return get_object_or_404(Marker, pk=pk)
+        try:
+            return Marker.objects.get(pk=pk)
+        except Marker.DoesNotExist:
+            raise Http404
 
     def get(self, request, pk):
         marker = self.get_object(pk)
@@ -108,6 +140,8 @@ class MarkerDetailView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+
+
 class CurrentUserView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -115,12 +149,11 @@ class CurrentUserView(APIView):
         user = request.user
         serializer = UserSerializer(user)
         return Response(serializer.data)
-
-
+    
+    
 class NewsDetailView(generics.RetrieveAPIView):
     queryset = News.objects.all()
     serializer_class = NewsSerializer
-
 
 class NotificationView(APIView):
     permission_classes = [IsAuthenticated]
