@@ -1,3 +1,4 @@
+// src/widgets/Navbar/index.tsx
 import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AppBar, Toolbar, IconButton, Badge, Menu, MenuItem, ListItemText, ListItemIcon } from '@mui/material';
@@ -96,6 +97,9 @@ const Navigation: React.FC = () => {
             {pages.map((page) => (
               <Item key={page.value} label={page.label} link={page.to} value={page.value} />
             ))}
+            <li>
+              <NavLink to="/video-gallery">Видеогалерея</NavLink>
+            </li>
           </ul>
           <ul className="navbar-right">
             {currentUser ? (

@@ -1,5 +1,3 @@
-// src/app/App.tsx
-
 import { CssBaseline } from "@mui/material";
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
@@ -16,6 +14,7 @@ const NewsDetail = React.lazy(() => import("pages/News/NewsDetail"));
 const Register = React.lazy(() => import("pages/Register/index"));
 const Login = React.lazy(() => import("pages/Login/index"));
 const Profile = React.lazy(() => import("pages/Profile/index"));
+const VideoGallery = React.lazy(() => import("pages/VideoGallery/VideoGallery"));
 
 function App() {
   return (
@@ -38,6 +37,7 @@ function App() {
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="video-gallery" element={<VideoGallery />} />
           <Route path="moderation/*" element={<AdminRoute />}>
             <Route path="*" element={<Moderation />} />
           </Route>
