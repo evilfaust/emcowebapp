@@ -12,6 +12,10 @@
   a {
     text-decoration: none;
     color: #000;
+
+    &.active {
+      text-decoration: none; /* Убираем подчеркивание */
+    }
   }
 
   img {
@@ -96,14 +100,6 @@
     right: 20px; /* Adjusted position to right */
     top: 15px;
 
-    .bar {
-      width: 25px;
-      height: 3px;
-      background-color: #000;
-      margin: 4px 0;
-      transition: 0.4s;
-    }
-
     .mobile-notification {
       display: none; /* Hide by default */
     }
@@ -152,7 +148,7 @@
     position: absolute;
     top: 50px; /* Adjust the top position based on navbar height */
     width: 100%;
-    background-color: #f8f9fa;
+    background-color: #fff;
     z-index: 1000;
     border-top: 1px solid #dee2e6;
 
@@ -166,11 +162,12 @@
         text-align: center;
 
         a {
-          color: #000;
+          color: #000; /* Set link color to black */
           font-weight: bold;
           padding: 10px;
           display: block;
           transition: background-color 0.3s;
+          text-decoration: none; /* Убираем подчеркивание */
 
           &:hover {
             background-color: #e9ecef;
@@ -189,6 +186,16 @@
 
           &:hover {
             background-color: #c82333;
+          }
+        }
+
+        span {
+          color: #dc3545; /* Set logout text color */
+          cursor: pointer;
+          transition: color 0.3s;
+
+          &:hover {
+            color: #c82333;
           }
         }
       }

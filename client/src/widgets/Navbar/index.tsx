@@ -1,9 +1,9 @@
-// src/widgets/Navbar/index.tsx
 import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AppBar, Toolbar, IconButton, Badge, Menu, MenuItem, ListItemText, ListItemIcon } from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MarkEmailUnreadIcon from '@mui/icons-material/MarkEmailUnread';
+import MenuIcon from '@mui/icons-material/Menu';
 import { useNotification, Notification } from '../../shared/notifications/NotificationContext';
 import { pages } from '../../widgets';
 import { Item } from './features/item/ui';
@@ -21,7 +21,7 @@ const Navigation: React.FC = () => {
   const currentUser = AuthService.getCurrentUser();
   const { notifications, markAsRead, addNotification } = useNotification();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [mobileAnchorEl, setMobileAnchorEl] = useState<null | HTMLElement>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,9 +46,8 @@ const Navigation: React.FC = () => {
     }
   };
 
-  const toggleMenu = () => {
-    setAnchorEl(null);
-    setMobileAnchorEl(null);
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
   };
 
   const handleNotificationClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -57,7 +56,6 @@ const Navigation: React.FC = () => {
 
   const handleNotificationClose = () => {
     setAnchorEl(null);
-    setMobileAnchorEl(null);
   };
 
   const handleNotificationItemClick = async (id: string) => {
@@ -80,10 +78,6 @@ const Navigation: React.FC = () => {
 
   const goToProfile = () => {
     navigate('/profile');
-  };
-
-  const handleMobileNotificationClick = (event: React.MouseEvent<HTMLElement>) => {
-    setMobileAnchorEl(event.currentTarget);
   };
 
   return (
@@ -139,17 +133,36 @@ const Navigation: React.FC = () => {
               </li>
             )}
           </ul>
-          <div className="hamburger" onClick={toggleMenu}>
-            <div className="bar"></div>
-            <div className="bar"></div>
-            <div className="bar"></div>
-            <IconButton color="inherit" onClick={handleMobileNotificationClick} className="mobile-notification">
+          <div className="hamburger">
+            <IconButton color="inherit" onClick={toggleMobileMenu}>
+              <MenuIcon style={{ color: '#000' }} />
+            </IconButton>
+            <IconButton color="inherit" onClick={handleNotificationClick} className="mobile-notification">
               <Badge badgeContent={unreadCount} color="secondary">
                 <NotificationsIcon style={{ color: unreadCount > 0 ? '#ff5722' : '#000' }} />
               </Badge>
             </IconButton>
           </div>
         </Toolbar>
+        {mobileMenuOpen && (
+          <div className="mobile-menu">
+            <ul>
+              {pages.map((page) => (
+                <li key={page.value} onClick={toggleMobileMenu}>
+                  <NavLink to={page.to}>{page.label}</NavLink>
+                </li>
+              ))}
+              <li onClick={toggleMobileMenu}>
+                <NavLink to="/video-gallery">Видеогалерея</NavLink>
+              </li>
+              {currentUser && (
+                <li onClick={toggleMobileMenu}>
+                  <span onClick={handleLogout}>Выйти</span>
+                </li>
+              )}
+            </ul>
+          </div>
+        )}
       </AppBar>
     </header>
   );
