@@ -1,5 +1,3 @@
-/* index.scss */
-
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -12,14 +10,10 @@
   a {
     text-decoration: none;
     color: #000;
-
-    &.active {
-      text-decoration: none; /* Убираем подчеркивание */
-    }
   }
 
   img {
-    max-height: 50px; /* Adjust the logo size if needed */
+    max-height: 50px; 
   }
 
   .navbar-left,
@@ -44,6 +38,10 @@
         &:hover {
           color: #007bff;
         }
+
+        &.active {
+          text-decoration: none; 
+        }
       }
     }
   }
@@ -55,8 +53,8 @@
       color: #000;
 
       .profile-icon {
-        width: 30px; /* Adjust the profile icon size */
-        height: 30px; /* Adjust the profile icon size */
+        width: 30px; 
+        height: 30px; 
         border-radius: 50%;
         margin-right: 10px;
         cursor: pointer;
@@ -85,72 +83,75 @@
           background-color: #c82333;
         }
       }
-
-      .MuiIconButton-root {
-        margin-left: 10px;
-      }
     }
   }
 
   .hamburger {
     display: none;
     flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
     cursor: pointer;
-    position: absolute;
-    right: 20px; /* Adjusted position to right */
-    top: 15px;
 
-    .mobile-notification {
-      display: none; /* Hide by default */
+    .bar {
+      height: 3px;
+      width: 100%;
+      background-color: #000; 
+      border-radius: 10px;
     }
   }
 
+  .mobile-notification {
+    display: none; 
+  }
+
   .desktop-notification {
-    display: flex; /* Show on desktop */
+    display: flex; 
   }
 }
 
-/* Media queries for mobile devices */
 @media (max-width: 768px) {
   .navbar {
-    flex-direction: row; /* Ensure navbar items are aligned horizontally */
+    flex-direction: row; 
     justify-content: space-between;
     align-items: center;
     padding: 10px;
 
     img {
-      max-height: 40px; /* Adjust the logo size for mobile */
+      max-height: 40px; 
     }
 
     .navbar-left,
     .navbar-right {
-      display: none; /* Hide default menu items */
+      display: none;
     }
 
     .hamburger {
-      display: flex; /* Show hamburger icon */
+      display: flex; 
       align-items: center;
+    }
 
-      .mobile-notification {
-        display: block; /* Show on mobile */
-        position: absolute;
-        top: 0;
-        right: 50px; /* Adjusted position */
-      }
+    .mobile-notification {
+      display: block; 
+      position: absolute;
+      top: 15px;
+      right: 50px; 
     }
 
     .desktop-notification {
-      display: none; /* Hide on mobile */
+      display: none; 
     }
   }
 
   .mobile-menu {
     position: absolute;
-    top: 50px; /* Adjust the top position based on navbar height */
+    top: 60px; 
     width: 100%;
-    background-color: #fff;
+    background-color: #fff; 
     z-index: 1000;
     border-top: 1px solid #dee2e6;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 
     ul {
       list-style: none;
@@ -162,15 +163,18 @@
         text-align: center;
 
         a {
-          color: #000; /* Set link color to black */
+          color: #000;
           font-weight: bold;
           padding: 10px;
           display: block;
           transition: background-color 0.3s;
-          text-decoration: none; /* Убираем подчеркивание */
 
           &:hover {
             background-color: #e9ecef;
+          }
+
+          &.active {
+            text-decoration: none; 
           }
         }
 
@@ -188,15 +192,15 @@
             background-color: #c82333;
           }
         }
+      }
 
-        span {
-          color: #dc3545; /* Set logout text color */
-          cursor: pointer;
-          transition: color 0.3s;
+      .auth-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
 
-          &:hover {
-            color: #c82333;
-          }
+        a {
+          width: 45%; 
         }
       }
     }

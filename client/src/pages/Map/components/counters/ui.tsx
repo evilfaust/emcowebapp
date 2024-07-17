@@ -13,15 +13,7 @@ export const CounterNumber: React.FC = () => {
             className="centered"
             style={{ marginLeft: "auto" }}
           />
-          <div
-            className="wrapper_counter centered"
-            style={{ marginBottom: "auto" }}
-          >
-            <h1>СВАЛОК УБРАЛИ:</h1>
-            <span>
-              <strong>40</strong>
-            </span>
-          </div>
+
         </div>
         <div className="wrapper">
           <img className="centered" src={wrapper_text} />
