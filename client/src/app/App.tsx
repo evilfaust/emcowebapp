@@ -28,7 +28,7 @@ function App() {
       >
         <CssBaseline />
         <Navigation />
-        <MobileNavigation />
+        {/* <MobileNavigation /> */}
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="news" element={<News />} />
