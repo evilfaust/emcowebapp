@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Map, YMaps, Placemark } from "@pbe/react-yandex-maps";
+import { Map, YMaps, Placemark, ZoomControl } from "@pbe/react-yandex-maps";
 import { useSearchParams } from "react-router-dom";
 import { FiMapPin } from "react-icons/fi";
 import { Button } from "shared/UI";
@@ -12,7 +12,7 @@ import customMarkerIcon2 from "../../../../../shared/icon/Vector green.png";
 interface Marker {
   id: number;
   name: string;
-  description: string; // Corrected typo in the interface
+  description: string;
   latitude: number;
   longitude: number;
   photo: string | File | null;
@@ -77,7 +77,7 @@ const YandexMap: React.FC = () => {
       formData.append("photo", newMarker.photo);
     }
     formData.append("name", newMarker.name || "");
-    formData.append("description", newMarker.description || ""); // Corrected field name
+    formData.append("description", newMarker.description || "");
     formData.append("latitude", newMarker.latitude?.toString() || "");
     formData.append("longitude", newMarker.longitude?.toString() || "");
     try {
@@ -89,8 +89,8 @@ const YandexMap: React.FC = () => {
       setMarkers([...markers, response.data]);
       setNewMarker({});
       setTempCoordinates(null);
-      setAddingMarker(false); // Disable marker adding mode after successful submission
-      setButtonText("МЕТКА ДОБАВЛЕНА"); // Update button text after adding marker
+      setAddingMarker(false);
+      setButtonText("МЕТКА ДОБАВЛЕНА");
     } catch (error) {
       console.error("Error saving marker:", error);
     }
@@ -157,6 +157,7 @@ const YandexMap: React.FC = () => {
               }}
             />
           )}
+          <ZoomControl options={{ position: { top: 10, right: 10 } }} />
         </Map>
       </YMaps>
       <div className="buttons">
@@ -175,14 +176,14 @@ const YandexMap: React.FC = () => {
               onChange={handleInputChange}
               required
             />
-            <label htmlFor="description">Описание</label> {/* Corrected field name */}
+            <label htmlFor="description">Описание</label>
             <textarea
               name="description"
               value={newMarker.description || ""}
               onChange={handleInputChange}
               maxLength={300}
               required
-              style={{ height: "100px", resize: "none" }} // Fixed height and disable resize
+              style={{ height: "100px", resize: "none" }}
             />
             <input
               type="file"

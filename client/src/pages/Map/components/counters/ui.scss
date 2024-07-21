@@ -11,7 +11,7 @@
   width: 48%; 
   
   &.left {
-    width: 30%; 
+    width: 30%;
 
     .centered {
       margin-left: 0;
@@ -19,50 +19,50 @@
 
     .overlapping-images {
       position: relative;
-      width: 100%; 
-      margin-top: 20px; 
+      width: 100%;
+      margin-top: 20px;
       
       .pot-image {
-        width: 60%; 
-        max-width: 300px; 
+        width: 40%;
+        max-width: 200px;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 10px; 
+        margin-top: 80px;
       }
 
       .leaf-image {
-        width: 60%; 
-        max-width: 250px; 
+        width: 30%;
+        max-width: 150px;
         position: absolute;
-        top: 10%; 
-        left: 50%; 
-        transform: translateX(-50%); 
-        z-index: 1; 
+        top: 23px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
       }
 
       .number {
         position: absolute;
-        top: 25%; 
+        top: 30%;
         left: 50%;
         transform: translate(-50%, -50%);
         font-family: 'Neue Machina', sans-serif;
-        font-size: 2em; 
+        font-size: 2em;
         color: white;
         font-weight: bold;
-        z-index: 2; 
+        z-index: 2;
       }
     }
   }
 
   &.right {
-    width: 60%; 
+    width: 60%;
     display: flex;
     justify-content: center;
     align-items: center;
 
     img {
-      max-width: 100%; 
-      height: auto; 
+      max-width: 100%;
+      height: auto;
     }
   }
 }
@@ -73,53 +73,52 @@
 
 @media screen and (max-width: 768px) {
   .layout {
-    flex-direction: column; 
+    flex-direction: column;
     align-items: center;
   }
 
   .wrapper {
-    width: 100%; 
+    width: 100%;
     margin-bottom: 1rem;
 
     &.left {
-      width: 100%; 
+      width: 100%;
+      
       .overlapping-images {
-        position: relative; 
-        width: 100%; 
-        margin-top: 10px; 
+        width: 80%;
+        margin-top: 10px;
 
         .pot-image {
-          width: 80%; 
-          max-width: 300px; 
-          margin-top: 10px; 
+          width: 60%;
+          max-width: 120px;
+          margin-top: 22px;
+          
         }
 
         .leaf-image {
-          width: 80%; 
-          max-width: 250px; 
-          position: absolute; 
-          top: 0; 
-          left: 50%; 
-          transform: translateX(-50%); 
-          margin-top: -80px; 
+          width: 50%;
+          max-width: 100px;
+          position: absolute;
+          top: -20px;
+          left: 50%;
+          transform: translateX(-50%);
         }
 
         .number {
-          font-size: 1.5em; 
-          margin-top: 0; 
-          top: 20%; 
+          font-size: 1.5em;
+          top: 10%;
         }
       }
     }
 
     &.right {
-      width: 100%; 
+      width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
 
       img {
-        max-width: 90%; 
+        max-width: 90%;
       }
     }
   }
