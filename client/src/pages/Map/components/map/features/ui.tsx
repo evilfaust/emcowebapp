@@ -34,7 +34,7 @@ const YandexMap: React.FC = () => {
 
   const fetchMarkers = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8000/marker/");
+      const response = await axios.get(" https://jurikartiweb.ru:8000/marker/");
       setMarkers(response.data);
       console.log("Markers:", response.data);
     } catch (error) {
@@ -81,7 +81,7 @@ const YandexMap: React.FC = () => {
     formData.append("latitude", newMarker.latitude?.toString() || "");
     formData.append("longitude", newMarker.longitude?.toString() || "");
     try {
-      const response = await axios.post("http://127.0.0.1:8000/marker/", formData, {
+      const response = await axios.post("https://jurikartiweb.ru:8000/marker/", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
