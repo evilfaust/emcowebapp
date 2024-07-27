@@ -29,7 +29,7 @@ const MarkersModeration: React.FC = () => {
 
     const fetchMarkers = async () => {
         try {
-            const response = await axios.get<Marker[]>("http://127.0.0.1:8000/marker/");
+            const response = await axios.get<Marker[]>(" https://jurikartiweb.ru/marker/");
             sortMarkers(response.data);
             setLoading(false);
         } catch (error) {
@@ -141,14 +141,14 @@ const MarkersModeration: React.FC = () => {
                                     <td>{marker.latitude}, {marker.longitude}</td>
                                     <td>
                                         {marker.photo ? (
-                                            <a href={`http://localhost:8000/${marker.photo}`} target="_blank" rel="noopener noreferrer">Ссылка на фото</a>
+                                            <a href={`http://https://jurikartiweb.ru/${marker.photo}`} target="_blank" rel="noopener noreferrer">Ссылка на фото</a>
                                         ) : (
                                             <span style={{ color: '#ccc' }}>Нет фото</span>
                                         )}
                                     </td>
                                     <td>
                                         {marker.aftephoto ? (
-                                            <a href={`http://localhost:8000/${marker.aftephoto}`} target="_blank" rel="noopener noreferrer">Ссылка на фото</a>
+                                            <a href={`https://jurikartiweb.ru/${marker.aftephoto}`} target="_blank" rel="noopener noreferrer">Ссылка на фото</a>
                                         ) : (
                                             <span style={{ color: '#ccc' }}>Нет фото</span>
                                         )}

@@ -3,7 +3,6 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { AppBar, Toolbar, IconButton, Badge, Menu, MenuItem, ListItemText, ListItemIcon } from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MarkEmailUnreadIcon from '@mui/icons-material/MarkEmailUnread';
-import MenuIcon from '@mui/icons-material/Menu';
 import { useNotification, Notification } from '../../shared/notifications/NotificationContext';
 import { pages } from '../../widgets';
 import { Item } from './features/item/ui';
@@ -21,6 +20,7 @@ const Navigation: React.FC = () => {
   const currentUser = AuthService.getCurrentUser();
   const { notifications, markAsRead, addNotification } = useNotification();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [mobileAnchorEl, setMobileAnchorEl] = useState<null | HTMLElement>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ const Navigation: React.FC = () => {
 
   const loadNotifications = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/notification/', {
+      const response = await fetch('https://jurikartiweb.ru/api/notification/', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access')}`,
         },
@@ -46,7 +46,7 @@ const Navigation: React.FC = () => {
     }
   };
 
-  const toggleMobileMenu = () => {
+  const toggleMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
@@ -56,15 +56,16 @@ const Navigation: React.FC = () => {
 
   const handleNotificationClose = () => {
     setAnchorEl(null);
+    setMobileAnchorEl(null);
   };
 
   const handleNotificationItemClick = async (id: string) => {
     try {
-      await fetch(`http://localhost:8000/api/notification/${id}/`, {
+      await fetch(`https://jurikartiweb.ru/api/notification/${id}/`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('access')}`, // Передаем токен авторизации
+          Authorization: `Bearer ${localStorage.getItem('access')}`,
         },
       });
       markAsRead(id);
@@ -78,6 +79,10 @@ const Navigation: React.FC = () => {
 
   const goToProfile = () => {
     navigate('/profile');
+  };
+
+  const handleMobileNotificationClick = (event: React.MouseEvent<HTMLElement>) => {
+    setMobileAnchorEl(event.currentTarget);
   };
 
   return (
@@ -133,37 +138,62 @@ const Navigation: React.FC = () => {
               </li>
             )}
           </ul>
-          <div className="hamburger">
-            <IconButton color="inherit" onClick={toggleMobileMenu}>
-              <MenuIcon style={{ color: '#000' }} />
-            </IconButton>
-            <IconButton color="inherit" onClick={handleNotificationClick} className="mobile-notification">
-              <Badge badgeContent={unreadCount} color="secondary">
-                <NotificationsIcon style={{ color: unreadCount > 0 ? '#ff5722' : '#000' }} />
-              </Badge>
-            </IconButton>
+          <div className="hamburger" onClick={toggleMenu}>
+            <div className="bar"></div>
+            <div className="bar"></div>
+            <div className="bar"></div>
           </div>
+          <IconButton color="inherit" onClick={handleMobileNotificationClick} className="mobile-notification">
+            <Badge badgeContent={unreadCount} color="secondary">
+              <NotificationsIcon style={{ color: unreadCount > 0 ? '#ff5722' : '#000' }} />
+            </Badge>
+          </IconButton>
         </Toolbar>
-        {mobileMenuOpen && (
-          <div className="mobile-menu">
-            <ul>
-              {pages.map((page) => (
-                <li key={page.value} onClick={toggleMobileMenu}>
-                  <NavLink to={page.to}>{page.label}</NavLink>
-                </li>
-              ))}
-              <li onClick={toggleMobileMenu}>
-                <NavLink to="/video-gallery">Видеогалерея</NavLink>
-              </li>
-              {currentUser && (
-                <li onClick={toggleMobileMenu}>
-                  <span onClick={handleLogout}>Выйти</span>
-                </li>
-              )}
-            </ul>
-          </div>
-        )}
       </AppBar>
+      {mobileMenuOpen && (
+        <div className="mobile-menu">
+          <ul>
+            {pages.map((page) => (
+              <li key={page.value}>
+                <NavLink to={page.to} onClick={toggleMenu}>{page.label}</NavLink>
+              </li>
+            ))}
+            <li>
+              <NavLink to="/video-gallery" onClick={toggleMenu}>Видеогалерея</NavLink>
+            </li>
+            {currentUser ? (
+              <li>
+                <button onClick={handleLogout}>Выйти</button>
+              </li>
+            ) : (
+              <li className="auth-buttons">
+                <NavLink to="/login" onClick={toggleMenu}>Login</NavLink>
+                <NavLink to="/register" onClick={toggleMenu}>Register</NavLink>
+              </li>
+            )}
+          </ul>
+        </div>
+      )}
+      <Menu
+        anchorEl={mobileAnchorEl}
+        open={Boolean(mobileAnchorEl)}
+        onClose={handleNotificationClose}
+      >
+        {notifications.length === 0 ? (
+          <MenuItem>
+            <ListItemText primary="Empty" />
+          </MenuItem>
+        ) : (
+          notifications.map((notification) => (
+            <MenuItem key={notification.id} onClick={() => handleNotificationItemClick(notification.id.toString())}>
+              <ListItemIcon>
+                <MarkEmailUnreadIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText primary={notification.message} />
+            </MenuItem>
+          ))
+        )}
+      </Menu>
     </header>
   );
 };

@@ -17,7 +17,7 @@ function News() {
   const [news, setNews] = useState<News[]>([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/news/')
+    axios.get('https://jurikartiweb.ru/api/news/')
       .then(response => {
         console.log('Ответ от API:', response.data);
         const formattedNews = response.data.map((item: any) => ({

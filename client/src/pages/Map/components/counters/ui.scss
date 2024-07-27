@@ -1,46 +1,125 @@
 .layout {
   display: flex;
-  .wrapper {
-    display: block;
-    max-width: 100%;
-    width: 50%;
-    .wrapper_text {
-      font-family: "Neue Machina";
-      font-size: 2em;
-      font-weight: bold;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.wrapper {
+  position: relative;
+  text-align: center;
+  width: 48%; 
+  
+  &.left {
+    width: 30%;
+
+    .centered {
+      margin-left: 0;
     }
-    .info {
-      max-width: 100%;
-      width: 350px;
-      margin-left: 15em;
-      margin-right: auto;
-    }
-    .wrappersamsa {
-      margin-left: 10em;
+
+    .overlapping-images {
+      position: relative;
+      width: 100%;
+      margin-top: 20px;
+      
+      .pot-image {
+        width: 40%;
+        max-width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 80px;
+      }
+
+      .leaf-image {
+        width: 30%;
+        max-width: 150px;
+        position: absolute;
+        top: 23px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+      }
+
+      .number {
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: 'Neue Machina', sans-serif;
+        font-size: 2em;
+        color: white;
+        font-weight: bold;
+        z-index: 2;
+      }
     }
   }
-  .wrapper_counter {
-    display: block;
-    color: white;
-    border-style: solid;
-    border-radius: 3.125em;
-    width: 34rem;
-    height: 26.5rem;
+
+  &.right {
+    width: 60%;
+    display: flex;
     justify-content: center;
-    text-align: center;
     align-items: center;
 
-    h1 {
-      margin-bottom: -0.25em;
-      font-size: 4em;
-      font-weight: bolde;
-      -webkit-text-stroke: 1px #e31c34;
-      line-height: 104px;
+    img {
+      max-width: 100%;
+      height: auto;
     }
-    
-    span {
-      font-size: 4.4em;
-      -webkit-text-stroke: 1px green;
+  }
+}
+
+.centered {
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .wrapper {
+    width: 100%;
+    margin-bottom: 1rem;
+
+    &.left {
+      width: 100%;
+      
+      .overlapping-images {
+        width: 80%;
+        margin-top: 10px;
+
+        .pot-image {
+          width: 60%;
+          max-width: 120px;
+          margin-top: 22px;
+          
+        }
+
+        .leaf-image {
+          width: 50%;
+          max-width: 100px;
+          position: absolute;
+          top: -20px;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        .number {
+          font-size: 1.5em;
+          top: 10%;
+        }
+      }
+    }
+
+    &.right {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        max-width: 90%;
+      }
     }
   }
 }
