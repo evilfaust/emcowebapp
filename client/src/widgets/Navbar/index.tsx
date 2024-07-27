@@ -10,6 +10,7 @@ import AuthService from '../../services/authService';
 import logo from '../../shared/images/header-logo.png';
 import profileIcon from '../../shared/images/profile-icon.png';
 import './index.scss';
+import { getCsrfToken } from '../../services/csrf'; // Импортируем функцию для получения CSRF-токена
 
 const handleLogout = () => {
   AuthService.logout();
@@ -30,10 +31,11 @@ const Navigation: React.FC = () => {
 
   const loadNotifications = async () => {
     try {
-      const response = await fetch('https://jurikartiweb.ru/api/notification/', {
+      const response = await fetch('http://localhost:8000/api/notification/', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access')}`,
         },
+        credentials: 'include', // Важно для отправки куки
       });
       if (response.ok) {
         const data: Notification[] = await response.json();
@@ -60,13 +62,21 @@ const Navigation: React.FC = () => {
   };
 
   const handleNotificationItemClick = async (id: string) => {
+    const csrfToken = getCsrfToken();
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('access')}`,
+    };
+    if (csrfToken) {
+      headers['X-CSRFToken'] = csrfToken;
+    }
+
     try {
-      await fetch(`https://jurikartiweb.ru/api/notification/${id}/`, {
+      await fetch(`http://localhost:8000/api/notification/${id}/`, {
         method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('access')}`,
-        },
+        headers: headers,
+        body: JSON.stringify({ read: true }),
+        credentials: 'include', // Важно для отправки куки
       });
       markAsRead(id);
       handleNotificationClose();

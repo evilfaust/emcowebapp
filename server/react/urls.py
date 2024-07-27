@@ -55,5 +55,6 @@ urlpatterns = [
     path('api/login/', LoginView.as_view(), name='login'),
     
     path('api/notification/', NotificationView.as_view(), name='notification'),
+    path('api/notification/<int:pk>/', NotificationView.as_view(), name='notification-detail'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

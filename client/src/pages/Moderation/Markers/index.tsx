@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios, { AxiosError } from 'axios';
 import './markers.scss';
 import { FiTrash2, FiArrowUpCircle } from 'react-icons/fi'; // Импортируем иконки из react-icons
+import { getCsrfToken } from '../../../services/csrf'; // Импортируем функцию для получения CSRF-токена
 
 interface Marker {
     id: number;
@@ -23,13 +24,15 @@ const MarkersModeration: React.FC = () => {
     const [showModal, setShowModal] = useState<boolean>(false);
     const [markerToDelete, setMarkerToDelete] = useState<number | null>(null);
 
+    const csrfToken = getCsrfToken();
+
     useEffect(() => {
         fetchMarkers();
     }, []);
 
     const fetchMarkers = async () => {
         try {
-            const response = await axios.get<Marker[]>(" https://jurikartiweb.ru/marker/");
+            const response = await axios.get<Marker[]>("http://localhost:8000/marker/");
             sortMarkers(response.data);
             setLoading(false);
         } catch (error) {
@@ -72,7 +75,11 @@ const MarkersModeration: React.FC = () => {
     const handleDeleteMarker = async () => {
         if (markerToDelete !== null) {
             try {
-                await axios.delete(`/api/markers/${markerToDelete}/`);
+                await axios.delete(`/api/markers/${markerToDelete}/`, {
+                    headers: {
+                        'X-CSRFToken': csrfToken,
+                    }
+                });
                 setMarkers(markers.filter(marker => marker.id !== markerToDelete));
                 setShowModal(false);
                 setMarkerToDelete(null);
@@ -84,11 +91,15 @@ const MarkersModeration: React.FC = () => {
 
     const handleToggleActive = async (id: number, currentActive: boolean) => {
         try {
+            await axios.patch(`/api/markers/${id}/`, { is_active: !currentActive }, {
+                headers: {
+                    'X-CSRFToken': csrfToken,
+                }
+            });
             const updatedMarkers = markers.map(marker =>
                 marker.id === id ? { ...marker, is_active: !currentActive } : marker
             );
             setMarkers(updatedMarkers);
-            await axios.patch(`/api/markers/${id}/`, { is_active: !currentActive });
         } catch (error) {
             console.error('Ошибка при обновлении активности метки:', error);
         }
@@ -141,14 +152,14 @@ const MarkersModeration: React.FC = () => {
                                     <td>{marker.latitude}, {marker.longitude}</td>
                                     <td>
                                         {marker.photo ? (
-                                            <a href={`http://https://jurikartiweb.ru/${marker.photo}`} target="_blank" rel="noopener noreferrer">Ссылка на фото</a>
+                                            <a href={`http://localhost:8000/${marker.photo}`} target="_blank" rel="noopener noreferrer">Ссылка на фото</a>
                                         ) : (
                                             <span style={{ color: '#ccc' }}>Нет фото</span>
                                         )}
                                     </td>
                                     <td>
                                         {marker.aftephoto ? (
-                                            <a href={`https://jurikartiweb.ru/${marker.aftephoto}`} target="_blank" rel="noopener noreferrer">Ссылка на фото</a>
+                                            <a href={`http://localhost:8000/${marker.aftephoto}`} target="_blank" rel="noopener noreferrer">Ссылка на фото</a>
                                         ) : (
                                             <span style={{ color: '#ccc' }}>Нет фото</span>
                                         )}

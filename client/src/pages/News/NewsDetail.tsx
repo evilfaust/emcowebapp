@@ -52,7 +52,7 @@ const NewsDetail: React.FC = () => {
     if (id) {
       const newsId = parseInt(id, 10);
       if (!isNaN(newsId)) {
-        axios.get(`https://jurikartiweb.ru/api/news/${newsId}/`)
+        axios.get(`http://localhost:8000/api/news/${newsId}/`)
           .then(response => {
             console.log('Ответ от API:', response.data);
             const formattedNewsItem: NewsDetail = {

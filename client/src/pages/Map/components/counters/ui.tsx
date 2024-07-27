@@ -25,7 +25,7 @@ export const CounterNumber: React.FC = () => {
   useEffect(() => {
     const fetchMarkers = async () => {
       try {
-        const response = await axios.get<Marker[]>('https://jurikartiweb.ru/api/markers/');
+        const response = await axios.get<Marker[]>('http://localhost:8000/api/markers/');
         const markers = response.data;
         const activeMarkers = markers.filter(marker => marker.is_active);
         setActiveMarkerCount(activeMarkers.length);
