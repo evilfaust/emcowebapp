@@ -51,7 +51,7 @@ class LoginSerializer(serializers.Serializer):
 class YouTubeVideoSerializer(serializers.ModelSerializer):
     class Meta:
         model = YouTubeVideo
-        fields = ['title', 'channel']
+        fields = '__all__'
         
 class MarkerSerializer(serializers.ModelSerializer):
     class Meta:

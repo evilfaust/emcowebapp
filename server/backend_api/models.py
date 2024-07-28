@@ -1,9 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User  # Импортируем модель User
 
+
+
 class YouTubeVideo(models.Model):
     title = models.CharField(max_length=100)
-    channel =  models.CharField(max_length=100)
+    description = models.TextField(default='Описание не предоставлено')
+    video_url = models.URLField(default='https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+    channel = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.title
+
+
     
 
 class Marker(models.Model):

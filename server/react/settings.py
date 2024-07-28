@@ -60,9 +60,10 @@ MIDDLEWARE = [
 ]
 
 
-CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
+CSRF_TRUSTED_ORIGINS = ["http://localhost:3000", 'https://evilfaust-svalki-client-85fa.twc1.net']
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    'https://evilfaust-svalki-client-85fa.twc1.net'
 ]
 CORS_ALLOW_CREDENTIALS = True
 

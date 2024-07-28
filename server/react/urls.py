@@ -39,6 +39,10 @@ urlpatterns = [
     
     path('', YouTubeVideoView.as_view(), name='home'),  # Путь для корневого URL
     path('youtube/', YouTubeVideoView.as_view(), name='youtube-view'),
+    
+    path('api/youtube/', YouTubeVideoView.as_view(), name='youtube-list'),
+    path('api/youtube/<int:pk>/', YouTubeVideoDetailView.as_view(), name='youtube-detail'),
+    
     path('marker/', MarkerView.as_view(), name='marker-view'),
     path('news/', NewsView.as_view(), name='news-view'),
     
