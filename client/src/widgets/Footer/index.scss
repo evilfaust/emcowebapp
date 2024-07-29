@@ -1,9 +1,25 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+#root, .main-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+}
+
 .footer {
   background-color: black;
   color: white;
-  text-align: left; /* Выравнивание основного контента по левому краю */
-  padding: 1em; /* Отступы для контента внутри футера */
-  max-height: 200px;
+  text-align: left;
+  padding: 1em;
+  width: 100%;
+  margin-top: auto;
 
   .footer__content {
     display: flex;
@@ -12,39 +28,37 @@
   }
 
   .footer__text {
-    max-width: 60%; /* Ширина текста, занимающего большую часть контейнера */
-    font-size: 14px; /* Размер шрифта текста */
+    max-width: 60%;
+    font-size: 14px;
   }
 
   .footer__image {
-    max-width: 40%; /* Ширина изображения, занимающего меньшую часть контейнера */
-    text-align: right; /* Выравнивание изображения по правому краю */
+    max-width: 40%;
+    text-align: right;
   }
 
   img {
-    max-width: 100%; /* Изображение занимает всю доступную ширину */
-    height: auto; /* Поддержка пропорций изображения */
+    max-width: 100%;
+    height: auto;
   }
 
   @media screen and (max-width: 768px) {
-    .footer {
-      padding: 0.5em; /* Уменьшаем внутренние отступы для мобильных устройств */
-      min-height: 3rem; /* Еще меньшая высота футера для мобильных устройств */
-    }
+    padding: 0.5em;
+    min-height: 3rem;
 
     .footer__content {
-      flex-direction: column; /* Располагаем элементы колонкой на мобильных устройствах */
+      flex-direction: column;
     }
 
     .footer__text {
-      max-width: 100%; /* Ширина текста на мобильных устройствах */
-      text-align: left; /* Выравнивание текста по левому краю */
+      max-width: 100%;
+      text-align: left;
     }
 
     .footer__image {
-      max-width: 100%; /* Ширина изображения на мобильных устройствах */
-      text-align: left; /* Выравнивание изображения по левому краю */
-      margin-top: 0.5em; /* Отступ сверху для изображения на мобильных устройствах */
+      max-width: 100%;
+      text-align: left;
+      margin-top: 0.5em;
     }
   }
 }

@@ -30,7 +30,7 @@ const Navigation: React.FC = () => {
 
   const loadNotifications = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/notification/', {
+      const response = await fetch('https://jurikartiweb.ru:8000/api/notification/', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access')}`,
         },
@@ -61,7 +61,7 @@ const Navigation: React.FC = () => {
 
   const handleNotificationItemClick = async (id: string) => {
     try {
-      await fetch(`http://localhost:8000/api/notification/${id}/`, {
+      await fetch(`https://jurikartiweb.ru:8000/api/notification/${id}/`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -87,8 +87,8 @@ const Navigation: React.FC = () => {
 
   return (
     <header>
-      <AppBar position="static">
-        <Toolbar className="navbar">
+      <AppBar position="fixed" className="navbar">
+        <Toolbar>
           <NavLink to={'/'}>
             <img src={logo} alt="logo" />
           </NavLink>
@@ -134,24 +134,24 @@ const Navigation: React.FC = () => {
               </li>
             ) : (
               <li>
-                <NavLink to={'/login'}>Login</NavLink>
+                <NavLink to={'/login'}>Логин</NavLink>
               </li>
             )}
           </ul>
-          <div className="hamburger" onClick={toggleMenu}>
-            <div className="bar"></div>
-            <div className="bar"></div>
-            <div className="bar"></div>
-          </div>
           <IconButton color="inherit" onClick={handleMobileNotificationClick} className="mobile-notification">
             <Badge badgeContent={unreadCount} color="secondary">
               <NotificationsIcon style={{ color: unreadCount > 0 ? '#ff5722' : '#000' }} />
             </Badge>
           </IconButton>
+          <div className="hamburger" onClick={toggleMenu}>
+            <div className="bar"></div>
+            <div className="bar"></div>
+            <div className="bar"></div>
+          </div>
         </Toolbar>
       </AppBar>
       {mobileMenuOpen && (
-        <div className="mobile-menu">
+        <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
           <ul>
             {pages.map((page) => (
               <li key={page.value}>
@@ -162,13 +162,18 @@ const Navigation: React.FC = () => {
               <NavLink to="/video-gallery" onClick={toggleMenu}>Видеогалерея</NavLink>
             </li>
             {currentUser ? (
-              <li>
-                <button onClick={handleLogout}>Выйти</button>
-              </li>
+              <>
+                <li>
+                  <NavLink to="/profile" onClick={toggleMenu}>Профиль</NavLink>
+                </li>
+                <li>
+                  <button onClick={handleLogout}>Выйти</button>
+                </li>
+              </>
             ) : (
               <li className="auth-buttons">
-                <NavLink to="/login" onClick={toggleMenu}>Login</NavLink>
-                <NavLink to="/register" onClick={toggleMenu}>Register</NavLink>
+                <NavLink to="/login" onClick={toggleMenu}>Логин</NavLink>
+                <NavLink to="/register" onClick={toggleMenu}>Регистрация</NavLink>
               </li>
             )}
           </ul>

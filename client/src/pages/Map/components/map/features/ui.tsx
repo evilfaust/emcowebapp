@@ -34,7 +34,7 @@ const YandexMap: React.FC = () => {
 
   const fetchMarkers = async () => {
     try {
-      const response = await axios.get(" https://jurikartiweb.ru:8000/marker/");
+      const response = await axios.get("https://jurikartiweb.ru:8000/marker/");
       setMarkers(response.data);
       console.log("Markers:", response.data);
     } catch (error) {

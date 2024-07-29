@@ -3,9 +3,12 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #f8f9fa;
+  background-color: #ffffff !important; /* Белый цвет */
   border-bottom: 1px solid #dee2e6;
-  position: relative;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 
   a {
     text-decoration: none;
@@ -113,10 +116,9 @@
 
 @media (max-width: 768px) {
   .navbar {
-    flex-direction: row; 
-    justify-content: space-between;
-    align-items: center;
     padding: 10px;
+    background-color: #ffffff !important; /* Белый цвет */
+    border-bottom: 1px solid #dee2e6;
 
     img {
       max-height: 40px; 
@@ -127,16 +129,18 @@
       display: none;
     }
 
+    .mobile-notification,
     .hamburger {
-      display: flex; 
+      display: flex;
       align-items: center;
     }
 
     .mobile-notification {
-      display: block; 
-      position: absolute;
-      top: 15px;
-      right: 50px; 
+      margin-left: 200px; /* Увеличенный отступ слева */
+    }
+
+    .hamburger {
+      margin-left: 10px; /* Отступ справа от иконки уведомлений */
     }
 
     .desktop-notification {
@@ -145,13 +149,20 @@
   }
 
   .mobile-menu {
-    position: absolute;
-    top: 60px; 
+    position: fixed; /* Добавлено для перемещения вместе с навбаром */
+    top: 60px; /* Высота навбара */
     width: 100%;
     background-color: #fff; 
     z-index: 1000;
     border-top: 1px solid #dee2e6;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease-in-out;
+
+    &.open {
+      max-height: 500px; /* Примерное значение, можно настроить */
+    }
 
     ul {
       list-style: none;
@@ -205,4 +216,8 @@
       }
     }
   }
+}
+
+body {
+  padding-top: 64px; /* Height of the navbar */
 }
