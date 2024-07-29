@@ -7,6 +7,7 @@ const NavigationBarModeration: React.FC = () => {
         <nav className="navigation-bar-moderation">
             <NavLink to="/moderation/markers">Метки</NavLink>
             <NavLink to="/moderation/reviews">Отзывы</NavLink>
+            <NavLink to="/moderation/youtube">YouTube</NavLink> {/* Добавляем новую ссылку */}
         </nav>
     );
 };

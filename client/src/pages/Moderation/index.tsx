@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Markers from './Markers';
 import Reviews from './Reviews';
 import NavigationBarModeration from './NavigationBarModeration';
+import YouTubeModeration from './YouTube';
 import './moderation.scss';
 
 const Moderation: React.FC = () => {
@@ -13,6 +14,7 @@ const Moderation: React.FC = () => {
                 <Routes>
                     <Route path="markers" element={<Markers />} />
                     <Route path="reviews" element={<Reviews />} />
+                    <Route path="youtube" element={<YouTubeModeration />} />
                     <Route path="*" element={<h1>Модерация</h1>} />
                 </Routes>
             </div>

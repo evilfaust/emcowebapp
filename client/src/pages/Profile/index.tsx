@@ -50,10 +50,10 @@ const Profile: React.FC = () => {
 
   return (
     <div className="profile-container">
-      <h1>Тут будет профиль</h1>
+      <h1>Профиль</h1>
       {currentUser ? (
         <div className="profile-info">
-          <p><strong>Username:</strong> {currentUser.username}</p>
+          <p><strong>Имя:</strong> {currentUser.username}</p>
           <p><strong>Email:</strong> {currentUser.email}</p>
           <p><strong>Количество убранных свалок:</strong> {trashCount}</p>
           {currentUser.is_staff && (<p><strong>Статус администратора:</strong> {currentUser.is_staff ? 'Да' : 'Нет'}</p>)}
@@ -66,7 +66,11 @@ const Profile: React.FC = () => {
           )}
         </div>
       ) : (
-        <p>Сначала войдите в аккаунт</p>
+        <div className="profile-info">
+        <><p><strong>Чтобы продолжить - войдите в аккаунт</strong></p>
+        <button onClick={handleLogout} className="logout-button2">Войти</button></>
+        </div>
+        
       )}
     </div>
   );
