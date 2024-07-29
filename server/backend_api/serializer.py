@@ -1,9 +1,6 @@
 from django.forms import ValidationError
 from rest_framework import serializers
-from .models import YouTubeVideo
-from .models import Marker
-from .models import News
-from .models import Notification
+from .models import YouTubeVideo, Marker, News, Notification, TruckComplaint
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
@@ -71,3 +68,8 @@ class NotificationSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
         
+        
+class TruckComplaintSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TruckComplaint
+        fields = '__all__'

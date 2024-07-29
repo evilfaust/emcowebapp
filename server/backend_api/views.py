@@ -12,22 +12,28 @@ from .serializer import NewsSerializer
 
 from rest_framework.response import Response
 
+
+
+
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+
+
+
 from rest_framework import generics
-from rest_framework.response import Response
-from .serializer import UserSerializer, RegisterSerializer, LoginSerializer
+from .serializer import UserSerializer, RegisterSerializer, LoginSerializer, TruckComplaintSerializer
 from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.permissions import AllowAny
 from django.shortcuts import get_object_or_404
-from rest_framework.views import APIView
-from rest_framework.response import Response
+
+
 from rest_framework import generics, status
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.forms import ValidationError
-from .models import YouTubeVideo, Marker, News, Notification
+from .models import YouTubeVideo, Marker, News, Notification, TruckComplaint
 from .serializer import (
     YouTubeVideoSerializer,
     MarkerSerializer,
@@ -36,6 +42,7 @@ from .serializer import (
     RegisterSerializer,
     LoginSerializer,
     NotificationSerializer,
+    TruckComplaintSerializer,
 )
 
 class RegisterView(generics.CreateAPIView):
@@ -198,4 +205,22 @@ class NotificationView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+    
+class TruckComplaintView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        complaints = TruckComplaint.objects.all()
+        serializer = TruckComplaintSerializer(complaints, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = TruckComplaintSerializer(data=request.data)
+        if serializer.is_valid():
+            user = request.user if request.user.is_authenticated else None
+            serializer.save(user=user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

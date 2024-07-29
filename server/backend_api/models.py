@@ -53,3 +53,13 @@ class Notification(models.Model):
 
     def __str__(self):
         return self.message
+
+
+class TruckComplaint(models.Model):
+    truck_number = models.CharField(max_length=20)
+    date_time = models.DateTimeField()
+    media = models.FileField(upload_to='complaints_media/')
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+        return f'Complaint on {self.truck_number} by {self.user.username if self.user else "Anonymous"}'

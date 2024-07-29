@@ -23,6 +23,7 @@ from django.conf.urls.static import static
 from django.views.static import serve
 from backend_api.views import MarkerDetailView
 
+
 from backend_api.views import RegisterView, LoginView, NotificationView
 
 from rest_framework_simplejwt.views import (
@@ -60,5 +61,7 @@ urlpatterns = [
     
     path('api/notification/', NotificationView.as_view(), name='notification'),
     path('api/notification/<int:pk>/', NotificationView.as_view(), name='notification-detail'),
+    
+    path('api/truck-complaints/', TruckComplaintView.as_view(), name='truck-complaints'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
