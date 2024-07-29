@@ -15,6 +15,7 @@ const Register = React.lazy(() => import("pages/Register/index"));
 const Login = React.lazy(() => import("pages/Login/index"));
 const Profile = React.lazy(() => import("pages/Profile/index"));
 const VideoGallery = React.lazy(() => import("pages/VideoGallery/VideoGallery"));
+const TruckComplaints = React.lazy(() => import("pages/TruckComplaints/index"));
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="profile" element={<Profile />} />
           <Route path="video-gallery" element={<VideoGallery />} />
+          <Route path="truck-complaints" element={<TruckComplaints />} />
           <Route path="moderation/*" element={<AdminRoute />}>
             <Route path="*" element={<Moderation />} />
           </Route>

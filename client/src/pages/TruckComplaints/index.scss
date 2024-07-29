@@ -1,0 +1,58 @@
+.complaint-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: 50px auto;  // Добавили отступы сверху и снизу
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.complaint-container h1 {
+    text-align: center;
+}
+
+.complaint-container p {
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.complaint-form {
+    display: flex;
+    flex-direction: column;
+
+    label {
+        margin-bottom: 15px;
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="datetime-local"],
+    input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    button {
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: #0056b3;
+        }
+    }
+
+    p {
+        margin-top: 20px;
+        text-align: center;
+        color: green;
+        font-weight: bold;
+    }
+}

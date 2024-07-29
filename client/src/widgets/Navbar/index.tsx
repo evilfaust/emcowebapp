@@ -109,6 +109,9 @@ const Navigation: React.FC = () => {
             <li>
               <NavLink to="/video-gallery">Видеогалерея</NavLink>
             </li>
+            <li>
+              <NavLink to="/truck-complaints">Жалобы на водителей грузовика</NavLink>
+            </li>
           </ul>
           <ul className="navbar-right">
             {currentUser ? (
@@ -170,6 +173,9 @@ const Navigation: React.FC = () => {
             ))}
             <li>
               <NavLink to="/video-gallery" onClick={toggleMenu}>Видеогалерея</NavLink>
+            </li>
+            <li>
+              <NavLink to="/truck-complaints" onClick={toggleMenu}>Жалобы на водителей грузовика</NavLink>
             </li>
             {currentUser ? (
               <li>
