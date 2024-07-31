@@ -9,10 +9,15 @@ const TruckComplaints: React.FC = () => {
     const [dateTime, setDateTime] = useState('');
     const [media, setMedia] = useState<File | null>(null);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        setIsSubmitted(true); // Делаем кнопку неактивной при нажатии
+        if (isSubmitting) return;
+        setIsSubmitting(true); // Делаем кнопку неактивной при нажатии
+        setErrorMessage(null); // Сброс сообщения об ошибке
+
         const formData = new FormData();
         formData.append('truck_number', truckNumber);
         formData.append('date_time', dateTime);
@@ -33,12 +38,16 @@ const TruckComplaints: React.FC = () => {
                 headers['Authorization'] = `Bearer ${accessToken}`;
             }
 
-            const response = await axios.post('http://localhost:8000/api/truck-complaints/', formData, {
+            const response = await axios.post('https://jurikartiweb.ru/api/truck-complaints/', formData, {
                 headers: headers,
             });
+
             setIsSubmitted(true);
         } catch (error) {
-            setIsSubmitted(false);
+            console.error('Error during form submission:', error);
+            setErrorMessage('Ошибка при отправке жалобы');
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -66,7 +75,7 @@ const TruckComplaints: React.FC = () => {
             <p>
                 Мы обязательно разберёмся в ситуации!
             </p>
-            <form onSubmit={isSubmitted ? undefined : handleSubmit} className="complaint-form">
+            <form onSubmit={handleSubmit} className="complaint-form">
                 <label>
                     Государственный номер грузовика:
                     <input 
@@ -97,8 +106,8 @@ const TruckComplaints: React.FC = () => {
                         disabled={isSubmitted}
                     />
                 </label>
-                <button type="submit" disabled={isSubmitted} style={{ backgroundColor: isSubmitted ? '#ccc' : '#007bff' }}>
-                    {isSubmitted ? 'Жалоба отправлена' : 'Отправить'}
+                <button type="submit" disabled={isSubmitting || isSubmitted} style={{ backgroundColor: isSubmitting || isSubmitted ? '#ccc' : '#007bff' }}>
+                    {isSubmitting ? 'Отправка...' : (isSubmitted ? 'Жалоба отправлена' : 'Отправить')}
                 </button>
                 {isSubmitted && (
                     <button type="button" onClick={handleReload} style={{ backgroundColor: '#007bff', color: 'white', marginTop: '10px' }}>
@@ -106,6 +115,7 @@ const TruckComplaints: React.FC = () => {
                     </button>
                 )}
             </form>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
         </div>
     );
 };
