@@ -24,7 +24,7 @@ from django.views.static import serve
 from backend_api.views import MarkerDetailView
 
 
-from backend_api.views import RegisterView, LoginView, NotificationView
+from backend_api.views import RegisterView, LoginView, NotificationView, ReviewListCreateView, ReviewDetailView
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -64,5 +64,8 @@ urlpatterns = [
     path('api/notification/<int:pk>/', NotificationView.as_view(), name='notification-detail'),
     
     path('api/truck-complaints/', TruckComplaintView.as_view(), name='truck-complaints'),
+
+    path('reviews/', ReviewListCreateView.as_view(), name='review-list-create'),
+    path('reviews/<int:pk>/', ReviewDetailView.as_view(), name='review-detail'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

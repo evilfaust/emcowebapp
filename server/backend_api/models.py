@@ -63,3 +63,15 @@ class TruckComplaint(models.Model):
 
     def __str__(self):
         return f'Complaint on {self.truck_number} by {self.user.username if self.user else "Anonymous"}'
+
+
+class Review(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField(verbose_name="Текст отзыва")
+    phone = models.CharField(max_length=20, verbose_name="Телефон")
+    recipient = models.CharField(max_length=255, verbose_name="Адресат")
+    created_at = models.DateTimeField(auto_now_add=True)
+    approved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'Review by {self.user.username} to {self.recipient}'

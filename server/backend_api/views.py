@@ -13,7 +13,7 @@ from .serializer import NewsSerializer
 from rest_framework.response import Response
 
 
-
+from rest_framework import permissions
 
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
@@ -33,7 +33,8 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.forms import ValidationError
-from .models import YouTubeVideo, Marker, News, Notification, TruckComplaint
+
+from .models import YouTubeVideo, Marker, News, Notification, TruckComplaint, Review
 from .serializer import (
     YouTubeVideoSerializer,
     MarkerSerializer,
@@ -43,6 +44,7 @@ from .serializer import (
     LoginSerializer,
     NotificationSerializer,
     TruckComplaintSerializer,
+    ReviewSerializer,
 )
 
 class RegisterView(generics.CreateAPIView):
@@ -224,3 +226,25 @@ class TruckComplaintView(APIView):
             serializer.save(user=user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ReviewListCreateView(generics.ListCreateAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+class ReviewDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def patch(self, request, *args, **kwargs):
+        instance = self.get_object()
+        data = request.data
+        instance.approved = data.get("approved", instance.approved)
+        instance.save()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)

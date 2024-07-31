@@ -4,7 +4,8 @@ from .models import Marker
 from .models import News
 from .models import Notification
 from .models import TruckComplaint
-# Регистрируем модель Marker в админке
+from .models import Review
+
 @admin.register(Marker)
 class MarkerAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'latitude', 'longitude', 'photo', 'aftephoto','is_active', 'is_admin')
@@ -16,3 +17,4 @@ admin.site.register(YouTubeVideo)
 admin.site.register(News)
 admin.site.register(Notification)
 admin.site.register(TruckComplaint)
+admin.site.register(Review)
