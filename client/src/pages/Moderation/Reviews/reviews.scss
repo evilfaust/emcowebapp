@@ -1,7 +1,104 @@
-.reviews {
-    padding: 2rem;
-    h1 {
-        font-size: 2rem;
-        margin-bottom: 1rem;
+.reviews-management-page {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 1000px; /* Увеличенная максимальная ширина */
+    margin: 0 auto;
+    overflow-x: auto; /* Горизонтальная прокрутка для мобильных устройств */
+}
+
+.reviews-management-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    table-layout: fixed; /* Добавлено для равномерного распределения ширины */
+}
+
+.reviews-management-table th, .reviews-management-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+    vertical-align: middle; /* Вертикальное выравнивание по центру */
+    overflow: hidden;
+}
+
+.reviews-management-table th {
+    background-color: #f4f4f4;
+}
+
+.reviews-management-table td .content {
+    max-height: 100px; /* Максимальная высота содержимого */
+    overflow-y: auto; /* Вертикальная прокрутка */
+    white-space: normal; /* Разрешаем перенос текста */
+}
+
+.reviews-management-table td .recipient {
+    max-height: 100px; /* Максимальная высота содержимого */
+    overflow-y: auto; /* Вертикальная прокрутка */
+    white-space: normal; /* Разрешаем перенос текста */
+}
+
+.reviews-management-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.reviews-management-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.reviews-management-button {
+    padding: 8px 12px;
+    margin: 5px 0; /* Пространство между кнопками */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block; /* Кнопки одна под другой */
+    width: 100%; /* Кнопки на всю ширину ячейки */
+    box-sizing: border-box; /* Учитываем padding и border в ширину */
+    text-align: center;
+}
+
+.reviews-management-button:hover {
+    opacity: 0.9;
+}
+
+.reviews-management-button:active {
+    transform: translateY(1px);
+}
+
+.reviews-management-approve-button {
+    background-color: #28a745;
+    color: white;
+}
+
+.reviews-management-cancel-button {
+    background-color: #ffc107;
+    color: white;
+}
+
+.reviews-management-button-delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .reviews-management-table {
+        display: block;
+        overflow-x: auto; /* Горизонтальная прокрутка */
     }
+
+    .reviews-management-table th, .reviews-management-table td {
+        min-width: 150px; /* Минимальная ширина ячеек */
+    }
+}
+
+/* Добавление ширины для колонки отзывов */
+.reviews-management-table td.content-cell {
+    width: 400px; /* Установите нужную ширину для колонки отзывов */
+}
+
+/* Добавление ширины для колонки с кнопками */
+.reviews-management-table td.actions-cell {
+    width: 150px; /* Установите нужную ширину для колонки с кнопками */
 }
