@@ -32,7 +32,7 @@ const MarkersModeration: React.FC = () => {
 
     const fetchMarkers = async () => {
         try {
-            const response = await axios.get<Marker[]>("http://localhost:8000/marker/");
+            const response = await axios.get<Marker[]>("https://jurikartiweb.ru/marker/");
             sortMarkers(response.data);
             setLoading(false);
         } catch (error) {
@@ -75,7 +75,7 @@ const MarkersModeration: React.FC = () => {
     const handleDeleteMarker = async () => {
         if (markerToDelete !== null) {
             try {
-                await axios.delete(`/api/markers/${markerToDelete}/`, {
+                await axios.delete(`https://jurikartiweb.ru/api/markers/${markerToDelete}/`, {
                     headers: {
                         'X-CSRFToken': csrfToken,
                     }
@@ -91,7 +91,7 @@ const MarkersModeration: React.FC = () => {
 
     const handleToggleActive = async (id: number, currentActive: boolean) => {
         try {
-            await axios.patch(`/api/markers/${id}/`, { is_active: !currentActive }, {
+            await axios.patch(`https://jurikartiweb.ru/api/markers/${id}/`, { is_active: !currentActive }, {
                 headers: {
                     'X-CSRFToken': csrfToken,
                 }
@@ -152,14 +152,14 @@ const MarkersModeration: React.FC = () => {
                                     <td>{marker.latitude}, {marker.longitude}</td>
                                     <td>
                                         {marker.photo ? (
-                                            <a href={`http://localhost:8000/${marker.photo}`} target="_blank" rel="noopener noreferrer">Ссылка на фото</a>
+                                            <a href={`https://jurikartiweb.ru/media/${marker.photo}`} target="_blank" rel="noopener noreferrer">Ссылка на фото</a>
                                         ) : (
                                             <span style={{ color: '#ccc' }}>Нет фото</span>
                                         )}
                                     </td>
                                     <td>
                                         {marker.aftephoto ? (
-                                            <a href={`http://localhost:8000/${marker.aftephoto}`} target="_blank" rel="noopener noreferrer">Ссылка на фото</a>
+                                            <a href={`https://jurikartiweb.ru/media/${marker.aftephoto}`} target="_blank" rel="noopener noreferrer">Ссылка на фото</a>
                                         ) : (
                                             <span style={{ color: '#ccc' }}>Нет фото</span>
                                         )}
