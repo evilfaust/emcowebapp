@@ -31,7 +31,7 @@ const Navigation: React.FC = () => {
 
   const loadNotifications = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/notification/', {
+      const response = await fetch('https://jurikartiweb.ru:8000/api/notification/', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access')}`,
         },
@@ -72,7 +72,7 @@ const Navigation: React.FC = () => {
     }
 
     try {
-      await fetch(`http://localhost:8000/api/notification/${id}/`, {
+      await fetch(`https://jurikartiweb.ru:8000/api/notification/${id}/`, {
         method: 'PATCH',
         headers: headers,
         body: JSON.stringify({ read: true }),
@@ -97,8 +97,8 @@ const Navigation: React.FC = () => {
 
   return (
     <header>
-      <AppBar position="static">
-        <Toolbar className="navbar">
+      <AppBar position="fixed" className="navbar">
+        <Toolbar>
           <NavLink to={'/'}>
             <img src={logo} alt="logo" />
           </NavLink>
@@ -147,10 +147,15 @@ const Navigation: React.FC = () => {
               </li>
             ) : (
               <li>
-                <NavLink to={'/login'}>Login</NavLink>
+                <NavLink to={'/login'}>Логин</NavLink>
               </li>
             )}
           </ul>
+          <IconButton color="inherit" onClick={handleMobileNotificationClick} className="mobile-notification">
+            <Badge badgeContent={unreadCount} color="secondary">
+              <NotificationsIcon style={{ color: unreadCount > 0 ? '#ff5722' : '#000' }} />
+            </Badge>
+          </IconButton>
           <div className="hamburger" onClick={toggleMenu}>
             <div className="bar"></div>
             <div className="bar"></div>
@@ -164,7 +169,7 @@ const Navigation: React.FC = () => {
         </Toolbar>
       </AppBar>
       {mobileMenuOpen && (
-        <div className="mobile-menu">
+        <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
           <ul>
             {pages.map((page) => (
               <li key={page.value}>
@@ -174,17 +179,19 @@ const Navigation: React.FC = () => {
             <li>
               <NavLink to="/video-gallery" onClick={toggleMenu}>Видеогалерея</NavLink>
             </li>
-            <li>
-              <NavLink to="/truck-complaints" onClick={toggleMenu}>Жалобы на водителей грузовика</NavLink>
-            </li>
             {currentUser ? (
-              <li>
-                <button onClick={handleLogout}>Выйти</button>
-              </li>
+              <>
+                <li>
+                  <NavLink to="/profile" onClick={toggleMenu}>Профиль</NavLink>
+                </li>
+                <li>
+                  <button onClick={handleLogout}>Выйти</button>
+                </li>
+              </>
             ) : (
               <li className="auth-buttons">
-                <NavLink to="/login" onClick={toggleMenu}>Login</NavLink>
-                <NavLink to="/register" onClick={toggleMenu}>Register</NavLink>
+                <NavLink to="/login" onClick={toggleMenu}>Логин</NavLink>
+                <NavLink to="/register" onClick={toggleMenu}>Регистрация</NavLink>
               </li>
             )}
           </ul>
