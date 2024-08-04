@@ -1,4 +1,3 @@
-// src/shared/UI/InstructionModal.scss
 .instruction-modal {
     position: absolute;
     top: 50%;
@@ -6,7 +5,7 @@
     transform: translate(-50%, -50%);
     width: 80%;
     max-width: 600px;
-    background-color: rgba(255, 255, 255, 0.9); // Белый цвет с небольшой прозрачностью
+    background-color: rgba(255, 255, 255, 0.9); 
     border: 2px solid #000;
     box-shadow: 24px;
     padding: 16px;
@@ -31,5 +30,35 @@
   
   .tabpanel {
     padding: 16px;
+  }
+  
+  .review-form {
+    margin-top: 20px;
+  }
+  
+  .review-list {
+    margin-top: 20px;
+  }
+  
+  .review-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #f0f0f0;
+    border-radius: 4px;
+  }
+  
+  .review-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .review-icon {
+    margin-right: 10px;
+    color: #3f51b5;
+  }
+  
+  .review-username {
+    font-weight: bold;
   }
   
