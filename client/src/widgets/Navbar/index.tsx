@@ -10,7 +10,7 @@ import AuthService from '../../services/authService';
 import logo from '../../shared/images/header-logo.png';
 import profileIcon from '../../shared/images/profile-icon.png';
 import './index.scss';
-import { getCsrfToken } from '../../services/csrf'; // Импортируем функцию для получения CSRF-токена
+import { getCsrfToken } from '../../services/csrf';
 
 const handleLogout = () => {
   AuthService.logout();
@@ -23,6 +23,7 @@ const Navigation: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [mobileAnchorEl, setMobileAnchorEl] = useState<null | HTMLElement>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [tempReadNotifications, setTempReadNotifications] = useState<number[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,11 +32,11 @@ const Navigation: React.FC = () => {
 
   const loadNotifications = async () => {
     try {
-      const response = await fetch('https://jurikartiweb.ru:8000/api/notification/', {
+      const response = await fetch('http://localhost:8000/api/notification/', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access')}`,
         },
-        credentials: 'include', // Важно для отправки куки
+        credentials: 'include',
       });
       if (response.ok) {
         const data: Notification[] = await response.json();
@@ -52,13 +53,38 @@ const Navigation: React.FC = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
-  const handleNotificationClick = (event: React.MouseEvent<HTMLElement>) => {
+  const handleNotificationClick = async (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
+    const unreadNotifications = notifications.filter(notification => !notification.read);
+    const csrfToken = getCsrfToken();
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('access')}`,
+    };
+    if (csrfToken) {
+      headers['X-CSRFToken'] = csrfToken;
+    }
+
+    try {
+      for (const notification of unreadNotifications) {
+        await fetch(`http://localhost:8000/api/notification/${notification.id}/`, {
+          method: 'PATCH',
+          headers: headers,
+          body: JSON.stringify({ read: true }),
+          credentials: 'include',
+        });
+        markAsRead(notification.id.toString());
+      }
+      setTempReadNotifications(unreadNotifications.map(n => n.id));
+    } catch (error: any) {
+      console.error('Error marking notifications as read:', error.message);
+    }
   };
 
   const handleNotificationClose = () => {
     setAnchorEl(null);
     setMobileAnchorEl(null);
+    setTempReadNotifications([]);
   };
 
   const handleNotificationItemClick = async (id: number) => {
@@ -72,14 +98,14 @@ const Navigation: React.FC = () => {
     }
 
     try {
-      await fetch(`https://jurikartiweb.ru:8000/api/notification/${id}/`, {
+      await fetch(`http://localhost:8000/api/notification/${id}/`, {
         method: 'PATCH',
         headers: headers,
         body: JSON.stringify({ read: true }),
-        credentials: 'include', // Важно для отправки куки
+        credentials: 'include',
       });
       markAsRead(id.toString());
-      handleNotificationClose();
+      setTempReadNotifications([...tempReadNotifications, id]);
     } catch (error: any) {
       console.error('Error marking notification as read:', error.message);
     }
@@ -91,8 +117,32 @@ const Navigation: React.FC = () => {
     navigate('/profile');
   };
 
-  const handleMobileNotificationClick = (event: React.MouseEvent<HTMLElement>) => {
+  const handleMobileNotificationClick = async (event: React.MouseEvent<HTMLElement>) => {
     setMobileAnchorEl(event.currentTarget);
+    const unreadNotifications = notifications.filter(notification => !notification.read);
+    const csrfToken = getCsrfToken();
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('access')}`,
+    };
+    if (csrfToken) {
+      headers['X-CSRFToken'] = csrfToken;
+    }
+
+    try {
+      for (const notification of unreadNotifications) {
+        await fetch(`http://localhost:8000/api/notification/${notification.id}/`, {
+          method: 'PATCH',
+          headers: headers,
+          body: JSON.stringify({ read: true }),
+          credentials: 'include',
+        });
+        markAsRead(notification.id.toString());
+      }
+      setTempReadNotifications(unreadNotifications.map(n => n.id));
+    } catch (error: any) {
+      console.error('Error marking notifications as read:', error.message);
+    }
   };
 
   return (
@@ -133,12 +183,12 @@ const Navigation: React.FC = () => {
                       <ListItemText primary="Empty" />
                     </MenuItem>
                   ) : (
-                    notifications.map((notification) => (
+                    [...notifications].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()).map((notification) => (
                       <MenuItem key={notification.id} onClick={() => handleNotificationItemClick(notification.id)}>
                         <ListItemIcon>
                           <MarkEmailUnreadIcon fontSize="small" />
                         </ListItemIcon>
-                        <ListItemText primary={notification.message} secondary={!notification.read ? 'New' : ''} />
+                        <ListItemText primary={notification.message} secondary={!notification.read || tempReadNotifications.includes(notification.id) ? 'Новое' : ''} />
                       </MenuItem>
                     ))
                   )}
@@ -207,12 +257,12 @@ const Navigation: React.FC = () => {
             <ListItemText primary="Empty" />
           </MenuItem>
         ) : (
-          notifications.map((notification) => (
+          [...notifications].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()).map((notification) => (
             <MenuItem key={notification.id} onClick={() => handleNotificationItemClick(notification.id)}>
               <ListItemIcon>
                 <MarkEmailUnreadIcon fontSize="small" />
               </ListItemIcon>
-              <ListItemText primary={notification.message} secondary={!notification.read ? 'New' : ''} />
+              <ListItemText primary={notification.message} secondary={!notification.read || tempReadNotifications.includes(notification.id) ? 'Новое' : ''} />
             </MenuItem>
           ))
         )}

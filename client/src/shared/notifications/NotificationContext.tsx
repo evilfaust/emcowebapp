@@ -12,12 +12,14 @@ export interface NotificationContextProps {
   notifications: Notification[];
   addNotification: (notification: Notification) => void;
   markAsRead: (id: string) => void;
+  markAllAsRead: () => void;
 }
 
 const NotificationContext = createContext<NotificationContextProps>({
   notifications: [],
   addNotification: () => {},
   markAsRead: () => {},
+  markAllAsRead: () => {},
 });
 
 export const useNotification = () => useContext(NotificationContext);
@@ -37,8 +39,14 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
     );
   };
 
+  const markAllAsRead = () => {
+    setNotifications(prevNotifications =>
+      prevNotifications.map(notification => ({ ...notification, read: true }))
+    );
+  };
+
   return (
-    <NotificationContext.Provider value={{ notifications, addNotification, markAsRead }}>
+    <NotificationContext.Provider value={{ notifications, addNotification, markAsRead, markAllAsRead }}>
       {children}
     </NotificationContext.Provider>
   );
