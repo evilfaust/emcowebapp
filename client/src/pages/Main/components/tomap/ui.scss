@@ -1,31 +1,30 @@
 .layout {
   display: flex;
 
-
-
   .text-block2 {
-    max-width: 50%;;
+    max-width: 50%;
+    margin-top: 2.25rem;
   }
-  
+
   .text-block1 {
     max-width: 10%;
   }
-
-
-
-
 
   .wrapper {
     display: block;
     max-width: 100%;
     width: 49%;
 
+    .wrapper-link {
+      text-decoration: none; /* Убираем подчеркивание текста */
+    }
+
     .wrapper-txt {
       text-align: center;
       color: white;
       background-color: #1D1D1B;
       border-radius: 3.125rem;
-      max-width: 70%;
+      max-width: 55%;
       margin-left: auto;
       margin-right: auto;
       padding: 2rem;
@@ -35,7 +34,8 @@
       font-size: 1.25rem;
       position: relative; /* Добавлено положение относительно для .wrapper-txt */
       z-index: 1;
-
+      margin-top: 5rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
 
     button {
@@ -43,7 +43,6 @@
       margin-right: auto;
       margin-top: -3rem;
       padding-bottom: 1.4rem;
-
     }
   }
 }
@@ -52,10 +51,12 @@
   .layout {
     display: none;
   }
+
   .wrapper {
     display: none;
   }
-  .text-block1{
+
+  .text-block1 {
     padding: 0.4rem;
   }
 
@@ -65,27 +66,30 @@
     align-items: center;
     padding: 0; /* Убираем внутренние отступы */
   }
-  
+
   .wrapper2 img {
     max-width: 90%; /* Максимальная ширина изображения равна ширине родительского контейнера */
     max-height: 90%; /* Максимальная высота изображения равна высоте родительского контейнера */
     height: auto; /* Автоматический расчет высоты, сохраняя пропорции */
   }
-
-
-  
 }
 
 @media screen and (min-width: 769px) {
   .text-block1 {
-        display: none; // Показать на мобильных устройствах
-      }
+    display: none; // Показать на мобильных устройствах
+  }
+
   .app {
     display: none; // Показать на мобильных устройствах
   }
 
   .wrapper2 {
-        display: none;
-    
-    }
+    display: none;
+  }
+}
+
+/* Новый класс для изменения размера черного овала */
+.wrapper-txt {
+  max-width: 90%; /* Увеличение ширины овала */
+  padding: 3rem; /* Увеличение внутреннего отступа */
 }

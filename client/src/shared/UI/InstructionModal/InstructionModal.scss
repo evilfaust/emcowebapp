@@ -1,0 +1,35 @@
+// src/shared/UI/InstructionModal.scss
+.instruction-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 600px;
+    background-color: rgba(255, 255, 255, 0.9); // Белый цвет с небольшой прозрачностью
+    border: 2px solid #000;
+    box-shadow: 24px;
+    padding: 16px;
+    
+    @media (max-width: 600px) {
+      width: 90%;
+      max-width: 90%;
+      height: 90%;
+      overflow-y: auto;
+    }
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .tabs {
+    margin-top: 20px;
+  }
+  
+  .tabpanel {
+    padding: 16px;
+  }
+  

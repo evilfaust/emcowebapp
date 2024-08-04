@@ -61,7 +61,7 @@ const Navigation: React.FC = () => {
     setMobileAnchorEl(null);
   };
 
-  const handleNotificationItemClick = async (id: string) => {
+  const handleNotificationItemClick = async (id: number) => {
     const csrfToken = getCsrfToken();
     const headers: HeadersInit = {
       'Content-Type': 'application/json',
@@ -78,7 +78,7 @@ const Navigation: React.FC = () => {
         body: JSON.stringify({ read: true }),
         credentials: 'include', // Важно для отправки куки
       });
-      markAsRead(id);
+      markAsRead(id.toString());
       handleNotificationClose();
     } catch (error: any) {
       console.error('Error marking notification as read:', error.message);
@@ -110,7 +110,7 @@ const Navigation: React.FC = () => {
               <NavLink to="/video-gallery">Видеогалерея</NavLink>
             </li>
             <li>
-              <NavLink to="/truck-complaints">Жалобы на водителей грузовика</NavLink>
+              <NavLink to="/truck-complaints">Вежливый грузовик</NavLink>
             </li>
           </ul>
           <ul className="navbar-right">
@@ -134,11 +134,11 @@ const Navigation: React.FC = () => {
                     </MenuItem>
                   ) : (
                     notifications.map((notification) => (
-                      <MenuItem key={notification.id} onClick={() => handleNotificationItemClick(notification.id.toString())}>
+                      <MenuItem key={notification.id} onClick={() => handleNotificationItemClick(notification.id)}>
                         <ListItemIcon>
                           <MarkEmailUnreadIcon fontSize="small" />
                         </ListItemIcon>
-                        <ListItemText primary={notification.message} />
+                        <ListItemText primary={notification.message} secondary={!notification.read ? 'New' : ''} />
                       </MenuItem>
                     ))
                   )}
@@ -161,31 +161,15 @@ const Navigation: React.FC = () => {
             <div className="bar"></div>
             <div className="bar"></div>
           </div>
-          <IconButton color="inherit" onClick={handleMobileNotificationClick} className="mobile-notification">
-            <Badge badgeContent={unreadCount} color="secondary">
-              <NotificationsIcon style={{ color: unreadCount > 0 ? '#ff5722' : '#000' }} />
-            </Badge>
-          </IconButton>
         </Toolbar>
       </AppBar>
       {mobileMenuOpen && (
         <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
           <ul>
-            {pages.map((page) => (
-              <li key={page.value}>
-                <NavLink to={page.to} onClick={toggleMenu}>{page.label}</NavLink>
-              </li>
-            ))}
-            <li>
-              <NavLink to="/video-gallery" onClick={toggleMenu}>Видеогалерея</NavLink>
-            </li>
             {currentUser ? (
               <>
                 <li>
                   <NavLink to="/profile" onClick={toggleMenu}>Профиль</NavLink>
-                </li>
-                <li>
-                  <button onClick={handleLogout}>Выйти</button>
                 </li>
               </>
             ) : (
@@ -194,6 +178,22 @@ const Navigation: React.FC = () => {
                 <NavLink to="/register" onClick={toggleMenu}>Регистрация</NavLink>
               </li>
             )}
+            {pages.map((page) => (
+              <li key={page.value}>
+                <NavLink to={page.to} onClick={toggleMenu}>{page.label}</NavLink>
+              </li>
+            ))}
+            <li>
+              <NavLink to="/video-gallery" onClick={toggleMenu}>Видеогалерея</NavLink>
+            </li>
+            <li>
+              <NavLink to="/truck-complaints" onClick={toggleMenu}>Вежливый грузовик</NavLink>
+            </li>
+            {currentUser ? (
+              <li>
+                <button onClick={handleLogout}>Выйти</button>
+              </li>
+            ) : null}
           </ul>
         </div>
       )}
@@ -208,11 +208,11 @@ const Navigation: React.FC = () => {
           </MenuItem>
         ) : (
           notifications.map((notification) => (
-            <MenuItem key={notification.id} onClick={() => handleNotificationItemClick(notification.id.toString())}>
+            <MenuItem key={notification.id} onClick={() => handleNotificationItemClick(notification.id)}>
               <ListItemIcon>
                 <MarkEmailUnreadIcon fontSize="small" />
               </ListItemIcon>
-              <ListItemText primary={notification.message} />
+              <ListItemText primary={notification.message} secondary={!notification.read ? 'New' : ''} />
             </MenuItem>
           ))
         )}

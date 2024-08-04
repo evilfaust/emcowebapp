@@ -136,7 +136,7 @@
     }
 
     .mobile-notification {
-      margin-left: 200px; /* Увеличенный отступ слева */
+      margin-left: 150px; /* Увеличенный отступ слева */
     }
 
     .hamburger {
@@ -179,6 +179,7 @@
           padding: 10px;
           display: block;
           transition: background-color 0.3s;
+          text-decoration: none; /* Убираем подчеркивание текста */
 
           &:hover {
             background-color: #e9ecef;

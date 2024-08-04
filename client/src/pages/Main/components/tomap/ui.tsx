@@ -17,22 +17,21 @@ export const ToMapButton: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  //Выше код проверяет, что браузер мобильный или нет, потому что компомент layout
-  //Почему-то отображается, когда возвращаешься на страницу :(
-
   return (
     <section>
       {!isMobile && (
         <div className="layout">
           <div className="wrapper">
-            <p className="wrapper-txt">
-              Интерактивная карта несанкционированных свалок
-            </p>
-            <NavLink to="/map">
+            <NavLink to="/map" className="wrapper-link">
+              <p className="wrapper-txt">
+               Перейти на карту свалок
+              </p>
+            </NavLink>
+            {/* <NavLink to="/map">
               <Button variant="second">
                 <AiOutlineArrowDown size={50} />
               </Button>
-            </NavLink>
+            </NavLink> */}
           </div>
           <div className="text-block2">
             <p>
@@ -43,7 +42,7 @@ export const ToMapButton: React.FC = () => {
               При помощи этого приложения пользователи смогут эффективно
               маркировать и сообщать о местонахождении несанкционированных свалок,
               что поможет местным властям, волонтерам и экологическим организациям
-              в ликвидации и предотвращении таких проблем.
+              в ликвидации и предотвращении распространения свалок.
             </p>
             <p>
               <strong>
@@ -69,7 +68,7 @@ export const ToMapButton: React.FC = () => {
             При помощи этого приложения пользователи смогут эффективно
             маркировать и сообщать о местонахождении несанкционированных свалок,
             что поможет местным властям, волонтерам и экологическим организациям
-            в ликвидации и предотвращении таких проблем.
+            в ликвидации и предотвращении распространения свалок.
           </p>
           <p>
             <strong>
