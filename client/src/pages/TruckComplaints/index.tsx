@@ -38,7 +38,7 @@ const TruckComplaints: React.FC = () => {
                 headers['Authorization'] = `Bearer ${accessToken}`;
             }
 
-            const response = await axios.post('http://localhost:8000/api/truck-complaints/', formData, {
+            const response = await axios.post('https://jurikartiweb.ru/api/truck-complaints/', formData, {
                 headers: headers,
             });
 

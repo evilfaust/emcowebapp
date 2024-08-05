@@ -44,7 +44,7 @@ const Description = styled.p`
   }
 `;
 
-const NewsDetail: React.FC = () => {
+const NewsDetailComponent: React.FC = () => {
   const { id } = useParams<{ id?: string }>();
   const [newsItem, setNewsItem] = useState<NewsDetail | null>(null);
 
@@ -52,7 +52,7 @@ const NewsDetail: React.FC = () => {
     if (id) {
       const newsId = parseInt(id, 10);
       if (!isNaN(newsId)) {
-        axios.get(`http://localhost:8000/api/news/${newsId}/`)
+        axios.get(`https://jurikartiweb.ru/api/news/${newsId}/`)
           .then(response => {
             console.log('Ответ от API:', response.data);
             const formattedNewsItem: NewsDetail = {
@@ -67,7 +67,12 @@ const NewsDetail: React.FC = () => {
                 response.data.images4,
                 response.data.images5,
                 response.data.images6,
-              ].reduce((acc, val) => acc.concat(val), []).filter(Boolean),
+              ].reduce((acc, val) => {
+                if (val) {
+                  acc.push(`https://jurikartiweb.ru${val}`);
+                }
+                return acc;
+              }, []),
             };
             setNewsItem(formattedNewsItem);
           })
@@ -110,4 +115,4 @@ const NewsDetail: React.FC = () => {
   );
 }
 
-export default NewsDetail;
+export default NewsDetailComponent;

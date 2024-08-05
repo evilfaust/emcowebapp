@@ -25,7 +25,7 @@ const VideoGallery: React.FC = () => {
       }
 
       try {
-        const response = await fetch('http://localhost:8000/api/youtube/', {
+        const response = await fetch('https://jurikartiweb.ru/api/youtube/', {
           method: 'GET',
           headers: headers,
           credentials: 'include', // Включение учетных данных

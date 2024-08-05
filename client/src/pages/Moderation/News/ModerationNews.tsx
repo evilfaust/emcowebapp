@@ -3,7 +3,7 @@ import axios from 'axios';
 import { NewsSmall } from "shared/UI/NewsComponent";
 import { Container, Grid } from "@mui/material";
 import { Link, useNavigate } from 'react-router-dom';
-import "./ModerationNews.scss";
+import './ModerationNews.scss';
 
 interface News {
   id: number;
@@ -25,7 +25,7 @@ const ModerationNews: React.FC = () => {
 
   const fetchNews = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/api/news/', {
+      const response = await axios.get('https://jurikartiweb.ru/api/news/', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access')}`,
         },
@@ -44,7 +44,7 @@ const ModerationNews: React.FC = () => {
           item.images6,
         ].reduce((acc: string[], val: string | undefined) => {
           if (val) {
-            acc.push(`http://localhost:8000${val}`); // Формирование правильного пути к изображениям
+            acc.push(`https://jurikartiweb.ru${val}`); // Формирование правильного пути к изображениям
           }
           return acc;
         }, []),
@@ -59,7 +59,7 @@ const ModerationNews: React.FC = () => {
 
   const handleDeleteNews = async (id: number) => {
     try {
-      await axios.delete(`http://localhost:8000/api/news/${id}/`, {
+      await axios.delete(`https://jurikartiweb.ru/api/news/${id}/`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access')}`,
         },
@@ -72,6 +72,10 @@ const ModerationNews: React.FC = () => {
 
   const handleEditNews = (id: number) => {
     navigate(`/moderation/news/${id}/edit`);
+  };
+
+  const handleCreateNews = () => {
+    navigate('/moderation/news/create');
   };
 
   if (loading) {
@@ -101,6 +105,9 @@ const ModerationNews: React.FC = () => {
             </div>
           </Grid>
         ))}
+        <Grid item xs={12} className="news-item">
+          <button onClick={handleCreateNews} className="add-news-button">Добавить новость</button>
+        </Grid>
       </Grid>
     </Container>
   );

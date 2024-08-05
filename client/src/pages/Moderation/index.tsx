@@ -5,7 +5,8 @@ import Reviews from './Reviews';
 import NavigationBarModeration from './NavigationBarModeration';
 import YouTubeModeration from './YouTube';
 import ModerationNews from './News/ModerationNews';
-import NewsEdit from './News/NewsEdit'; // Импортируем правильный компонент
+import NewsEdit from './News/NewsEdit';
+import NewsCreate from './News/NewsCreate';
 import './moderation.scss';
 
 const Moderation: React.FC = () => {
@@ -17,8 +18,9 @@ const Moderation: React.FC = () => {
                     <Route path="markers" element={<Markers />} />
                     <Route path="reviews" element={<Reviews />} />
                     <Route path="youtube" element={<YouTubeModeration />} />
-                    <Route path="news" element={<ModerationNews />} /> {/* Новый маршрут для новостей */}
-                    <Route path="news/:id/edit" element={<NewsEdit />} /> {/* Маршрут для редактирования новостей */}
+                    <Route path="news" element={<ModerationNews />} /> 
+                    <Route path="news/create" element={<NewsCreate />} /> 
+                    <Route path="news/:id/edit" element={<NewsEdit />} /> 
                     <Route path="*" element={<h1>Модерация</h1>} />
                 </Routes>
             </div>

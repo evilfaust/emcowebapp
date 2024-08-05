@@ -32,7 +32,7 @@ const Navigation: React.FC = () => {
 
   const loadNotifications = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/notification/', {
+      const response = await fetch('https://jurikartiweb.ru/api/notification/', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access')}`,
         },
@@ -67,7 +67,7 @@ const Navigation: React.FC = () => {
 
     try {
       for (const notification of unreadNotifications) {
-        await fetch(`http://localhost:8000/api/notification/${notification.id}/`, {
+        await fetch(`https://jurikartiweb.ru/api/notification/${notification.id}/`, {
           method: 'PATCH',
           headers: headers,
           body: JSON.stringify({ read: true }),
@@ -98,7 +98,7 @@ const Navigation: React.FC = () => {
     }
 
     try {
-      await fetch(`http://localhost:8000/api/notification/${id}/`, {
+      await fetch(`https://jurikartiweb.ru/api/notification/${id}/`, {
         method: 'PATCH',
         headers: headers,
         body: JSON.stringify({ read: true }),
@@ -131,7 +131,7 @@ const Navigation: React.FC = () => {
 
     try {
       for (const notification of unreadNotifications) {
-        await fetch(`http://localhost:8000/api/notification/${notification.id}/`, {
+        await fetch(`https://jurikartiweb.ru/api/notification/${notification.id}/`, {
           method: 'PATCH',
           headers: headers,
           body: JSON.stringify({ read: true }),

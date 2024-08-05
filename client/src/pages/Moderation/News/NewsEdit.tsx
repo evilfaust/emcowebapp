@@ -89,7 +89,7 @@ const NewsEdit: React.FC = () => {
 
   const fetchNews = async (id: string) => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/news/${id}/`, {
+      const response = await axios.get(`https://jurikartiweb.ru/api/news/${id}/`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access')}`,
         },
@@ -127,7 +127,7 @@ const NewsEdit: React.FC = () => {
       });
 
       try {
-        const response = await axios.patch(`http://localhost:8000/api/news/${newsItem.id}/`, formData, {
+        const response = await axios.patch(`https://jurikartiweb.ru/api/news/${newsItem.id}/`, formData, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('access')}`,
             'Content-Type': 'multipart/form-data',
@@ -185,7 +185,7 @@ const NewsEdit: React.FC = () => {
                   newImages[index]
                     ? URL.createObjectURL(newImages[index]!)
                     : image
-                      ? `http://localhost:8000${image}`
+                      ? `https://jurikartiweb.ru${image}`
                       : ''
                 }
                 alt={`image-${index}`}
