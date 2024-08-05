@@ -1,33 +1,32 @@
+/* NavigationBarModeration.scss */
 .navigation-bar-moderation {
-    width: 200px; /* Ширина панели (можно изменить по необходимости) */
-    background-color: #f8f9fa;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding-top: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    gap: 10px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-right: 1px solid #ddd;
+    min-width: 200px; /* Уменьшение минимальной ширины */
 
-    /* Стили для ссылок */
     a {
-        margin: 10px 0;
         text-decoration: none;
-        color: #000;
-        font-size: 16px;
-        padding: 10px 20px;
-        transition: all 0.3s ease;
-        width: 100%;
-        text-align: center;
+        color: #007bff;
+        padding: 10px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+
+        &.active {
+            background-color: #007bff;
+            color: #fff;
+        }
 
         &:hover {
             background-color: #e9ecef;
-            color: #000;
         }
 
-        /* Стили для активной ссылки */
-        &.active {
-            background-color: #ddd; /* Цвет фона активной ссылки */
-            color: #333; /* Цвет текста активной ссылки */
-            font-weight: bold; /* Жирный шрифт для активной ссылки */
+        .icon {
+            margin-right: 10px;
         }
     }
 }

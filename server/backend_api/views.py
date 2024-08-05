@@ -132,17 +132,45 @@ class MarkerView(APIView):
         
         
 class NewsView(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
     def get(self, request):
         news = News.objects.all()
         serializer = NewsSerializer(news, many=True)
         return Response(serializer.data)
-    
+
     def post(self, request):
         serializer = NewsSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class NewsDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_object(self, pk):
+        return get_object_or_404(News, pk=pk)
+
+    def get(self, request, pk):
+        news = self.get_object(pk)
+        serializer = NewsSerializer(news)
+        return Response(serializer.data)
+
+    def patch(self, request, pk):
+        news = self.get_object(pk)
+        serializer = NewsSerializer(news, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        news = self.get_object(pk)
+        news.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class MarkerDetailView(APIView):
@@ -182,9 +210,6 @@ class CurrentUserView(APIView):
         return Response(serializer.data)
     
     
-class NewsDetailView(generics.RetrieveAPIView):
-    queryset = News.objects.all()
-    serializer_class = NewsSerializer
 
 class NotificationView(APIView):
     permission_classes = [IsAuthenticated]

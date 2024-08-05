@@ -1,0 +1,53 @@
+.news-edit-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  
+    h2 {
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+  
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: block;
+    }
+  
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+  
+    input[type="file"] {
+      margin-bottom: 20px;
+    }
+  
+    button {
+      padding: 10px 20px;
+      margin-right: 10px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+  
+      &:first-of-type {
+        background-color: #007bff;
+        color: #fff;
+      }
+  
+      &:last-of-type {
+        background-color: #6c757d;
+        color: #fff;
+      }
+    }
+  }
+  
