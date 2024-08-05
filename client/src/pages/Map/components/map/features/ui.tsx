@@ -34,7 +34,7 @@ const YandexMap: React.FC = () => {
 
   const fetchMarkers = async () => {
     try {
-      const response = await axios.get("https://jurikartiweb.ru/marker/");
+      const response = await axios.get("http://localhost:8000/marker/");
       setMarkers(response.data);
       console.log("Markers:", response.data);
     } catch (error) {
@@ -81,7 +81,7 @@ const YandexMap: React.FC = () => {
     formData.append("latitude", newMarker.latitude?.toString() || "");
     formData.append("longitude", newMarker.longitude?.toString() || "");
     try {
-      const response = await axios.post("https://jurikartiweb.ru/marker/", formData, {
+      const response = await axios.post("http://localhost:8000/marker/", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -132,8 +132,8 @@ const YandexMap: React.FC = () => {
                   ${marker.is_active ? `<p style="color: green;"><strong>Убрана</strong></p>` : ""}
                   <p>Название: ${marker.name}</p>
                   <p>Описание: ${marker.description}</p>
-                  Фото:${marker.photo ? `<img src="https://jurikartiweb.ru/media/${marker.photo}" alt="Фото" style="max-width: 100%;" />` : "Нет фото"}
-                  После:${marker.aftephoto ? `<img src="https://jurikartiweb.ru/media/${marker.aftephoto}" alt="Фото" style="max-width: 100%;" />` : "Нет фото после"}
+                  Фото:${marker.photo ? `<img src="http://localhost:8000/media/${marker.photo}" alt="Фото" style="max-width: 100%;" />` : "Нет фото"}
+                  После:${marker.aftephoto ? `<img src="http://localhost:8000/media/${marker.aftephoto}" alt="Фото" style="max-width: 100%;" />` : "Нет фото после"}
                   <p>Номер: ${marker.id}</p>
                 `,
               }}
