@@ -1,3 +1,4 @@
+// src/shared/UI/InstructionModal.scss
 .instruction-modal {
     position: absolute;
     top: 50%;
@@ -5,7 +6,7 @@
     transform: translate(-50%, -50%);
     width: 80%;
     max-width: 600px;
-    background-color: rgba(255, 255, 255, 0.9); 
+    background-color: rgba(255, 255, 255, 0.9); // Белый цвет с небольшой прозрачностью
     border: 2px solid #000;
     box-shadow: 24px;
     padding: 16px;
@@ -60,5 +61,16 @@
   
   .review-username {
     font-weight: bold;
+  }
+  
+  .images-placeholder {
+    height: 200px; /* Пространство для изображений */
+    background-color: #e0e0e0; /* Светлый серый фон для выделения пространства */
+    border: 1px dashed #9e9e9e; /* Пунктирная граница */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9e9e9e;
+    font-size: 14px;
   }
   

@@ -1,7 +1,8 @@
+// src/shared/UI/InstructionModal.tsx
 import React, { useState } from 'react';
 import { Modal, Box, Typography, Tabs, Tab, IconButton, TextField, Button } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import PersonIcon from '@mui/icons-material/Person';
+import PersonIcon from '@mui/icons-material/Person'; // Импортируем иконку пользователя
 import './InstructionModal.scss';
 
 interface InstructionModalProps {
@@ -58,10 +59,18 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
           <Tab label="Отзывы" />
         </Tabs>
         <TabPanel value={tabValue} index={0}>
-          <Typography>
-            Здесь вы можете найти информацию о нашем сайте.
-            {/* Добавьте ваш текст о сайте */}
+          <Typography variant="h6" gutterBottom>
           </Typography>
+          <Typography variant="body1" paragraph>
+            Этот сайт помощник по выявлению несанкционированных свалок. Этот проект разработан при поддержке сотрудников и учеников детского технопарка EMCO TECH.
+          </Typography>
+          <Typography variant="body1" paragraph>
+            Мы стремимся помочь обществу в борьбе с загрязнением окружающей среды, предоставляя удобные инструменты для маркировки и отчетности о несанкционированных свалках. С нашей помощью пользователи могут эффективно взаимодействовать с местными властями и экологическими организациями, чтобы быстро и эффективно устранять такие проблемы.
+          </Typography>
+          <Typography variant="body1" paragraph>
+            Наши цели включают повышение осведомленности об экологических проблемах и содействие в их решении. Мы верим, что совместными усилиями можем сделать наш мир чище и лучше для будущих поколений.
+          </Typography>
+          <Box className="images-placeholder" />
         </TabPanel>
         <TabPanel value={tabValue} index={1}>
           <Typography>
