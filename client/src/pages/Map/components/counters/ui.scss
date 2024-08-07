@@ -76,13 +76,16 @@
     flex-direction: column;
     align-items: center;
   }
+  .centered{
+    width: 85%;
+  }
 
   .wrapper {
     width: 100%;
     margin-bottom: 1rem;
 
     &.left {
-      width: 100%;
+      width: 97%;
       
       .overlapping-images {
         width: 80%;

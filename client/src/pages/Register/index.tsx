@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import AuthService from '../../services/authService';
 import '../Auth.css';
+import "./ui.scss"
 
 const Register: React.FC = () => {
   const [username, setUsername] = useState<string>('');

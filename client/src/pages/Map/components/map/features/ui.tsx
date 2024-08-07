@@ -9,6 +9,11 @@ import "./ui.scss";
 import customMarkerIcon from "../../../../../shared/icon/Vector red.png";
 import customMarkerIcon2 from "../../../../../shared/icon/Vector green.png";
 
+import mainImage from "../../../../../shared/images/background_marker.png";
+import subImage1 from "../../../../../shared/images/marker_red.png";
+import subImage2 from "../../../../../shared/images/marker_green.png";
+import lastImage from "../../../../../shared/images/marker_base.png";
+
 interface Marker {
   id: number;
   name: string;
@@ -195,7 +200,7 @@ const YandexMap: React.FC = () => {
             <input
               type="text"
               name="latitude"
-              placeholder="Широта(Заполняется автоматически)"
+              placeholder="Широта (Заполняется автоматически)"
               value={newMarker.latitude?.toString() || ""}
               onChange={handleInputChange}
               readOnly
@@ -203,7 +208,7 @@ const YandexMap: React.FC = () => {
             <input
               type="text"
               name="longitude"
-              placeholder="Долгота(Заполняется автоматически)"
+              placeholder="Долгота (Заполняется автоматически)"
               value={newMarker.longitude?.toString() || ""}
               onChange={handleInputChange}
               readOnly
@@ -212,6 +217,22 @@ const YandexMap: React.FC = () => {
           </form>
         </div>
       )}
+      <div className="image-gallery">
+        <div className="first-image-container">
+          <img src={mainImage} alt="Main Image" className="first-image" />
+          <div className="sub-images">
+            <div className="sub-image">
+              <img src={subImage1} alt="Sub Image 1" />
+              <span className="label">Неубранные свалки</span>
+            </div>
+            <div className="sub-image">
+              <img src={subImage2} alt="Sub Image 2" />
+              <span className="label">Убранные свалки</span>
+            </div>
+          </div>
+        </div>
+        <img src={lastImage} alt="Second Image" className="second-image" />
+      </div>
     </div>
   );
 };
