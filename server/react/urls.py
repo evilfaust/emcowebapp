@@ -65,7 +65,7 @@ urlpatterns = [
     
     path('api/truck-complaints/', TruckComplaintView.as_view(), name='truck-complaints'),
 
-    path('reviews/', ReviewListCreateView.as_view(), name='review-list-create'),
-    path('reviews/<int:pk>/', ReviewDetailView.as_view(), name='review-detail'),
+    path('api/reviews/', ReviewListCreateView.as_view(), name='review-list-create'),
+    path('api/reviews/<int:pk>/', ReviewDetailView.as_view(), name='review-detail'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

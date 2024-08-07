@@ -31,7 +31,7 @@ const YouTubeModeration: React.FC = () => {
 
     const fetchVideos = async () => {
         try {
-            const response = await axios.get<YouTubeVideo[]>(" /api/youtube/");
+            const response = await axios.get<YouTubeVideo[]>("http://localhost:8000/api/youtube/");
             sortVideos(response.data);
             setLoading(false);
         } catch (error) {
@@ -74,7 +74,7 @@ const YouTubeModeration: React.FC = () => {
     const handleDeleteVideo = async () => {
         if (videoToDelete !== null) {
             try {
-                await axios.delete(` /api/youtube/${videoToDelete}/`, {
+                await axios.delete(`http://localhost:8000/api/youtube//api/youtube/${videoToDelete}/`, {
                     headers: {
                         'X-CSRFToken': csrfToken,
                     }
@@ -95,7 +95,7 @@ const YouTubeModeration: React.FC = () => {
     const handleSaveVideo = async () => {
         if (editingVideo !== null) {
             try {
-                await axios.patch(` /api/youtube/${editingVideo.id}/`, editingVideo, {
+                await axios.patch(`http://localhost:8000/api/youtube/${editingVideo.id}/`, editingVideo, {
                     headers: {
                         'X-CSRFToken': csrfToken,
                     }
@@ -111,7 +111,7 @@ const YouTubeModeration: React.FC = () => {
     const handleAddVideo = async () => {
         if (addingVideo !== null) {
             try {
-                const response = await axios.post(' /api/youtube/', addingVideo, {
+                const response = await axios.post('jurikartiweb.ru/api/youtube/', addingVideo, {
                     headers: {
                         'X-CSRFToken': csrfToken,
                     }

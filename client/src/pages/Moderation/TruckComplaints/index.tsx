@@ -100,7 +100,7 @@ const TruckComplaintsModeration: React.FC = () => {
                                 <td>{complaint.date_time}</td>
                                 <td>
                                     {complaint.media ? (
-                                        <a href={`http://localhost:8000/media/${complaint.media}`} target="_blank" rel="noopener noreferrer">Ссылка на медиа</a>
+                                        <a href={`http://localhost:8000${complaint.media}`} target="_blank" rel="noopener noreferrer">Ссылка на медиа</a>
                                     ) : (
                                         <span style={{ color: '#ccc' }}>Нет медиа</span>
                                     )}

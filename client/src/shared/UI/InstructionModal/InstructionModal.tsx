@@ -1,9 +1,10 @@
-// src/shared/UI/InstructionModal.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Modal, Box, Typography, Tabs, Tab, IconButton, TextField, Button } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import PersonIcon from '@mui/icons-material/Person'; // Импортируем иконку пользователя
+import PersonIcon from '@mui/icons-material/Person';
 import './InstructionModal.scss';
+import { getCsrfToken } from '../../../services/csrf'; // Импортируем функцию для получения CSRF-токена
 
 interface InstructionModalProps {
   open: boolean;
@@ -11,16 +12,40 @@ interface InstructionModalProps {
 }
 
 interface Review {
+  id: number;
   text: string;
-  date: string;
-  userName: string;
+  phone: string;
+  recipient: string;
+  created_at: string;
+  approved: boolean;
+  user: string;
 }
 
 const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }) => {
   const [tabValue, setTabValue] = useState(0);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [reviewText, setReviewText] = useState('');
+  const [phone, setPhone] = useState('');
+  const [recipient, setRecipient] = useState('');
+  const [message, setMessage] = useState('');
   const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    fetchReviews();
+  }, []);
+
+  const fetchReviews = async () => {
+    try {
+      const response = await axios.get<Review[]>('http://localhost:8000/api/reviews/', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access')}`,
+        },
+      });
+      setReviews(response.data.filter(review => review.approved));
+    } catch (error) {
+      console.error('Error fetching reviews:', error);
+    }
+  };
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
@@ -30,19 +55,42 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
     setReviewText(event.target.value);
   };
 
+  const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPhone(event.target.value);
+  };
+
+  const handleRecipientChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRecipient(event.target.value);
+  };
+
   const handleUserNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserName(event.target.value);
   };
 
-  const handleReviewSubmit = () => {
-    const newReview = {
-      text: reviewText,
-      date: new Date().toLocaleString(),
-      userName: userName || 'Аноним' // Используем "Аноним", если имя пользователя не указано
-    };
-    setReviews([...reviews, newReview]);
-    setReviewText('');
-    setUserName('');
+  const handleReviewSubmit = async () => {
+    try {
+      const csrfToken = getCsrfToken();
+      await axios.post('http://localhost:8000/api/reviews/', {
+        text: reviewText,
+        phone,
+        recipient,
+        user: userName,
+      }, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access')}`,
+          'X-CSRFToken': csrfToken, // Добавляем CSRF-токен в заголовок
+        },
+        withCredentials: true,
+      });
+      setMessage('Ваш отзыв на модерации');
+      setReviewText('');
+      setPhone('');
+      setRecipient('');
+      setUserName('');
+      fetchReviews(); // Перезагружаем список отзывов после добавления нового
+    } catch (error) {
+      console.error('Error submitting review:', error);
+    }
   };
 
   return (
@@ -86,6 +134,22 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
               sx={{ mb: 2 }}
             />
             <TextField
+              label="Ваш телефон"
+              value={phone}
+              onChange={handlePhoneChange}
+              variant="outlined"
+              fullWidth
+              sx={{ mb: 2 }}
+            />
+            <TextField
+              label="Адресат"
+              value={recipient}
+              onChange={handleRecipientChange}
+              variant="outlined"
+              fullWidth
+              sx={{ mb: 2 }}
+            />
+            <TextField
               label="Ваш отзыв"
               multiline
               rows={4}
@@ -104,17 +168,18 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
               Оставить отзыв
             </Button>
           </div>
+          {message && <Typography sx={{ mt: 2, color: 'green', fontWeight: 'bold' }}>{message}</Typography>}
           <div className="review-list">
             {reviews.map((review, index) => (
               <div key={index} className="review-item">
                 <div className="review-header">
                   <PersonIcon className="review-icon" />
                   <Typography variant="body2" className="review-username">
-                    {review.userName}
+                    {review.user}
                   </Typography>
                 </div>
                 <Typography variant="body1">{review.text}</Typography>
-                <Typography variant="caption" color="textSecondary">{review.date}</Typography>
+                <Typography variant="caption" color="textSecondary">{new Date(review.created_at).toLocaleString()}</Typography>
               </div>
             ))}
           </div>
