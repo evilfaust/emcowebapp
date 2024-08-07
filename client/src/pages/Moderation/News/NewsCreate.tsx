@@ -105,7 +105,7 @@ const NewsCreate: React.FC = () => {
     });
 
     try {
-      const response = await axios.post('https://jurikartiweb.ru/api/news/', formData, {
+      const response = await axios.post('http://localhost:8000/api/news/', formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access')}`,
           'Content-Type': 'multipart/form-data',

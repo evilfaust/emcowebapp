@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://jurikartiweb.ru/api/';
+const API_URL = 'http://localhost:8000/api/';
 
 interface User {
   username: string;

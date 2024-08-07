@@ -38,7 +38,7 @@ const TruckComplaints: React.FC = () => {
                 headers['Authorization'] = `Bearer ${accessToken}`;
             }
 
-            const response = await axios.post('https://jurikartiweb.ru/api/truck-complaints/', formData, {
+            const response = await axios.post('http://localhost:8000/api/truck-complaints/', formData, {
                 headers: headers,
             });
 
@@ -60,9 +60,9 @@ const TruckComplaints: React.FC = () => {
 
     return (
         <div className="complaint-container">
-            <h1>Жалобы на водителей грузовика</h1>
+            <h1>Вежливый грузовик</h1>
             <p>
-                Если Вы стали свидетелем хамства на дорогах со стороны грузовиков в Углегорском районе, нарушения ими ПДД: парковка во дворах, парковка на газонах, проезд по улицам населенных пунктов и других случаев неподобающего поведения водителей – то вы попали по адресу!
+                Если Вы стали свидетелем хамства на дорогах со стороны грузовиков в Углегорском районе, нарушения ими ПДД: парковка во дворах, парковка на газонах, проезд под запрещающий знак и других случаев неподобающего поведения водителей – то вы попали по адресу!
             </p>
             <p>
                 Опишите здесь нарушение:

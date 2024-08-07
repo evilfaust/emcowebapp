@@ -20,7 +20,7 @@ const ReviewsManagement: React.FC = () => {
     useEffect(() => {
         const fetchReviews = async () => {
             try {
-                const response = await axios.get('https://jurikartiweb.ru/reviews/', {
+                const response = await axios.get('http://localhost:8000/reviews/', {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('access')}`
                     }
@@ -46,7 +46,7 @@ const ReviewsManagement: React.FC = () => {
 
     const handleApprove = async (id: number) => {
         try {
-            await axios.patch(`https://jurikartiweb.ru/reviews/${id}/`, { approved: true }, {
+            await axios.patch(`http://localhost:8000/reviews/${id}/`, { approved: true }, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('access')}`
                 }
@@ -60,7 +60,7 @@ const ReviewsManagement: React.FC = () => {
 
     const handleDisapprove = async (id: number) => {
         try {
-            await axios.patch(`https://jurikartiweb.ru/reviews/${id}/`, { approved: false }, {
+            await axios.patch(`http://localhost:8000/reviews/${id}/`, { approved: false }, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('access')}`
                 }
@@ -74,7 +74,7 @@ const ReviewsManagement: React.FC = () => {
 
     const handleDelete = async (id: number) => {
         try {
-            await axios.delete(`https://jurikartiweb.ru/reviews/${id}/`, {
+            await axios.delete(`http://localhost:8000/reviews/${id}/`, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('access')}`
                 }

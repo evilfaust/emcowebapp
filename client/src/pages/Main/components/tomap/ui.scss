@@ -3,7 +3,10 @@
 
   .text-block2 {
     max-width: 50%;
-    margin-top: 2.25rem;
+    margin-top: 0.2rem;
+    word-break: break-word; 
+    max-width: 40%;
+    white-space: pre-wrap; 
   }
 
   .text-block1 {
@@ -14,9 +17,11 @@
     display: block;
     max-width: 100%;
     width: 49%;
+    margin-top: -3.7rem;
 
     .wrapper-link {
       text-decoration: none; /* Убираем подчеркивание текста */
+      
     }
 
     .wrapper-txt {

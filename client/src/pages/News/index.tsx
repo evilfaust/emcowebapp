@@ -17,7 +17,7 @@ function News() {
   const [news, setNews] = useState<News[]>([]);
 
   useEffect(() => {
-    axios.get('https://jurikartiweb.ru/api/news/')
+    axios.get('http://localhost:8000/api/news/')
       .then(response => {
         console.log('Ответ от API:', response.data);
         const formattedNews = response.data.map((item: any) => ({
@@ -33,7 +33,7 @@ function News() {
             item.images6,
           ].reduce((acc: string[], val: string | undefined) => {
             if (val) {
-              acc.push(`https://jurikartiweb.ru${val}`); // Добавление правильного URL URL
+              acc.push(`http://localhost:8000${val}`); // Добавление правильного URL URL
             }
             return acc;
           }, []),
