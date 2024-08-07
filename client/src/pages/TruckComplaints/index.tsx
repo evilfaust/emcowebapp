@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './index.scss';
 import { getCsrfToken } from '../../services/csrf'; // Импортируем функцию для получения CSRF-токена
-import AuthService from '../../services/authService';
 
 const TruckComplaints: React.FC = () => {
     const [truckNumber, setTruckNumber] = useState('');
     const [dateTime, setDateTime] = useState('');
     const [media, setMedia] = useState<File | null>(null);
+    const [complaintText, setComplaintText] = useState('');
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -21,6 +21,7 @@ const TruckComplaints: React.FC = () => {
         const formData = new FormData();
         formData.append('truck_number', truckNumber);
         formData.append('date_time', dateTime);
+        formData.append('complaint_text', complaintText);
         if (media) {
             formData.append('media', media);
         }
@@ -55,6 +56,7 @@ const TruckComplaints: React.FC = () => {
         setIsSubmitted(false);
         setTruckNumber('');
         setDateTime('');
+        setComplaintText('');
         setMedia(null);
     };
 
@@ -92,6 +94,15 @@ const TruckComplaints: React.FC = () => {
                         type="datetime-local" 
                         value={dateTime} 
                         onChange={(e) => setDateTime(e.target.value)} 
+                        required 
+                        disabled={isSubmitted}
+                    />
+                </label>
+                <label>
+                    Текст жалобы:
+                    <textarea 
+                        value={complaintText} 
+                        onChange={(e) => setComplaintText(e.target.value)} 
                         required 
                         disabled={isSubmitted}
                     />

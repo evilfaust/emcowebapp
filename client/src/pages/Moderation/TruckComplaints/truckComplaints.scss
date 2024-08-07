@@ -1,0 +1,118 @@
+.complaints-container {
+    padding: 20px;
+
+    .search-input {
+        padding: 10px;
+        margin-bottom: 20px;
+        width: 100%;
+        max-width: 400px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        outline: none;
+        transition: border-color 0.3s;
+
+        &:focus {
+            border-color: #007bff;
+        }
+    }
+
+    .complaints-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            cursor: pointer;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        .delete-button {
+            padding: 12px 24px; /* Увеличиваем отступы для увеличения ширины кнопок */
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 20px; /* Максимально закругленные края */
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto; /* Центрируем кнопки */
+        }
+
+        .delete-button:hover {
+            background-color: #cc0000;
+        }
+    }
+
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+
+            button {
+                padding: 8px 16px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                margin: 0 10px;
+                transition: background-color 0.3s;
+            }
+
+            .confirm {
+                background-color: #f44336;
+                color: white;
+            }
+
+            .confirm:hover {
+                background-color: #cc0000;
+            }
+
+            .cancel {
+                background-color: #aaa;
+                color: white;
+            }
+
+            .cancel:hover {
+                background-color: #888;
+            }
+        }
+    }
+}

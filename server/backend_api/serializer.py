@@ -33,7 +33,7 @@ class LoginSerializer(serializers.Serializer):
             if not user:
                 raise ValidationError("Неправильный Логин или Пароль")
         else:
-            raise ValidationError("Must include 'username' and 'password'.")
+            raise ValidationError("Необходимо ввести Логин и Пароль'.")
 
         refresh = RefreshToken.for_user(user)
         data['user'] = user
@@ -70,6 +70,7 @@ class NotificationSerializer(serializers.ModelSerializer):
         
         
 class TruckComplaintSerializer(serializers.ModelSerializer):
+    user_email = serializers.EmailField(source='user.email', read_only=True)
     class Meta:
         model = TruckComplaint
         fields = '__all__'

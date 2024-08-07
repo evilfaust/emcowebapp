@@ -59,11 +59,11 @@ class TruckComplaint(models.Model):
     truck_number = models.CharField(max_length=20)
     date_time = models.DateTimeField()
     media = models.FileField(upload_to='complaints_media/')
+    complaint_text = models.TextField(default='No complaint text provided')  # Добавляем значение по умолчанию
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return f'Complaint on {self.truck_number} by {self.user.username if self.user else "Anonymous"}'
-
 
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

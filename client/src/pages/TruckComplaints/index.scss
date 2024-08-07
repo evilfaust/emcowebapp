@@ -1,7 +1,7 @@
 .complaint-container {
     padding: 20px;
     max-width: 600px;
-    margin: 50px auto;  // Добавили отступы сверху и снизу
+    margin: 50px auto;  /* Добавили отступы сверху и снизу */
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -27,12 +27,18 @@
 
     input[type="text"],
     input[type="datetime-local"],
-    input[type="file"] {
+    input[type="file"],
+    textarea {
         width: 100%;
         padding: 10px;
         margin-top: 5px;
         border: 1px solid #ddd;
         border-radius: 5px;
+        resize: vertical; /* Позволяет изменять размер текстового поля по вертикали */
+    }
+
+    textarea {
+        min-height: 100px; /* Минимальная высота для текстового поля */
     }
 
     button {
@@ -49,10 +55,10 @@
         }
     }
 
-    p {
+    .error-message {
         margin-top: 20px;
         text-align: center;
-        color: green;
+        color: red;
         font-weight: bold;
     }
 }
