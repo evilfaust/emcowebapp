@@ -9,11 +9,6 @@ import "./ui.scss";
 import customMarkerIcon from "../../../../../shared/icon/Vector red.png";
 import customMarkerIcon2 from "../../../../../shared/icon/Vector green.png";
 
-import mainImage from "../../../../../shared/images/background_marker.png";
-import subImage1 from "../../../../../shared/images/marker_red.png";
-import subImage2 from "../../../../../shared/images/marker_green.png";
-import lastImage from "../../../../../shared/images/marker_base.png";
-
 interface Marker {
   id: number;
   name: string;
@@ -137,8 +132,8 @@ const YandexMap: React.FC = () => {
                   ${marker.is_active ? `<p style="color: green;"><strong>Убрана</strong></p>` : ""}
                   <p>Название: ${marker.name}</p>
                   <p>Описание: ${marker.description}</p>
-                  Фото:${marker.photo ? `<img src="http://localhost:8000/media/${marker.photo}" alt="Фото" style="max-width: 100%;" />` : "Нет фото"}
-                  После:${marker.aftephoto ? `<img src="http://localhost:8000/media/${marker.aftephoto}" alt="Фото" style="max-width: 100%;" />` : "Нет фото после"}
+                  Фото: ${marker.photo ? `<img src="http://localhost:8000/media/${marker.photo}" alt="Фото" style="max-width: 100%;" />` : "Нет фото"}
+                  После: ${marker.aftephoto ? `<img src="http://localhost:8000/media/${marker.aftephoto}" alt="Фото" style="max-width: 100%;" />` : "Нет фото после"}
                   <p>Номер: ${marker.id}</p>
                 `,
               }}
@@ -219,19 +214,21 @@ const YandexMap: React.FC = () => {
       )}
       <div className="image-gallery">
         <div className="first-image-container">
-          <img src={mainImage} alt="Main Image" className="first-image" />
+          <div className="first-image"></div>
           <div className="sub-images">
             <div className="sub-image">
-              <img src={subImage1} alt="Sub Image 1" />
+              <div className="sub-image-box red"></div>
               <span className="label">Неубранные свалки</span>
             </div>
             <div className="sub-image">
-              <img src={subImage2} alt="Sub Image 2" />
+              <div className="sub-image-box green"></div>
               <span className="label">Убранные свалки</span>
             </div>
           </div>
         </div>
-        <img src={lastImage} alt="Second Image" className="second-image" />
+        <div className="second-image">
+          <span className="second-image-text">Добавить точку на карту</span>
+        </div>
       </div>
     </div>
   );

@@ -98,7 +98,7 @@
 .image-gallery {
   display: flex;
   flex-wrap: wrap;
-  gap: 10rem;
+  gap: 20rem;
   margin-top: 2rem;
   justify-content: center;
 }
@@ -110,18 +110,44 @@
   align-items: center;
 }
 
-.first-image {
-  width: 600px;
-  height: 90px;
-  border-radius: 10px;
-  margin-bottom: 1rem;
-  margin-top: 1.9rem;
+.first-image,
+.second-image {
+  width: 550px;
+  height: 80px;
+  background-color: #fff;
   position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.first-image::before,
+.second-image::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.first-image::before {
+  top: 0;
+  left: 0;
+  border-width: 0 40px 40px 0;
+  border-color: transparent #fff transparent transparent;
+  border-radius: 0 60px 60px 0;
+}
+
+.second-image::before {
+  bottom: 0;
+  right: 0;
+  border-width: 40px 0 0 40px;
+  border-color: transparent transparent transparent #fff;
+  border-radius: 60px 0 0 60px;
 }
 
 .sub-images {
   position: absolute;
-  top: 10px;
+  top: -20px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -135,9 +161,25 @@
   align-items: center;
 }
 
+.sub-image-box {
+  width: 40px;
+  height: 48px;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+}
+
+.sub-image-box.red {
+  background-image: url("../../../../../shared/icon/Vector red.png");
+}
+
+.sub-image-box.green {
+  background-image: url("../../../../../shared/icon/Vector green.png");
+}
+
 .sub-image img {
-  width: 70px;
-  height: 45px;
+  width: 80px;
+  height: 60px;
   margin-bottom: 0.5rem;
 }
 
@@ -148,56 +190,52 @@
   white-space: nowrap;
 }
 
-.second-image {
-  width: 620px;
-  height: 120px;
-  border-radius: 10px;
+.second-image-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 2rem;
+  color: #000;
+  text-align: center;
+  font-family: 'Neue Machina', sans-serif;
+  font-weight: bold;
 }
 
 @media (max-width: 768px) {
   .image-gallery {
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
   }
 
   .first-image-container {
     order: 1;
-    width: 95%;
+    width: 100%;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
   }
 
   .first-image,
   .second-image {
-    width: 90%;
+    width: 100%;
     height: auto;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .first-image {
-    width: 93%;
-    margin-right: -1px;
-  }
-
-  .sub-images {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    margin-top: 11px;
-    gap: 0.5rem;
-  }
-
-  .sub-image {
-    margin: 0 5px;
-  }
-
-  .sub-image img {
-    width: 40px;
-    height: auto;
+    margin-top: 4rem;
+    display: block;
+    background-color: #fff;
   }
 
   .second-image {
-    position: relative;
-    height: 68px;
     order: 2;
+    margin-top: 4rem;
+  }
+
+  .sub-images {
+    top: 0;
+    gap: 1rem;
+  }
+
+  .sub-image img {
+    width: 100%;
   }
 }
