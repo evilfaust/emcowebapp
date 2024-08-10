@@ -3,8 +3,12 @@ import axios from 'axios';
 import { Modal, Box, Typography, Tabs, Tab, IconButton, TextField, Button } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import PersonIcon from '@mui/icons-material/Person';
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
+import StarIcon from '@mui/icons-material/Star';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 import './InstructionModal.scss';
-import { getCsrfToken } from '../../../services/csrf'; // Импортируем функцию для получения CSRF-токена
+import { getCsrfToken } from '../../../services/csrf';
 
 interface InstructionModalProps {
   open: boolean;
@@ -19,6 +23,9 @@ interface Review {
   created_at: string;
   approved: boolean;
   user: string;
+  rating: number;
+  likes: number;
+  dislikes: number;
 }
 
 const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }) => {
@@ -29,6 +36,7 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
   const [recipient, setRecipient] = useState('');
   const [message, setMessage] = useState('');
   const [userName, setUserName] = useState('');
+  const [rating, setRating] = useState(0);
 
   useEffect(() => {
     fetchReviews();
@@ -67,6 +75,10 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
     setUserName(event.target.value);
   };
 
+  const handleRatingChange = (index: number) => {
+    setRating(index);
+  };
+
   const handleReviewSubmit = async () => {
     try {
       const csrfToken = getCsrfToken();
@@ -75,10 +87,11 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
         phone,
         recipient,
         user: userName,
+        rating,
       }, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access')}`,
-          'X-CSRFToken': csrfToken, // Добавляем CSRF-токен в заголовок
+          'X-CSRFToken': csrfToken,
         },
         withCredentials: true,
       });
@@ -87,10 +100,19 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
       setPhone('');
       setRecipient('');
       setUserName('');
-      fetchReviews(); // Перезагружаем список отзывов после добавления нового
+      setRating(0);
+      fetchReviews();
     } catch (error) {
       console.error('Error submitting review:', error);
     }
+  };
+
+  const handleLike = async (reviewId: number) => {
+    // Add logic to handle liking a review
+  };
+
+  const handleDislike = async (reviewId: number) => {
+    // Add logic to handle disliking a review
   };
 
   return (
@@ -108,6 +130,7 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
         </Tabs>
         <TabPanel value={tabValue} index={0}>
           <Typography variant="h6" gutterBottom>
+            О нашем проекте
           </Typography>
           <Typography variant="body1" paragraph>
             Этот сайт помощник по выявлению несанкционированных свалок. Этот проект разработан при поддержке сотрудников и учеников детского технопарка EMCO TECH.
@@ -121,9 +144,7 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
           <Box className="images-placeholder" />
         </TabPanel>
         <TabPanel value={tabValue} index={1}>
-          <Typography>
-            Здесь вы можете прочитать отзывы и оставить свой отзыв.
-          </Typography>
+          <Typography>Здесь вы можете прочитать отзывы и оставить свой отзыв.</Typography>
           <div className="review-form">
             <TextField
               label="Ваше имя"
@@ -158,6 +179,19 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
               variant="outlined"
               fullWidth
             />
+
+            <div className="rating-stars">
+              {[...Array(5)].map((_, index) => (
+                <IconButton key={index} onClick={() => handleRatingChange(index + 1)}>
+                  {index < rating ? (
+                    <StarIcon className="star-filled" />
+                  ) : (
+                    <StarBorderIcon className="star-empty" />
+                  )}
+                </IconButton>
+              ))}
+            </div>
+
             <Button
               onClick={handleReviewSubmit}
               variant="contained"
@@ -179,6 +213,24 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
                   </Typography>
                 </div>
                 <Typography variant="body1">{review.text}</Typography>
+                <div className="review-rating">
+                  {[...Array(5)].map((_, index) => (
+                    <StarIcon
+                      key={index}
+                      className={index < review.rating ? 'star-filled' : 'star-empty'}
+                    />
+                  ))}
+                </div>
+                <div className="review-feedback">
+                  <IconButton onClick={() => handleLike(review.id)}>
+                    <ThumbUpAltIcon />
+                  </IconButton>
+                  <Typography variant="caption">{review.likes}</Typography>
+                  <IconButton onClick={() => handleDislike(review.id)}>
+                    <ThumbDownAltIcon />
+                  </IconButton>
+                  <Typography variant="caption">{review.dislikes}</Typography>
+                </div>
                 <Typography variant="caption" color="textSecondary">{new Date(review.created_at).toLocaleString()}</Typography>
               </div>
             ))}
