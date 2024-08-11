@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User  # Импортируем модель User
-
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.core.mail import EmailMessage
+from django.conf import settings  # Импортируем настройки Django
 
 
 class YouTubeVideo(models.Model):
@@ -64,6 +67,30 @@ class TruckComplaint(models.Model):
 
     def __str__(self):
         return f'Complaint on {self.truck_number} by {self.user.username if self.user else "Anonymous"}'
+    
+    
+    
+@receiver(post_save, sender=TruckComplaint)
+def send_truck_complaint_notification(sender, instance, **kwargs):
+    message = (
+        f"Новая жалоба была добавлена пользователем.\n\n"
+        f"Номер грузовика: {instance.truck_number}\n"
+        f"Дата и время: {instance.date_time}\n"
+        f"Текст жалобы: {instance.complaint_text}\n"
+        f"Пользователь: {instance.user.email if instance.user else 'Аноним'}\n"
+    )
+
+    email = EmailMessage(
+        'Новая жалоба на грузовик',
+        message,
+        settings.EMAIL_HOST_USER,  # Используем EMAIL_HOST_USER из настроек
+        ['svalkamboi@yandex.com'],
+    )
+    
+    if instance.media:
+        email.attach_file(instance.media.path)  # Вложение файла
+    
+    email.send(fail_silently=False)
 
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
