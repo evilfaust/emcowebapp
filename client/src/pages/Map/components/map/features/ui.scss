@@ -233,7 +233,7 @@
 @media (max-width: 1438px) {
   .image-gallery {
     flex-direction: column;
-    gap: 2rem;
+    gap: 0.5rem;
     width: 100%; 
     padding: 0 1rem; 
     box-sizing: border-box; 
@@ -245,10 +245,11 @@
     display: flex;
     justify-content: center;
     background-color: #ffffff;
-    border-radius: 40px 0px 40px;
     position: relative;
     margin: 1rem auto 0 auto;
     box-sizing: border-box; 
+    border-radius: 40px 40px 40px 40px;
+
   }
 
   .first-image,
@@ -260,14 +261,37 @@
     display: block;
     background-color: #fff;
     position: relative;
-    border-radius: 30px 30px 30px 30px;
     padding: 1rem;
     box-sizing: border-box; 
+    
+  }
+  .first-image {
+    width: 100%; /* Ограничиваем ширину */
+    max-width: 100%; /* Предотвращаем превышение ширины экрана */
+    height: 70px; /* Устанавливаем одинаковую высоту */
+    margin: 0 auto;
+    display: block;
+    background-color: #fff;
+    position: relative;
+    padding: 1rem;
+    box-sizing: border-box; /* Учитываем padding в ширину элемента */
+    border-radius: 20px 20px 0 0; /* Делаем верхние углы круглыми */
+  }
+  .second-image {
+    width: 100%; /* Ограничиваем ширину */
+    max-width: 100%; /* Предотвращаем превышение ширины экрана */
+    height: 70px; /* Устанавливаем одинаковую высоту */
+    margin: 0 auto;
+    display: block;
+    background-color: #fff;
+    position: relative;
+    padding: 1rem;
+    box-sizing: border-box; /* Учитываем padding в ширину элемента */
+    border-radius: 0 0 20px 20px; /* Делаем нижние углы круглыми */
   }
 
   .second-image {
     order: 2;
-    border-radius: 40px 0px 40px;
   }
 
   .sub-images {
