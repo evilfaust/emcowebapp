@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Map, YMaps, Placemark, ZoomControl } from "@pbe/react-yandex-maps";
 import { useSearchParams } from "react-router-dom";
-import { FiMapPin } from "react-icons/fi";
-import { Button } from "shared/UI";
 import "./ui.scss";
 
 import customMarkerIcon from "../../../../../shared/icon/Vector red.png";
@@ -160,58 +158,6 @@ const YandexMap: React.FC = () => {
           <ZoomControl options={{ position: { top: 10, right: 10 } }} />
         </Map>
       </YMaps>
-      <div className="buttons">
-        <Button onClick={handleAddMarkerClick}>
-          <FiMapPin /> {buttonText}
-        </Button>
-      </div>
-      {addingMarker && (
-        <div className="form-container">
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="name">Название</label>
-            <input
-              type="text"
-              name="name"
-              value={newMarker.name || ""}
-              onChange={handleInputChange}
-              required
-            />
-            <label htmlFor="description">Описание</label>
-            <textarea
-              name="description"
-              value={newMarker.description || ""}
-              onChange={handleInputChange}
-              maxLength={300}
-              required
-              style={{ height: "100px", resize: "none" }}
-            />
-            <input
-              type="file"
-              name="photo"
-              onChange={handleFileChange}
-              required
-            />
-            <label htmlFor="latitude">Координаты</label>
-            <input
-              type="text"
-              name="latitude"
-              placeholder="Широта (Заполняется автоматически)"
-              value={newMarker.latitude?.toString() || ""}
-              onChange={handleInputChange}
-              readOnly
-            />
-            <input
-              type="text"
-              name="longitude"
-              placeholder="Долгота (Заполняется автоматически)"
-              value={newMarker.longitude?.toString() || ""}
-              onChange={handleInputChange}
-              readOnly
-            />
-            <button type="submit">Создать метку</button>
-          </form>
-        </div>
-      )}
       <div className="image-gallery">
         <div className="first-image-container">
           <div className="first-image"></div>
@@ -226,9 +172,58 @@ const YandexMap: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="second-image">
-          <span className="second-image-text">Добавить точку на карту</span>
+        <div
+          className="second-image"
+          onClick={handleAddMarkerClick}
+          style={{ cursor: "pointer" }}
+        >
+          <span className="second-image-text">{buttonText}</span>
         </div>
+      </div>
+      <div className={`form-container ${addingMarker ? "show" : ""}`}>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="name">Название</label>
+          <input
+            type="text"
+            name="name"
+            value={newMarker.name || ""}
+            onChange={handleInputChange}
+            required
+          />
+          <label htmlFor="description">Описание</label>
+          <textarea
+            name="description"
+            value={newMarker.description || ""}
+            onChange={handleInputChange}
+            maxLength={300}
+            required
+            style={{ height: "100px", resize: "none" }}
+          />
+          <input
+            type="file"
+            name="photo"
+            onChange={handleFileChange}
+            required
+          />
+          <label htmlFor="latitude">Координаты</label>
+          <input
+            type="text"
+            name="latitude"
+            placeholder="Широта (Заполняется автоматически)"
+            value={newMarker.latitude?.toString() || ""}
+            onChange={handleInputChange}
+            readOnly
+          />
+          <input
+            type="text"
+            name="longitude"
+            placeholder="Долгота (Заполняется автоматически)"
+            value={newMarker.longitude?.toString() || ""}
+            onChange={handleInputChange}
+            readOnly
+          />
+          <button type="submit">Создать метку</button>
+        </form>
       </div>
     </div>
   );

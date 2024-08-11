@@ -15,6 +15,25 @@
   background-color: #ffffff;
   margin-top: 2rem;
   border-radius: 20px;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+  opacity: 0;
+  padding: 0 1rem; /* Скрываем padding, когда форма закрыта */
+  
+}
+
+.form-container.show {
+  opacity: 1;
+  transform: translateY(0);
+
+  max-height: 500px; /* Увеличьте это значение в зависимости от размера формы */
+  opacity: 1;
+  padding: 1rem; /* Восстанавливаем padding, когда форма открыта */
 }
 
 .form-container form {
@@ -108,6 +127,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 }
 
 .first-image,
@@ -117,7 +137,7 @@
   background-color: #fff;
   position: relative;
   overflow: hidden;
-  border-radius: 20px 0px 40px;
+  border-radius: 40px 0px 40px;
 }
 
 .first-image::before,
@@ -195,14 +215,14 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #000;
   text-align: center;
   font-family: 'Neue Machina', sans-serif;
-  font-weight: bold;
+  font-weight: 900;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1438px) {
   .image-gallery {
     flex-direction: column;
     gap: 2rem;
@@ -210,23 +230,24 @@
 
   .first-image-container {
     order: 1;
-    width: 90%;
+    max-width: 70%;
     display: flex;
     justify-content: center;
     background-color: #ffffff;
-    border-radius: 20px 0px 30px;
+    border-radius: 40px 40px 0px 0px;
     position: relative;
-     margin: 1rem auto 0 auto; // димас здесь ты можешь уменьшить отступ сверху поменяв первое значение
+    margin: 1rem auto 0 auto;
   }
 
   .first-image,
   .second-image {
-    width: 90%;
-    height: 70px; /* Устанавливаем одинаковую высоту для обоих изображений */
-    margin: 0 auto; /* Убираем лишние отступы для выравнивания */
+    max-width: 70%;
+    height: 70px;
+    margin: 0 auto;
     display: block;
     background-color: #fff;
     position: relative;
+    border-radius: 30px 30px 30px 30px;
     padding: 1rem;
   }
 
@@ -246,8 +267,8 @@
 
   .second-image-text {
     position: relative;
-    font-size: 1.8rem;
+    font-size: 1.3rem;
+    font-weight: 900;
     z-index: 3;
   }
 }
-
