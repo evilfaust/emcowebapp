@@ -71,6 +71,15 @@ CSRF_COOKIE_NAME = "csrftoken"
 CSRF_HEADER_NAME = "HTTP_X_CSRFTOKEN"
 
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.yandex.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'svalkamboi@yandex.com'  # Замените на ваш адрес электронной почты Яндекс
+EMAIL_HOST_PASSWORD = 'tivhrihluvmkgnha'  # Вставьте здесь пароль приложения
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # Ваш адрес электронной почты Яндекс
+
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny'
