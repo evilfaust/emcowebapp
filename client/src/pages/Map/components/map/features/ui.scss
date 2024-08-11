@@ -222,6 +222,14 @@
   font-weight: 900;
 }
 
+.red-text {
+  color: red;
+}
+
+.green-text {
+  color: green;
+}
+
 @media (max-width: 1438px) {
   .image-gallery {
     flex-direction: column;
@@ -271,4 +279,5 @@
     font-weight: 900;
     z-index: 3;
   }
+  
 }

@@ -24,6 +24,7 @@ const YandexMap: React.FC = () => {
   const [tempCoordinates, setTempCoordinates] = useState<[number, number] | null>(null);
   const [addingMarker, setAddingMarker] = useState(false);
   const [buttonText, setButtonText] = useState("ДОБАВИТЬ ТОЧКУ НА КАРТУ");
+  const [filter, setFilter] = useState<string | null>(null); // Состояние для фильтрации
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
@@ -104,6 +105,23 @@ const YandexMap: React.FC = () => {
     }
   };
 
+  const handleFilterClick = (filterType: string | null) => {
+    if (filter === filterType) {
+      setFilter(null); // Убираем фильтр, если тот же фильтр выбран снова
+    } else {
+      setFilter(filterType);
+    }
+  };
+
+  const filteredMarkers = markers.filter((marker) => {
+    if (filter === "active") {
+      return !marker.is_active;
+    } else if (filter === "inactive") {
+      return marker.is_active;
+    }
+    return true;
+  });
+
   const mapCenter = [
     parseFloat(searchParams.get('latitude') || '49.15794957'),
     parseFloat(searchParams.get('longitude') || '142.1032654')
@@ -120,7 +138,7 @@ const YandexMap: React.FC = () => {
           onClick={handleMapClick}
           modules={["geoObject.addon.balloon"]}
         >
-          {markers.map((marker) => (
+          {filteredMarkers.map((marker) => (
             <Placemark
               key={marker.id}
               geometry={[marker.latitude, marker.longitude]}
@@ -162,13 +180,19 @@ const YandexMap: React.FC = () => {
         <div className="first-image-container">
           <div className="first-image"></div>
           <div className="sub-images">
-            <div className="sub-image">
-              <div className="sub-image-box red"></div>
-              <span className="label">Неубранные свалки</span>
+            <div
+              className={`sub-image ${filter === "active" ? "selected red" : ""}`}
+              onClick={() => handleFilterClick("active")}
+            >
+              <div className={`sub-image-box red ${filter === "active" ? "selected" : ""}`}></div>
+              <span className={`label ${filter === "active" ? "red-text" : ""}`}>Неубранные свалки</span>
             </div>
-            <div className="sub-image">
-              <div className="sub-image-box green"></div>
-              <span className="label">Убранные свалки</span>
+            <div
+              className={`sub-image ${filter === "inactive" ? "selected green" : ""}`}
+              onClick={() => handleFilterClick("inactive")}
+            >
+              <div className={`sub-image-box green ${filter === "inactive" ? "selected" : ""}`}></div>
+              <span className={`label ${filter === "inactive" ? "green-text" : ""}`}>Убранные свалки</span>
             </div>
           </div>
         </div>
