@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Modal, Box, Typography, Tabs, Tab, IconButton, TextField, Button } from '@mui/material';
+import { Modal, Box, Typography, Tabs, Tab, IconButton, TextField, Button, Select, MenuItem, FormControl, InputLabel, SelectChangeEvent } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import PersonIcon from '@mui/icons-material/Person';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
@@ -28,6 +28,12 @@ interface Review {
   dislikes: number;
 }
 
+const categories = [
+  'Отзывы для людей',
+  'Отзывы о работниках EMCO',
+  'Отзывы о волонтерах',
+];
+
 const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }) => {
   const [tabValue, setTabValue] = useState(0);
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -37,6 +43,7 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
   const [message, setMessage] = useState('');
   const [userName, setUserName] = useState('');
   const [rating, setRating] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
 
   useEffect(() => {
     fetchReviews();
@@ -67,7 +74,7 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
     setPhone(event.target.value);
   };
 
-  const handleRecipientChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleRecipientChange = (event: SelectChangeEvent<string>) => {
     setRecipient(event.target.value);
   };
 
@@ -79,6 +86,10 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
     setRating(index);
   };
 
+  const handleCategoryChange = (event: SelectChangeEvent<string>) => {
+    setSelectedCategory(event.target.value);
+  };
+
   const handleReviewSubmit = async () => {
     try {
       const csrfToken = getCsrfToken();
@@ -88,6 +99,7 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
         recipient,
         user: userName,
         rating,
+        category: selectedCategory,
       }, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access')}`,
@@ -101,6 +113,7 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
       setRecipient('');
       setUserName('');
       setRating(0);
+      setSelectedCategory('');
       fetchReviews();
     } catch (error) {
       console.error('Error submitting review:', error);
@@ -115,13 +128,14 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
     // Add logic to handle disliking a review
   };
 
+  const filteredReviews = selectedCategory
+    ? reviews.filter(review => review.recipient === selectedCategory)
+    : reviews;
+
   return (
     <Modal open={open} onClose={handleClose}>
       <Box className="instruction-modal">
-        <IconButton
-          onClick={handleClose}
-          className="close-button"
-        >
+        <IconButton onClick={handleClose} className="close-button">
           <CloseIcon />
         </IconButton>
         <Tabs value={tabValue} onChange={handleTabChange} className="tabs">
@@ -146,6 +160,22 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
         <TabPanel value={tabValue} index={1}>
           <Typography>Здесь вы можете прочитать отзывы и оставить свой отзыв.</Typography>
           <div className="review-form">
+            <FormControl fullWidth sx={{ mb: 2 }}>
+              <InputLabel id="recipient-label">Адресат</InputLabel>
+              <Select
+                labelId="recipient-label"
+                value={recipient}
+                onChange={handleRecipientChange}
+                label="Адресат"
+              >
+                {categories.map((category, index) => (
+                  <MenuItem key={index} value={category}>
+                    {category}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
             <TextField
               label="Ваше имя"
               value={userName}
@@ -163,14 +193,6 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
               sx={{ mb: 2 }}
             />
             <TextField
-              label="Адресат"
-              value={recipient}
-              onChange={handleRecipientChange}
-              variant="outlined"
-              fullWidth
-              sx={{ mb: 2 }}
-            />
-            <TextField
               label="Ваш отзыв"
               multiline
               rows={4}
@@ -178,7 +200,25 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
               onChange={handleReviewChange}
               variant="outlined"
               fullWidth
+              sx={{ mb: 2 }}
             />
+
+            <FormControl fullWidth sx={{ mb: 2 }}>
+              <InputLabel id="category-label">Категория</InputLabel>
+              <Select
+                labelId="category-label"
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+                label="Категория"
+              >
+                <MenuItem value="">Все</MenuItem>
+                {categories.map((category, index) => (
+                  <MenuItem key={index} value={category}>
+                    {category}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
 
             <div className="rating-stars">
               {[...Array(5)].map((_, index) => (
@@ -196,7 +236,7 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
               onClick={handleReviewSubmit}
               variant="contained"
               color="primary"
-              disabled={!reviewText.trim()}
+              disabled={!reviewText.trim() || !recipient || rating === 0}
               sx={{ mt: 2 }}
             >
               Оставить отзыв
@@ -204,7 +244,7 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
           </div>
           {message && <Typography sx={{ mt: 2, color: 'green', fontWeight: 'bold' }}>{message}</Typography>}
           <div className="review-list">
-            {reviews.map((review, index) => (
+            {filteredReviews.map((review, index) => (
               <div key={index} className="review-item">
                 <div className="review-header">
                   <PersonIcon className="review-icon" />
@@ -213,7 +253,8 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
                   </Typography>
                 </div>
                 <Typography variant="body1">{review.text}</Typography>
-                <div className="review-rating">
+                <div className="
+                review-rating">
                   {[...Array(5)].map((_, index) => (
                     <StarIcon
                       key={index}
@@ -231,7 +272,9 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
                   </IconButton>
                   <Typography variant="caption">{review.dislikes}</Typography>
                 </div>
-                <Typography variant="caption" color="textSecondary">{new Date(review.created_at).toLocaleString()}</Typography>
+                <Typography variant="caption" color="textSecondary">
+                  {new Date(review.created_at).toLocaleString()}
+                </Typography>
               </div>
             ))}
           </div>
