@@ -15,7 +15,7 @@ const Register: React.FC = () => {
 
     AuthService.register(username, email, password).then(
       () => {
-        setMessage('User registered successfully!');
+        setMessage('Вы успешно зарегистрированы!');
         setShowMessage(true);
 
         setTimeout(() => {
