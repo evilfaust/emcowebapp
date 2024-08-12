@@ -71,8 +71,29 @@
   border: 1px solid #f5c6cb;
 }
 
-
-
+.register-message {
+  position: fixed;
+  left: 50%;
+  bottom: -100px; /* Начальное положение за пределами экрана */
+  transform: translateX(-50%);
+  padding: 0.75rem;
+  border-radius: 4px;
+  background-color: #d4edda; /* Светло-зеленый фон */
+  color: #155724; /* Темно-зеленый текст */
+  border: 1px solid #c3e6cb; /* Зеленая граница */
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  
+  &.show {
+    transform: translateX(-50%) translateY(-120px); /* Сообщение появляется на экране */
+    opacity: 1;
+  }
+  
+  &.hide {
+    transform: translateX(-50%) translateY(0); /* Сообщение исчезает */
+    opacity: 0;
+  }
+}
 /* Стили для ссылки на регистрацию */
 .register-link {
   display: block;

@@ -149,7 +149,7 @@
   }
 
   .mobile-menu {
-    position: fixed; /* Добавлено для перемещения вместе с навбаром */
+    position: fixed;
     top: 60px; /* Высота навбара */
     width: 100%;
     background-color: #fff; 
@@ -157,11 +157,14 @@
     border-top: 1px solid #dee2e6;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.3s ease-in-out;
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 
     &.open {
-      max-height: 500px; /* Примерное значение, можно настроить */
+      transform: scaleY(1);
+      opacity: 1;
     }
 
     ul {
@@ -220,5 +223,5 @@
 }
 
 body {
-  padding-top: 64px; /* Height of the navbar */
+  padding-top: 76px; /* Высота навбара */
 }

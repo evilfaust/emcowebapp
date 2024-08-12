@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import AuthService from '../../services/authService';
 import '../Auth.css';
 
-
 const Register: React.FC = () => {
   const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [message, setMessage] = useState<string>('');
+  const [showMessage, setShowMessage] = useState<boolean>(false);
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,6 +16,11 @@ const Register: React.FC = () => {
     AuthService.register(username, email, password).then(
       () => {
         setMessage('User registered successfully!');
+        setShowMessage(true);
+
+        setTimeout(() => {
+          setShowMessage(false);
+        }, 3000); // Сообщение будет показываться 3 секунды
       },
       (error) => {
         const resMessage =
@@ -58,9 +63,13 @@ const Register: React.FC = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit" className="auth-button">Зарегестрироваться</button>
+        <button type="submit" className="auth-button">Зарегистрироваться</button>
       </form>
-      {message && <div className="message">{message}</div>}
+      {message && (
+        <div className={`register-message ${showMessage ? 'show' : 'hide'}`}>
+          {message}
+        </div>
+      )}
     </div>
   );
 };
