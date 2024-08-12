@@ -5,16 +5,19 @@
   transform: translate(-50%, -50%);
   width: 80%;
   max-width: 600px;
+  max-height: 80vh; // Установите максимальную высоту для модального окна
   background-color: rgba(255, 255, 255, 0.9);
   border: 2px solid #000;
   box-shadow: 24px;
   padding: 16px;
+  overflow-y: auto; // Включить вертикальную прокрутку, если контент превышает высоту
 
   @media (max-width: 600px) {
     width: 90%;
     max-width: 90%;
     height: 90%;
-    overflow-y: auto;
+    max-height: none; // Убираем максимальную высоту для мобильных устройств
+    overflow-y: auto; // Включаем вертикальную прокрутку
   }
 }
 
