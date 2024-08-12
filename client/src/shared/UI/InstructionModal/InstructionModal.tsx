@@ -3,8 +3,6 @@ import axios from 'axios';
 import { Modal, Box, Typography, Tabs, Tab, IconButton, TextField, Button, Select, MenuItem, FormControl, InputLabel, SelectChangeEvent } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import PersonIcon from '@mui/icons-material/Person';
-import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
-import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import './InstructionModal.scss';
@@ -24,8 +22,6 @@ interface Review {
   approved: boolean;
   user: string;
   rating: number;
-  likes: number;
-  dislikes: number;
 }
 
 const categories = [
@@ -120,14 +116,6 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
     }
   };
 
-  const handleLike = async (reviewId: number) => {
-    // Add logic to handle liking a review
-  };
-
-  const handleDislike = async (reviewId: number) => {
-    // Add logic to handle disliking a review
-  };
-
   const filteredReviews = selectedCategory
     ? reviews.filter(review => review.recipient === selectedCategory)
     : reviews;
@@ -160,22 +148,6 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
         <TabPanel value={tabValue} index={1}>
           <Typography>Здесь вы можете прочитать отзывы и оставить свой отзыв.</Typography>
           <div className="review-form">
-            <FormControl fullWidth sx={{ mb: 2 }}>
-              <InputLabel id="recipient-label">Адресат</InputLabel>
-              <Select
-                labelId="recipient-label"
-                value={recipient}
-                onChange={handleRecipientChange}
-                label="Адресат"
-              >
-                {categories.map((category, index) => (
-                  <MenuItem key={index} value={category}>
-                    {category}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-
             <TextField
               label="Ваше имя"
               value={userName}
@@ -192,6 +164,19 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
               fullWidth
               sx={{ mb: 2 }}
             />
+            <FormControl fullWidth sx={{ mb: 2 }}>
+              <InputLabel id="recipient-label">Адресат</InputLabel>
+              <Select
+                labelId="recipient-label"
+                value={recipient}
+                onChange={handleRecipientChange}
+                label="Адресат"
+              >
+                <MenuItem value="Отзывы для людей">Отзывы для людей</MenuItem>
+                <MenuItem value="Отзывы о работниках EMCO">Отзывы о работниках EMCO</MenuItem>
+                <MenuItem value="Отзывы о волонтерах">Отзывы о волонтерах</MenuItem>
+              </Select>
+            </FormControl>
             <TextField
               label="Ваш отзыв"
               multiline
@@ -202,23 +187,6 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
               fullWidth
               sx={{ mb: 2 }}
             />
-
-            <FormControl fullWidth sx={{ mb: 2 }}>
-              <InputLabel id="category-label">Категория</InputLabel>
-              <Select
-                labelId="category-label"
-                value={selectedCategory}
-                onChange={handleCategoryChange}
-                label="Категория"
-              >
-                <MenuItem value="">Все</MenuItem>
-                {categories.map((category, index) => (
-                  <MenuItem key={index} value={category}>
-                    {category}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
 
             <div className="rating-stars">
               {[...Array(5)].map((_, index) => (
@@ -241,8 +209,26 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
             >
               Оставить отзыв
             </Button>
+
+            <FormControl fullWidth sx={{ mt: 2 }}>
+              <InputLabel id="category-label">Категория</InputLabel>
+              <Select
+                labelId="category-label"
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+                label="Категория"
+              >
+                <MenuItem value="">Все</MenuItem>
+                {categories.map((category, index) => (
+                  <MenuItem key={index} value={category}>
+                    {category}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+            {message && <Typography sx={{ mt: 2, color: 'green', fontWeight: 'bold' }}>{message}</Typography>}
           </div>
-          {message && <Typography sx={{ mt: 2, color: 'green', fontWeight: 'bold' }}>{message}</Typography>}
           <div className="review-list">
             {filteredReviews.map((review, index) => (
               <div key={index} className="review-item">
@@ -253,24 +239,13 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
                   </Typography>
                 </div>
                 <Typography variant="body1">{review.text}</Typography>
-                <div className="
-                review-rating">
+                <div className="review-rating">
                   {[...Array(5)].map((_, index) => (
                     <StarIcon
                       key={index}
                       className={index < review.rating ? 'star-filled' : 'star-empty'}
                     />
                   ))}
-                </div>
-                <div className="review-feedback">
-                  <IconButton onClick={() => handleLike(review.id)}>
-                    <ThumbUpAltIcon />
-                  </IconButton>
-                  <Typography variant="caption">{review.likes}</Typography>
-                  <IconButton onClick={() => handleDislike(review.id)}>
-                    <ThumbDownAltIcon />
-                  </IconButton>
-                  <Typography variant="caption">{review.dislikes}</Typography>
                 </div>
                 <Typography variant="caption" color="textSecondary">
                   {new Date(review.created_at).toLocaleString()}
