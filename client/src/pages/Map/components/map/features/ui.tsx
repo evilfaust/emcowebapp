@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Map, YMaps, Placemark, ZoomControl } from "@pbe/react-yandex-maps";
+import { Map, YMaps, Placemark, ZoomControl, GeolocationControl} from "@pbe/react-yandex-maps";
 import { useSearchParams } from "react-router-dom";
 import "./ui.scss";
 
@@ -174,6 +174,7 @@ const YandexMap: React.FC = () => {
             />
           )}
           <ZoomControl options={{ position: { top: 10, right: 10 } }} />
+          <GeolocationControl options={{ position: { top: 10, left: 10 } }} />
         </Map>
       </YMaps>
       <div className="image-gallery">

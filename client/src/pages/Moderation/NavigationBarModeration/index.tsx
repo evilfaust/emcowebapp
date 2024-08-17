@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './navigationBarModeration.scss';
+import './NavigationBarModeration.scss';
 
 const NavigationBarModeration: React.FC = () => {
     return (
