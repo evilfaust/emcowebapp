@@ -41,19 +41,6 @@
   flex-direction: column;
 }
 
-.rating-stars {
-  display: flex;
-  justify-content: center;
-  margin-top: auto;
-
-  .star-filled {
-    color: #FFD700; // Золотой цвет для заполненных звезд
-  }
-
-  .star-empty {
-    color: #ccc; // Серый цвет для пустых звезд
-  }
-}
 
 .review-list {
   margin-top: 20px;

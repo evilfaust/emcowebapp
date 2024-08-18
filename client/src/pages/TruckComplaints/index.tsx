@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './index.scss';
 import { getCsrfToken } from '../../services/csrf'; // Импортируем функцию для получения CSRF-токена
@@ -11,6 +11,15 @@ const TruckComplaints: React.FC = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [showNotice, setShowNotice] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowNotice(false);
+        }, 10000); // 10 секунд
+
+        return () => clearTimeout(timer); // Очистка таймера при размонтировании компонента
+    }, []);
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
@@ -62,6 +71,11 @@ const TruckComplaints: React.FC = () => {
 
     return (
         <div className="complaint-container">
+            {showNotice && (
+                <div className="notice">
+                    Если вы хотите обратную связь, то зарегистрируйтесь.
+                </div>
+            )}
             <h1>Вежливый грузовик</h1>
             <p>
                 Если Вы стали свидетелем нарушения на дорогах со стороны грузовиков в Углегорском районе, нарушения ими ПДД: парковка во дворах, парковка на газонах, проезд по улицам населенных пунктов и других случаев неподобающего поведения водителей – то вы попали по адресу!

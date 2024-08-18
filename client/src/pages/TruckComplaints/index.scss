@@ -1,10 +1,11 @@
 .complaint-container {
     padding: 20px;
     max-width: 600px;
-    margin: 50px auto;  /* Добавили отступы сверху и снизу */
+    margin: 50px auto;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative; /* Добавляем для позиционирования всплывающего сообщения */
 }
 
 .complaint-container h1 {
@@ -34,11 +35,11 @@
         margin-top: 5px;
         border: 1px solid #ddd;
         border-radius: 5px;
-        resize: vertical; /* Позволяет изменять размер текстового поля по вертикали */
+        resize: vertical;
     }
 
     textarea {
-        min-height: 100px; /* Минимальная высота для текстового поля */
+        min-height: 100px;
     }
 
     button {
@@ -60,5 +61,30 @@
         text-align: center;
         color: red;
         font-weight: bold;
+    }
+}
+
+.notice {
+    position: fixed;
+    bottom: -100px; /* Начальное положение вне экрана */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px;
+    background-color: #ffc107;
+    color: #333;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: slideIn 1s forwards, slideOut 1s 9s forwards; /* Анимация появления и исчезновения */
+}
+
+@keyframes slideIn {
+    to {
+        bottom: 20px; /* Положение на экране */
+    }
+}
+
+@keyframes slideOut {
+    to {
+        bottom: -100px; /* Исчезает обратно вниз */
     }
 }

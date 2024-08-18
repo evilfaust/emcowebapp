@@ -188,18 +188,6 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, handleClose }
               sx={{ mb: 2 }}
             />
 
-            <div className="rating-stars">
-              {[...Array(5)].map((_, index) => (
-                <IconButton key={index} onClick={() => handleRatingChange(index + 1)}>
-                  {index < rating ? (
-                    <StarIcon className="star-filled" />
-                  ) : (
-                    <StarBorderIcon className="star-empty" />
-                  )}
-                </IconButton>
-              ))}
-            </div>
-
             <Button
               onClick={handleReviewSubmit}
               variant="contained"
